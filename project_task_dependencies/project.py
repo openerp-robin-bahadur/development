@@ -192,22 +192,24 @@ class project_task(osv.Model):
         self.compute_earliest_start(cr, uid, [res], context=None)
         return res
 
-    def write(self, cr, uid, ids, vals, context=None) :
-        _logger = logging.getLogger(__name__)
-        if vals.get('duration') and vals['duration']:
-            vals['duration_helper'] = vals['duration']
-        res = super(project_task, self).write(cr, uid, ids, vals, context=context)
-        
-        dates = self.compute_earliest_start(cr, uid, ids, context=None)
-        if dates and  dates[0] and dates[1]:
-            vals['date_start'] = dates[0]
-            vals['date_end'] = dates[1]
-            #_logger.debug('FGF task write vals %s' % vals)
-            res = super(project_task, self).write(cr, uid, ids, vals, context=context)
-        
-        self.compute_earliest_start_successors(cr, uid, ids, context)
-               
-        #self.networkx_test(cr, uid, ids, vals, context)
-        return res
+#    def write(self, cr, uid, ids, vals, context=None) :
+##bha this function is updating duration field and in second part (compute_earliest_start) it is calculating start and end date of current task based on predecessor dates
+#        _logger = logging.getLogger(__name__)
+#        if vals.get('duration') and vals['duration']:
+#            vals['duration_helper'] = vals['duration']
+#        res = super(project_task, self).write(cr, uid, ids, vals, context=context)
+#
+#        dates = self.compute_earliest_start(cr, uid, ids, context=None)
+#        print"datesdatesdatesdates",dates
+#        if dates and  dates[0] and dates[1]:
+#            vals['date_start'] = dates[0]
+#            vals['date_end'] = dates[1]
+#            #_logger.debug('FGF task write vals %s' % vals)
+#            res = super(project_task, self).write(cr, uid, ids, vals, context=context)
+#
+#        self.compute_earliest_start_successors(cr, uid, ids, context)
+#
+##        self.networkx_test(cr, uid, ids, vals, context)
+#        return res
 
 # end project_task

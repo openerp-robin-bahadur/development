@@ -350,18 +350,7 @@ class project_task(osv.osv):
                                         raise osv.except_osv(_('Note !'), _('Same task can not be added as Predecessor and Successor'))
 #                               for all in successeor[2]:
 
-#        hnfui
-
-
-
-
-#                                print "successeor and list", successeor, list, successeor[2]
-#                                d=cmp(each[2], successeor[2])
-#                                print "d=============", d, successeor[2]
-#                                if d==1:
-#                                    raise osv.except_osv(_('Note !'), _('Same task can not be added as Predecessor and Successor'))
-
-#            hduqw
+           
         return res
 
     def action_close(self, cr, uid, ids, context=None):
@@ -386,10 +375,11 @@ class project_task(osv.osv):
         return res
 
     def write(self, cr, uid, ids, vals, context=None) :
+        if not isinstance(ids,list):
+            ids=[ids]
         super(project_task, self).write(cr, uid, ids, vals, context=context)
-        print "vals of overrided write==============", vals, ids, self.browse(cr, uid, ids[0]).successor_ids
-#        try:
-        current_task=self.browse(cr, uid, ids[0])
+        current_task=self.browse(cr, uid, ids)
+        print "current_task", current_task
         if vals.get('predecessor_ids'):
             vals.update({'visible_task':False})
             print "vals0000000", vals
@@ -397,7 +387,11 @@ class project_task(osv.osv):
 #        if not vals.get('predecessor_ids'):
 #            vals.update({'visible_task':True})
 #            print "vals00001111", vals
-		
+        if vals.get('successor_ids'):
+            for task in current_task:
+                for successor in task.successor_ids:
+                    self.write(cr, uid, [successor.id], {'visible_task':False})
+                    
         if vals.get('user_id'):
             vals.update({'user_task_ids':[(6,0,[vals['user_id']])]})
 
@@ -405,17 +399,28 @@ class project_task(osv.osv):
             days=vals['planned_days']*24
             print "days========", days
             vals.update({'planned_hours':days})
+        for each_task in current_task:
+            print "each_task====", each_task
+            if each_task.successor_ids and each_task.predecessor_ids:
+                print "current_task.successor_ids==", each_task.successor_ids
+                print "current_task.predecessor_ids==", each_task.predecessor_ids
+                for every in each_task.predecessor_ids:
+                    for each in each_task.successor_ids:
+                        if every==each:
+                            raise osv.except_osv(_('Note !'), _('Same task can not be added as Predecessor and Successor'))
 
-        if current_task.successor_ids and current_task.predecessor_ids:
-            print "current_task.successor_ids==", current_task.successor_ids
-            print "current_task.predecessor_ids==", current_task.predecessor_ids
-            for every in current_task.predecessor_ids:
-                for each in current_task.successor_ids:
-                    if every==each:
-                        raise osv.except_osv(_('Note !'), _('Same task can not be added as Predecessor and Successor'))
-#        
-#        except:
-#            pass
+        
+        if vals.get('stage_id'):
+            
+            for every_task in current_task:
+                if every_task.predecessor_ids:
+                    for predecessors in every_task. predecessor_ids:
+                        if predecessors.state == 'open' or predecessors.state == 'draft' or predecessors.state == 'pending' or predecessors.state == False :
+                            raise osv.except_osv(_('Note !'), _('You can not edit this task until predecessors are open '))
+
+        for each in current_task:
+            if each.predecessor_ids and vals.get('work_ids'):
+                raise osv.except_osv(_('Warning !'), _('You can not fill Timesheet untill Predecessor task is not Done '))
 	print "final vals of write=========", vals
         return super(project_task, self).write(cr, uid, ids, vals, context=context)
 

@@ -12,7 +12,8 @@ class project_compute_tasks(osv.osv_memory):
     def task_predecessor(self, cr, uid, task_start, task_ids, context):
         task_obj= self.pool.get('project.task')
         for each in task_ids:
-            if each.date_end and each.date_end < task_start:
+#            print "check after 4 th task...for 1st task....outside if...", pre_end
+            if each.date_end and each.date_end < task_start:     #not executed this if while (task_start of 4th task=20 & date_end for task 1=17)
                 pre_end=datetime.strptime(each.date_end, "%Y-%m-%d %H:%M:%S")
             elif each.date_end and each.date_end > task_start:
                 pre_end=datetime.strptime(task_start, "%Y-%m-%d %H:%M:%S")
@@ -114,10 +115,10 @@ class project_compute_tasks(osv.osv_memory):
                     else:
                         pre_end=datetime.strptime(task_data.date_end, "%Y-%m-%d %H:%M:%S")
 
-                    if not task_data.date_start:
-                        pre_start=pre_end-relativedelta(hours=task_data.planned_hours)
-                    else:
-                        pre_start=datetime.strptime(task_data.date_start, "%Y-%m-%d %H:%M:%S")
+#                    if not task_data.date_start:
+                    pre_start=pre_end-relativedelta(hours=task_data.planned_hours)
+#                    else:
+#                        pre_start=datetime.strptime(task_data.date_start, "%Y-%m-%d %H:%M:%S")
 
 
                     pre_start=pre_start.strftime("%Y-%m-%d %H:%M:%S")

@@ -118,7 +118,7 @@
 
                 </xpath>
                 <xpath expr="//field[@name='project_id']" position="after">
-                    <field name="visible_task"/>
+                    <field name="visible_task" invisible="1"/>
                     <field name="planned_days" required="1"/>
 
                 </xpath>
