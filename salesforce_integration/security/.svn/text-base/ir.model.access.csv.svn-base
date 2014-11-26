@@ -1,0 +1,35 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_salesforce_data_user","access_salesforce_data","model_salesforce_connection","salesforce_integration.group_salesforce_user",1,0,0,0
+"access_salesforce_data_manager","access_salesforce_data","model_salesforce_connection","salesforce_integration.group_salesforce_manager",1,1,1,1
+"access_salesforce_tables_user","salesforce.tables.user","model_salesforce_tables","salesforce_integration.group_salesforce_user",1,0,0,0
+"access_salesforce_tables_manger","salesforce.tables.manger","model_salesforce_tables","salesforce_integration.group_salesforce_manager",1,1,1,1
+"access_salesforce_fields_user","salesforce.fields.user","model_salesforce_fields","salesforce_integration.group_salesforce_user",1,0,0,0
+"access_salesforce_fields_manger","salesforce.fields.manger","model_salesforce_fields","salesforce_integration.group_salesforce_manager",1,1,1,1
+"access_salesforce_reference_user","salesforce.reference.user","model_salesforce_reference","salesforce_integration.group_salesforce_user",1,0,0,0
+"access_salesforce_reference_manger","salesforce.reference.manger","model_salesforce_reference","salesforce_integration.group_salesforce_manager",1,1,1,1
+,,,,,,,
+,,,,,,,
+,,,,,,,
+"access_product_product_salesforce_user","product.product.salesforce.user","product.model_product_product","salesforce_integration.group_salesforce_user",1,0,0,0
+"access_product_product_salesforce_manager","product.product.salesforce.user","product.model_product_product","salesforce_integration.group_salesforce_manager",1,1,1,1
+"access_product_template_salesforce_user","product.template salesforce user","product.model_product_template","salesforce_integration.group_salesforce_user",1,0,0,0
+"access_product_template_salesforce_manager","product.template salesforce manager","product.model_product_template","salesforce_integration.group_salesforce_manager",1,1,1,1
+"access_product_supplierinfo_salesforce_user","product.supplierinfo.salesforce.user","product.model_product_supplierinfo","salesforce_integration.group_salesforce_user",1,0,0,0
+"access_product_supplierinfo_salesforce_manager","product.supplierinfo salesforce.manager","product.model_product_supplierinfo","salesforce_integration.group_salesforce_manager",1,1,1,1
+"access_product_uom_salesforce_user","product.uom.salesforce.user","product.model_product_uom","salesforce_integration.group_salesforce_user",1,0,0,0
+"access_product_uom_salesforce_manager","product.uom salesforce.manager","product.model_product_uom","salesforce_integration.group_salesforce_manager",1,1,1,1
+"access_product_uom_categ_salesforce_manager","product.uom.categ salesforcemanager","product.model_product_uom_categ","salesforce_integration.group_salesforce_manager",1,1,1,1
+"access_product_pricelist_salesforce_user","product.pricelist.salesforce.user","product.model_product_pricelist","salesforce_integration.group_salesforce_user",1,0,0,0
+"access_product_pricelist_salesforce_manager","product.pricelist salesforcemanager","product.model_product_pricelist","salesforce_integration.group_salesforce_manager",1,1,1,1
+"access_product_pricelist_type_salesforce_manager","product.pricelist.type salesforcemanager","product.model_product_pricelist_type","salesforce_integration.group_salesforce_manager",1,1,1,1
+"access_product_pricelist_version_salesforce_manager","product.pricelist.version salesforce_manager","product.model_product_pricelist_version","salesforce_integration.group_salesforce_manager",1,1,1,1
+"access_product_ul_salesforce_manager","product.ul salesforcemanager","product.model_product_ul","salesforce_integration.group_salesforce_manager",1,1,1,1
+"access_product_category_salesforce_manager","product.category salesforcemanager","product.model_product_category","salesforce_integration.group_salesforce_manager",1,1,1,1
+"access_product_price_type_salesforce_manager","product.price.type salesforcemanager","product.model_product_price_type","salesforce_integration.group_salesforce_manager",1,1,1,1
+"access_stock_move_salesforce_user","stock_move salesforce user","stock.model_stock_move","salesforce_integration.group_salesforce_user",1,1,1,0
+"access_stock_move_salesforce_manager","stock_move salesforce manager","stock.model_stock_move","salesforce_integration.group_salesforce_manager",1,1,1,1
+"access_stock_picking_salesforce_user","stock_picking salesforce user","stock.model_stock_picking","salesforce_integration.group_salesforce_user",1,1,1,0
+"access_stock_picking_salesforce_manager","stock.picking.salesforce manager","stock.model_stock_picking","salesforce_integration.group_salesforce_manager",1,1,1,1
+"access_ir_property_salesforce_user","ir_property salesforce_user","base.model_ir_property","salesforce_integration.group_salesforce_user",1,1,1,0
+"access_salesforce_attachment_user","ir.attachment.salesforce user","base.model_ir_attachment","salesforce_integration.group_salesforce_user",1,1,1,0
+"access_salesforce_attachment_manager","ir.attachment.salesforce.manager","base.model_ir_attachment","salesforce_integration.group_salesforce_manager",1,1,1,1

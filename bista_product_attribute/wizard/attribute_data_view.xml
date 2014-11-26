@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+        <record id="attribute_x_version" model="attribute.attribute">
+            <field name="field_description">Version</field>
+            <field name="model_id" search="[('model','=','product.product')]"/>
+            <field name="name">x_version</field>
+            <field name="ttype">many2one</field>
+            <field name="attribute_type">select</field>
+            <field name="active" eval="1"/>
+            <field name="option_ids" eval="[(0,0,{})]"/>
+        </record>
+
+        <record id="attribute_x_version_option_1" model="attribute.option">
+            <field name="name">1</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_version"/>
+        </record>
+        <record id="attribute_x_version_option_2" model="attribute.option">
+            <field name="name">2</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_version"/>
+        </record>
+        <record id="attribute_x_version_option_3" model="attribute.option">
+            <field name="name">3</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_version"/>
+        </record>
+        <record id="attribute_x_version_option_4" model="attribute.option">
+            <field name="name">4</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_version"/>
+        </record>
+        <record id="attribute_x_version_option_5" model="attribute.option">
+            <field name="name">5</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_version"/>
+        </record>
+        <record id="attribute_x_version_option_6" model="attribute.option">
+            <field name="name">6</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_version"/>
+        </record>
+        <record id="attribute_x_version_option_7" model="attribute.option">
+            <field name="name">7</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_version"/>
+        </record>
+        <record id="attribute_x_version_option_8" model="attribute.option">
+            <field name="name">8</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_version"/>
+        </record>
+
+        <!--=====drop number==========-->
+
+        <record id="attribute_x_drop_number" model="attribute.attribute">
+            <field name="field_description">Drop Number</field>
+            <field name="model_id" search="[('model','=','product.product')]"/>
+            <field name="name">x_drop_number</field>
+            <field name="ttype">many2one</field>
+            <field name="attribute_type">select</field>
+            <field name="active" eval="1"/>
+            <field name="option_ids" eval="[(0,0,{})]"/>
+        </record>
+        <record id="attribute_x_drop_option_1" model="attribute.option">
+            <field name="name">1</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_drop_number"/>
+        </record>
+        <record id="attribute_x_drop_option_2" model="attribute.option">
+            <field name="name">2</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_drop_number"/>
+        </record>
+        <record id="attribute_x_drop_option_3" model="attribute.option">
+            <field name="name">3</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_drop_number"/>
+        </record>
+        <record id="attribute_x_drop_option_3" model="attribute.option">
+            <field name="name">3</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_drop_number"/>
+        </record>
+        <record id="attribute_x_drop_option_4" model="attribute.option">
+            <field name="name">4</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_drop_number"/>
+        </record>
+        <record id="attribute_x_drop_option_5" model="attribute.option">
+            <field name="name">5</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_drop_number"/>
+        </record>
+        <record id="attribute_x_drop_option_6" model="attribute.option">
+            <field name="name">6</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_drop_number"/>
+        </record>
+        <record id="attribute_x_drop_option_7" model="attribute.option">
+            <field name="name">7</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_drop_number"/>
+        </record>
+        <record id="attribute_x_drop_option_8" model="attribute.option">
+            <field name="name">8</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_drop_number"/>
+        </record>
+
+
+        <!--=============start date==========-->
+
+
+        <record id="attribute_x_start_date" model="attribute.attribute">
+            <field name="field_description">Sale Start Date</field>
+            <field name="model_id" search="[('model','=','product.product')]"/>
+            <field name="name">x_sale_start_date</field>
+            <field name="ttype">date</field>
+            <field name="attribute_type">date</field>
+            <field name="active" eval="1"/>
+            <field name="option_ids" eval="[(0,0,{})]"/>
+        </record>
+
+        <record id="attribute_x_start_option_1" model="attribute.option">
+            <field name="name">1</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_start_date"/>
+
+        </record>
+        <!-- ===================sale end date=====-->
+        <record id="attribute_x_end_date" model="attribute.attribute">
+            <field name="field_description">Sale End Date</field>
+            <field name="model_id" search="[('model','=','product.product')]"/>
+            <field name="name">x_sale_end_date</field>
+            <field name="ttype">date</field>
+            <field name="attribute_type">date</field>
+            <field name="active" eval="1"/>
+            <field name="option_ids" eval="[(0,0,{})]"/>
+        </record>
+
+        <record id="attribute_x_end_option_1" model="attribute.option">
+            <field name="name">1</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_end_date"/>
+        </record>
+
+
+
+        <!--==============list type====-->
+
+
+        <record id="attribute_x_list_type" model="attribute.attribute">
+            <field name="field_description">List Type</field>
+            <field name="model_id" search="[('model','=','product.product')]"/>
+            <field name="name">x_list_type</field>
+            <field name="ttype">many2one</field>
+            <field name="attribute_type">select</field>
+            <field name="active" eval="1"/>
+            <field name="option_ids" eval="[(0,0,{})]"/>
+        </record>
+
+
+
+
+
+        <record id="attribute_x_list_type_option_1" model="attribute.option">
+            <field name="name">1</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_list_type"/>
+        </record>
+        <record id="attribute_x_list_type_option_2" model="attribute.option">
+            <field name="name">2</field>
+            <field name="sales_price">5.0</field>
+            <field name="cost_price">5.0</field>
+            <field name="price">per_unit</field>
+            <field name="active" eval="1"/>
+            <field name="attribute_id" ref="attribute_x_list_type"/>
+        </record>
+
+    </data>
+</openerp>

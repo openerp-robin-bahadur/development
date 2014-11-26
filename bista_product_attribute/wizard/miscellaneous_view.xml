@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+    
+    	 <!--Miscellaneous wizard view for SOL-->
+
+
+        <record model="ir.ui.view" id="miscellaneous_wizard_form_view">
+            <field name="name">miscellaneous.wizard</field>
+            <field name="model">miscellaneous.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Miscellaneous Item" version="7.0">
+                    <group colspan="4" col="4">
+                    	<field name='line_id' invisible="1"/>
+                    	<field name='product_id' invisible="1"/>
+                        <field name="miscellaneous_item_line" nolabel="1" colspan="4" col="4">
+                            <tree editable="top">
+                                <field name="miscellaneous_id" on_change="onchange_miscellaneous_id(miscellaneous_id,context)"/>
+                                <field name="misc_cost_price"/>
+                                <field name="misc_sales_price"/>
+
+                            </tree>
+                            <form>
+                                <field name="miscellaneous_id" on_change="onchange_miscellaneous_id(miscellaneous_id,context)"/>
+                                <field name="misc_cost_price"/>
+                                <field name="misc_sales_price"/>
+
+                            </form>
+                        </field>
+					</group>
+
+                    <footer>
+                        <button name="save_miscellaneous_item" string="Save and Close" type="object" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="miscellaneous_wizard_action" model="ir.actions.act_window">
+            <field name="name">Miscellaneous Item</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">miscellaneous.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_type">form</field>
+            <field name="target">new</field>
+            <field name="nodestory">True</field>
+            <field name="view_id" ref="miscellaneous_wizard_form_view"/>
+        </record>
+    	
+
+        <record model="ir.ui.view" id="attributes_switch_form_view">
+            <field name="name">attribute.switch.wizard</field>
+            <field name="model">attribute.switch</field>
+            <field name="arch" type="xml">
+                <form string="Attribute Switch" version="7.0">
+                    <group col="4" colspan="4">
+                        <group col="2" colspan="2">
+
+                                <field name="old_attribute_set_id"/>
+                        </group>
+                        <group col="2" colspan="2">
+
+                            <field name="new_attribute_set_id" domain="[('id','!=',old_attribute_set_id)]"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="save_and_close_switch" string="Save and Close" type="object" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+         <record id="attribute_switch_action" model="ir.actions.act_window">
+            <field name="name">Attribute Switch</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">attribute.switch</field>
+            <field name="view_mode">form</field>
+            <field name="view_type">form</field>
+            <field name="target">new</field>
+            <field name="nodestory">True</field>
+            <field name="view_id" ref="attributes_switch_form_view"/>
+        </record>
+
+
+        <record model="ir.ui.view" id="sale_attributes_form_view">
+            <field name="name">sale.product.attributes.normal.wizard</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <form string="Sale Order Line" version="7.0">
+                    <group name="name_set" invisible="1">
+                        <field name="name" invisible="1"/>
+                        <field name="attribute_set_id" invisible="1"/>
+                        <field name="state" invisible="1"/>
+                    </group>
+                    <separator string="attributes_placeholder" colspan="4"/>
+                    <footer>
+                        <button name="save_and_close_product_attributes" string="Save and Close" type="object" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

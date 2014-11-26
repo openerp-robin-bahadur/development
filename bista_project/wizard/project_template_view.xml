@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="project_template_form_view">
+            <field name="name">project.template.form.view.test</field>
+            <field name="model">project.template.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Choose Template" version="7.0">
+                    <group col="2" colspan="2">
+                        <field name="template_id" domain="[('state','=','template')]"/>
+                    </group>
+                    <footer>
+                      <button name="choose_template" string="Save &amp; Close" type="object" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                  </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_view_choose_template" model="ir.actions.act_window">
+            <field name="name">Choose Template</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.template.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="project_template_form_view"/>
+            <field name="target">new</field>
+            <field name="nodestroy">True</field>
+        </record>
+
+
+        <record model="ir.ui.view" id="project_template_form_view_test">
+            <field name="name">project.template.form.view.test</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="before">
+                    <button name="%(action_view_choose_template)d" string="Choose Template" type="action"/>
+                    <!--attrs="{invisible:['state', '=', 'template']}"-->
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

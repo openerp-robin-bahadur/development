@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="project_compute_task">
+            <field name="name">project.compute.task</field>
+            <field name="model">project.compute.tasks</field>
+            <field name="inherit_id" ref="project_long_term.view_project_compute_tasks"/>
+            <field name="arch" type="xml">
+                <!--<xpath expr="//field[@name='project_id']" position ="replace">
+                    <field name="project_id"/>
+                    </xpath>-->
+                <xpath expr="//button[@name='compute_date']" position="replace">
+                    
+                    <button name="new_schedule_task" string="C_ompute" type="object" class="oe_highlight"/>
+                    
+                </xpath>
+            </field>
+        </record>
+
+
+
+       <!-- <record model="ir.actions.act_window" id="project_long_term.act_project_phase_test">
+        <field name="name">My Phases</field>
+        <field name="res_model">project.phase</field>
+        <field name="search_view_id" ref="project_gtd.view_task_gtd_search"/>
+        <field name="context">{'set_visible':True}</field>
+        <field name="domain">[('user_task_ids','in',uid)]</field>
+        <field name="view_type">form</field>
+        <field name="inherit_id" ref="project_long_term.act_project_phase"/>
+        <field name="view_mode">kanban,tree,form,calendar,gantt,graph</field>
+    </record>
+    <menuitem action="project_long_term.act_project_phase_test" id="project_long_term.menu_project_phase_test" parent="base.menu_project_long_term" sequence="10"/>
+-->
+
+ </data>
+</openerp>

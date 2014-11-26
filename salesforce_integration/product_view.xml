@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+    
+
+<!--    products form inherited-->
+
+	    <record id="sale_product_form_inherit" model="ir.ui.view">
+		    <field name="name">saleforce.product.form.inherit</field>
+		    <field name="model">product.product</field>
+		    <field name="type">form</field>
+		    <field name="inherit_id" ref="account.product_normal_form_view"/>
+		    <field name="arch" type="xml">
+			    <page string="Accounting" position="after">
+			        <page string="Salesforce" >
+			            <group>
+			                <field name="LastModifiedDate" readonly="1"/>
+			                <field name="CreatedDate" readonly="1"/>
+			                <field name="SystemModstamp" readonly="1"/>
+			                <field name="price_entry_id" readonly="1" />
+			                <field name="IsDeleted" readonly="1"/>
+			                <field name="salesforce_exportable" />
+				        </group>
+                    </page>
+                </page>
+	        </field>
+	    </record>
+
+<!--    products form inherited-->
+
+	    <record id="salesforce_product_form_inherit" model="ir.ui.view">
+		    <field name="name">saleforce.product.form.inherit</field>
+		    <field name="model">product.product</field>
+		    <field name="type">form</field>
+		    <field name="inherit_id" ref="product.product_normal_form_view"/>
+		    <field name="arch" type="xml">
+			    <div name="buttons" position="after">
+                    <button name="delete_product_from_salesforce" string="Delete From SalesForce" type="object" attrs="{'invisible': [('price_entry_id','=',False)]}"/>
+                </div>
+	        </field>
+	    </record>
+
+    </data>
+</openerp>
+
+

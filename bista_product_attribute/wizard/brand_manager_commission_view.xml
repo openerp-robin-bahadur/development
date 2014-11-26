@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+
+        <!--Brand Manager view for Commission-->
+        <menuitem name="Brand Manager Commission" id="brand_commission_main_menu" parent="account.menu_finance" sequence="5"/>
+
+
+        <record model="ir.ui.view" id="brand_manager_form_view">
+            <field name="name">Brand Manager</field>
+            <field name="model">brand.manager.commission</field>
+            <field name="arch" type="xml">
+                <form string="Brand Manager Commission" version="7.0">
+                    <group colspan="5" col="5">
+                        <field name="commission_month"/>
+                        <field name="commission_year"/>
+                        <button name="cal_commission" type="object" string="Calculate Commission"/>
+                        <field name="brand_manager_commission_line" nolabel="1" colspan="5" col="5">
+                            <tree>
+                                <field name="brand_manager_id"/>
+                                <field name="total_agi"/>
+                                <field name="commission_val"/>
+                            </tree>
+                            <form>
+                                <field name="brand_manager_id"/>
+                                <field name="total_agi"/>
+                                <field name="commission_val"/>
+                            </form>
+                        </field>
+
+
+                    </group>
+                    <footer>
+                        <button name="save_brand_manager" string="Save and Close" type="object" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="brand_manager_action" model="ir.actions.act_window">
+            <field name="name">Brand Manager Commission</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">brand.manager.commission</field>
+            <field name="view_mode">form</field>
+            <field name="view_type">form</field>
+            <field name="target">new</field>
+            <field name="nodestory">True</field>
+            <field name="view_id" ref="brand_manager_form_view"/>
+        </record>
+
+        <menuitem name="Brand Manager Commission Rules" id="brand_commission_menu" parent="brand_commission_main_menu" sequence="0" action="brand_manager_action"/>
+
+
+
+    </data>
+</openerp>

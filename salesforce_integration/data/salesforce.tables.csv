@@ -1,0 +1,3 @@
+id,model_id/id,model,salesforce_model,sequence
+salesforce_integration.salesforce_partner,account.model_res_partner,res.partner,Account,
+salesforce_integration.salesforce_partner_contacts,account.model_res_partner,res.partner,Contact,1

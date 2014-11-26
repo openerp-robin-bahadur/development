@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    <!-- Workflow -->
+        <record id="wkf_mudd_sale" model="workflow">
+            <field name="name">Mudd.sale.basic.workflow</field>
+            <field name="osv">sale.order</field>
+            <field name="on_create">True</field>
+        </record>
+
+        <!-- Activity -->
+
+        <record id="act_draft_mudd" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_mudd_sale"/>
+            <field name="flow_start">True</field>
+            <field name="name">draft</field>
+        </record>
+
+
+        <record id="act_draft_cancel" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_mudd_sale"/>
+            <field name="name">Review</field>
+            <field name="kind">function</field>
+            <field name="action">act_draft()</field>
+        </record>
+
+        <record id="act_review" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_mudd_sale"/>
+            <field name="name">Review</field>
+            <field name="kind">function</field>
+            <field name="action">state_review()</field>
+        </record>
+        <record id="act_approve" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_mudd_sale"/>
+            <field name="name">Approve</field>
+            <field name="kind">function</field>
+            <field name="action">act_approve()</field>
+        </record>
+
+
+        <record id="act_waiting_for_sign" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_mudd_sale"/>
+            <field name="name">Waiting for sign</field>
+            <field name="kind">function</field>
+            <field name="action">act_waiting_for_approve()</field>
+        </record>
+
+
+         <record id="act_cancel_mudd" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_mudd_sale"/>
+
+            <field name="name">cancel</field>
+
+            <field name="kind">function</field>
+            <field name="action">write({'state':'quote_cancel'})</field>
+        </record>
+
+        <!--actvity for onchange-->
+
+         <record id="act_approve_onchange" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_mudd_sale"/>
+
+            <field name="name">onchange</field>
+
+            <field name="kind">function</field>
+            <field name="action">act_draft()</field>
+        </record>
+
+
+        
+
+
+
+        <!-- Transistion -->
+
+        <record id="trans_mudd_sale_review" model="workflow.transition">
+            <field name="act_from" ref="act_draft_mudd"/>
+            <field name="act_to" ref="act_review"/>
+            <field name="signal">action_submit_for_approval</field>
+        </record>
+
+        <record id="trans_mudd_sale_reject" model="workflow.transition">
+            <field name="act_from" ref="act_draft_mudd"/>
+            <field name="act_to" ref="act_draft_mudd"/>
+            <field name="signal">action_reject_for_quotation</field>
+        </record>
+
+        <record id="trans_mudd_sale_reject_manger" model="workflow.transition">
+            <field name="act_from" ref="act_review"/>
+            <field name="act_to" ref="act_draft_cancel"/>
+
+
+        </record>
+
+
+        <record id="trans_mudd_sale_Approve1" model="workflow.transition">
+            <field name="act_from" ref="act_review"/>
+            <field name="act_to" ref="act_approve"/>
+            <field name="signal">action_submit_for_approval</field>
+        </record>
+
+
+
+
+        <record id="trans_mudd_sale_wait_for_sign" model="workflow.transition">
+            <field name="act_from" ref="act_approve"/>
+            <field name="act_to" ref="act_waiting_for_sign"/>
+            <field name="signal">action_waiting_sign_approval</field>
+        </record>
+
+         <record id="trans_mudd_sale_wait_for_sign_approved" model="workflow.transition">
+            <field name="act_from" ref="act_waiting_for_sign"/>
+            <field name="act_to" ref="act_approve"/>
+            <field name="signal">action_waiting_sign_approval_reject</field>
+        </record>
+
+        <!-- <record id="trans_mudd_sale_wait_for_sign_reject" model="workflow.transition">
+            <field name="act_from" ref="act_waiting_for_sign"/>
+            <field name="act_to" ref="act_approve"/>
+            <field name="signal">action_waiting_sign_approval_approved</field>
+        </record>-->
+        
+        <!--transition on change signal()-->
+
+        <record id="transition_for_onchange" model="workflow.transition">
+            <field name="act_from" ref="act_approve"/>
+            <field name="act_to" ref="act_approve_onchange"/>
+            <field name="signal">action_onchange_write</field>
+        </record>
+
+
+        <record id="trans_mudd_sale_cancel1" model="workflow.transition">
+            <field name="act_from" ref="act_draft_mudd"/>
+            <field name="act_to" ref="act_cancel_mudd"/>
+            <field name="signal">action_cancel_quote1</field>
+        </record>
+
+         <record id="trans_mudd_sale_cancel2" model="workflow.transition">
+            <field name="act_from" ref="act_review"/>
+            <field name="act_to" ref="act_cancel_mudd"/>
+            <field name="signal">action_cancel_quote1</field>
+        </record>
+
+         <record id="trans_mudd_sale_cancel3" model="workflow.transition">
+            <field name="act_from" ref="act_approve"/>
+            <field name="act_to" ref="act_cancel_mudd"/>
+            <field name="signal">action_cancel_quote1</field>
+        </record>
+
+         <record id="trans_mudd_sale_cancel4" model="workflow.transition">
+            <field name="act_from" ref="act_waiting_for_sign"/>
+            <field name="act_to" ref="act_cancel_mudd"/>
+            <field name="signal">action_cancel_quote1</field>
+        </record>
+
+
+    </data>
+</openerp>

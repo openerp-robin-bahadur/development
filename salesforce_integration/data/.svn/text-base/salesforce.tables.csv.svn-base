@@ -1,0 +1,8 @@
+"id","model_id/id","model","salesforce_model","sequence"
+"salesforce_integration.salesforce_crm_lead","crm.model_crm_lead","crm.lead","Lead",
+"salesforce_integration.salesforce_partner","account.model_res_partner","res.partner","Account",
+"salesforce_integration.salesforce_product","salesforce_integration.model_product_product","product.product","Product2",
+"salesforce_integration.salesforce_partner_contacts","account.model_res_partner","res.partner","Contact","1"
+"salesforce_integration.salesforce_crm_claim","crm_claim.model_crm_claim","crm.claim","Case",
+"salesforce_integration.salesforce_crm_opportunity","crm.model_crm_lead","crm.lead","Opportunity","1"
+"salesforce_integration.salesforce_contracts","account_analytic_analysis.model_account_analytic_account","account.analytic.account","Contract",

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="mudd_res_partner_inherit" model="ir.ui.view">
+            <field name="name">mudd.res.partner.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+
+                <xpath expr="//field[@name='title']" position = "after">
+
+                    <field name ="x_is_billing_vendor"/>
+                    <!--<field name ="x_report_type" attrs="{'required':[('x_is_billing_vendor','=',True)]}"/>-->
+                    <field name="notify_email"/>
+                </xpath>
+
+                <xpath expr="//field[@name='state_id']" postion="attributes">
+                    <attribute name="domain">"[('country_id','=',country_id)]"</attribute>
+
+                    </xpath>
+                <xpath expr="//page[@string='Sales &amp; Purchases']/group/group[3]/field[@name='date']" position = "after">
+                    <group colspan="4" columns="8">
+                    <separator string="Quote terms"/>
+                    
+                        <field name ="x_quote_terms" columns="8" colspan="8" nolabel="1" width="4"/>
+                   </group>
+                </xpath>
+
+                <xpath expr="//form/sheet/group/group[1]/field[@name='website']" position = "after">
+
+                    <field name= "x_vendor_id"/>
+                    <field name= "x_ein"/>
+                </xpath>
+
+                <xpath expr="//form/sheet/group/group[1]/div/field[@name='street2']" position = "after">
+                    <field name ="x_street_3"/>
+                </xpath>
+
+        </field>
+        </record>
+        
+        
+          <record model="ir.ui.view" id="view_partner_form_mudd">
+            <field name="name">view.partner.form.mudd</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+              <xpath expr="//field[@name='category_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+              </xpath>
+            </field>
+         </record>
+         
+        
+    </data>
+</openerp>

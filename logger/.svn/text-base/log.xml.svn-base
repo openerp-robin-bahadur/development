@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+
+<!--log form view-->
+
+
+        <record id="log_form_view" model="ir.ui.view">
+            <field name="name">Log - Form</field>
+            <field name="model">log.details</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Log">
+                    <field name="log_date"/>
+                    <field name="module"/>
+                    <field name="connector"/>
+                    <field name="model_name"/>
+                    <field name="res_id"/>
+                    <field name="type"/>
+                    <field name="state"/>
+                    <field name="message"/>
+                </form>
+            </field>
+        </record>
+        
+<!--      log tree view-->
+        
+        <record id="log_tree_view" model="ir.ui.view">
+            <field name="name">Log - Tree</field>
+            <field name="model">log.details</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Logs">
+                    <field name="log_date"/>
+                    <field name="module"/>
+                    <field name="connector"/>
+                    <field name="model_name"/>
+                    <field name="res_id"/>
+                    <field name="type"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        
+<!--        log search view-->
+        
+        <record id="log_search_view" model="ir.ui.view">
+            <field name="name">Log - Search</field>
+            <field name="model">log.details</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Logs">
+                    <field name="log_date"/>
+                    <field name="type"/>
+                    <field name="state"/>
+                    <field name="module"/>
+                    <field name="connector"/>
+                    <field name="model_name"/>
+                    <field name="message"/>
+                    <newline/>
+                    <group expand="0" string="Extended..." groups="base.group_extended">
+                        <field name="res_id"/>
+                    </group>
+                    <newline/>
+                    <group expand="0" string="Group By..." groups="base.group_extended">
+                        <filter string="Model" domain="[]" context="{'group_by':'model_name'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+<!--        log action-->
+        
+        <record id="act_log_details" model="ir.actions.act_window">
+            <field name="name">Logs</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">log.details</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--        log parent menu-->
+
+        <menuitem id="menu_log_details" parent="base.menu_custom" name="log Details" sequence="50"/>
+
+<!--        log  menu-->
+
+        <menuitem id="menu_log_details_sub" parent="menu_log_details" name="log Details" action="act_log_details" sequence="5"/>
+        
+    </data>
+</openerp>

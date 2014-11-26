@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+
+        <!--Brand Manager view for Commission-->
+        <menuitem name="Special Commission" id="special_commission_main_menu" parent="account.menu_finance" sequence="4"/>
+
+        <record id="special_commission_id" model="ir.ui.view">
+            <field name="name">special.commission.tree</field>
+            <field name="model">special.commission</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Special Commission">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <!--special Commission form view-->
+        <record id="special_commission_form_id" model="ir.ui.view">
+            <field name="name">special.commission.form</field>
+            <field name="model">special.commission</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Special Commission">
+                    <group colspan="4" col="4">
+                        <group col="2">
+                            <field name="name"/>
+                            <field name="model_id" on_change="onchange_model(model_id)" invisible="0"/>
+                            <field name="field_id" domain="[('model_id','=',model_id)]" on_change="onchange_field(field_id)"/>
+                            
+                        </group>
+                        <group col="2">
+                            <field name="commission_date"/>
+                            <field name="product_category_ids" widget="many2many_tags"/>
+                            <field name="field_name"/>
+                        </group>
+                    </group>
+                    <group colspan="4" col="4">
+                        <group col="2">
+                            <field name="condition_one"/>
+                            <field name="condition_two"/>
+                            <field name="condition_three"/>
+                            <field name="condition_four"/>
+                            <field name="condition_five"/>
+                            <field name="condition_six"/>
+                        </group>
+                        <group col="2">
+                            <field name="rule_one"/>
+                            <field name="rule_two"/>
+                            <field name="rule_three"/>
+                            <field name="rule_four"/>
+                            <field name="rule_five"/>
+                            <field name="rule_six"/>
+
+                        </group>
+                        <separator string="Python Code Example" colspan="4"/>
+                        <field name="code_example" colspan="4" nolabel="1"/>
+                    </group>
+                        <separator string="Rules Per Order" colspan="4"/>
+                        <field name="result_example" colspan="4" nolabel="1"/>
+
+                    <group col="4" colspan="4">
+                        
+                            <field name="manager_field" on_change="onchange_manager(manager_field,context)"/>
+                            
+                            <field name="sale_final_result"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <!--special search view-->
+        <record id="special_commission_id" model="ir.ui.view">
+            <field name="name">special.commission.search</field>
+            <field name="model">special.commission</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+
+                <search string="Special Commission">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        <!--special action view-->
+
+        <record id="special_commission_action" model="ir.actions.act_window">
+            <field name="name">Special Commission</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">special.commission</field>
+            <field name="view_mode">form,tree</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="special_commission_id"/>
+        </record>
+        <menuitem name="Special Commission Rules" id="special_commission_menu" parent="special_commission_main_menu" sequence="0" action="special_commission_action"/>
+    </data>
+</openerp>

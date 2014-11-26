@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/Projects/!svn/ver/755/MUDD/salesforce_integration
+END
+salesforce_osv.py
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/Projects/!svn/ver/750/MUDD/salesforce_integration/salesforce_osv.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/Projects/!svn/ver/750/MUDD/salesforce_integration/__init__.py
+END
+product.py
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/Projects/!svn/ver/750/MUDD/salesforce_integration/product.py
+END
+product_view.xml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/Projects/!svn/ver/750/MUDD/salesforce_integration/product_view.xml
+END
+__openerp__.py
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/Projects/!svn/ver/750/MUDD/salesforce_integration/__openerp__.py
+END
+salesforce_reference.py
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/Projects/!svn/ver/750/MUDD/salesforce_integration/salesforce_reference.py
+END
+lead.py
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/Projects/!svn/ver/754/MUDD/salesforce_integration/lead.py
+END
+salesforce.py
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/Projects/!svn/ver/750/MUDD/salesforce_integration/salesforce.py
+END
+salesforce_reference_view.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/Projects/!svn/ver/750/MUDD/salesforce_integration/salesforce_reference_view.xml
+END
+lead_view.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/Projects/!svn/ver/755/MUDD/salesforce_integration/lead_view.xml
+END
+salesforce_view.xml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/Projects/!svn/ver/750/MUDD/salesforce_integration/salesforce_view.xml
+END

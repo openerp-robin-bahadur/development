@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="project_attribute_form_view_test">
+            <field name="name">project.attribute.form.view.test</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <!--<field name="attribute_set_id" readonly="1" invisible = "1"/>-->
+                    <field name="so_id" domain="[('partner_id','=',partner_id),('state','!=','quote_cancel'),('x_signed_flag','!=',False)]" />
+
+                </xpath>
+
+                <xpath expr="//field[@name='date_start']" position="replace">
+                    <!--<attribute name="invisible">1</attribute>-->
+                </xpath><!--
+                --><xpath expr="//field[@name='date']" position="replace">
+                        <!--<attribute name="invisible">1</attribute>-->
+                </xpath>
+                <xpath expr="//field[@name='so_id']" position = "after">
+                    <field name="date_start"/>
+                    <field name="date"/>
+                </xpath><!--
+-->
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <group colspan="2">
+                        <!--<field name="attribute_set_id" readonly="1" invisible = "1"/>-->
+                        <field name = "is_create" invisible="1"/>
+                        <field name="project_code" attrs="{'invisible':[('is_create', '=', False)]}"/>
+
+                    </group>
+
+                </xpath>
+               <xpath expr="//page[@string='Project Stages']" position="attributes">
+                    <attribute name="string">Task Stages</attribute>
+                </xpath>
+                <notebook>
+                    <page string="Description">
+                        <field name="desc" placeholder="Description" nolabel="1"/>
+                    </page>
+                </notebook>
+                <!-- <xpath expr="/form/sheet/div[2]/button[@name='attachment_tree_view']" position="after">
+                    <button name="open_attributes" string="Open Attributes" type="object" icon="gtk-ok" attrs="{'invisible':[('attribute_set_id', '=', False)]}"/>
+                </xpath>-->
+               <!-- <xpath expr="//field[@name='state']" position="before">
+                    <button name="button_select_template" string="Choose Template" type="object" icon="gtk-ok" attrs="{invisible:['state', '=', 'template']}"/>
+                </xpath>-->
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="project_project_tree_view_test">
+            <field name="name">project.project.tree.view.inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='name']" position="before">
+                    <!--<field name="attribute_set_id" readonly="1" invisible = "1"/>-->
+                    <field name="project_code"/>
+
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="project_project_filter_view_test">
+            <field name="name">project.project.filter.view.inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project_project_filter"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <!--<field name="attribute_set_id" readonly="1" invisible = "1"/>-->
+                    <field name="project_code"/>
+
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="project_task_form_view_test">
+            <field name="name">project.task.form.view.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[@string='Extra Info']" position="after">
+                    <page string="Task Team">
+                        <group>
+                            <field name="user_task_ids" nolabel="1" widget="many2many_kanban">
+
+
+                                <kanban quick_create="false" create="true" delete="true">
+                                    <field name="name"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <div style="position: relative">
+                                                <a t-if="! read_only_mode" type="delete" style="position: absolute; right: 0; padding: 4px; diplay: inline-block">X</a>
+                                                <div class="oe_module_vignette">
+                                                    <div class="oe_module_desc">
+                                                        <field name="name"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                        </group>
+
+
+                    </page>
+                    <!--<field name="attribute_set_id" readonly="1" invisible = "1"/>-->
+
+
+                </xpath>
+                <xpath expr="//field[@name='project_id']" position="after">
+                    <field name="visible_task"/>
+                    <field name="planned_days" required="1"/>
+
+                </xpath>
+                <!--<xpath expr="//field[@name='phase_id']" position="replace">
+                         <field name="planned_days"/>
+
+                </xpath>-->
+                <xpath expr="//field[@name='planned_hours']" position="attributes">
+
+                    <attribute name="invisible">1</attribute>
+
+
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+        <!--==allow to access my task menu to all assign members====-->
+
+        <record model="ir.actions.act_window" id="project_gtd.open_gtd_task">
+            <field name="name">My Tasks</field>
+            <field name="res_model">project.task</field>
+            <field name="search_view_id" ref="project_gtd.view_task_gtd_search"/>
+            <field name="context">{'set_editable':True,'set_visible':True,'gtd':True,'user_invisible':True, "search_default_open": 1}</field>
+            <field name="domain">[('user_task_ids','in',uid),('visible_task','=',True)]</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form,calendar,gantt,graph</field>
+        </record>
+        <menuitem action="project_gtd.open_gtd_task" id="project_gtd.menu_open_gtd_timebox_tree" parent="project.menu_project_management" sequence="10"/>
+
+
+
+        <!-- Record of tree view of task to hide planned_hours -->
+        <record model="ir.ui.view" id="view_task_tree2_test">
+            <field name="name">project.task.tree</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_tree2"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='planned_hours']" position="replace">
+                    <field name="planned_days"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

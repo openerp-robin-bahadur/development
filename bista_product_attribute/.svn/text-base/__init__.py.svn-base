@@ -1,0 +1,5 @@
+import res_partner
+import sale
+import custom_attribute
+import base_product
+import mail

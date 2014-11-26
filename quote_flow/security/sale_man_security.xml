@@ -1,0 +1,8 @@
+<openerp>
+    <data noupdate="0">
+        <record id="group_salesman" model="res.groups">
+            <field name="name">Salesman</field>
+        </record>
+       
+    </data>
+</openerp>

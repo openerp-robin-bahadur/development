@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+    <data>
+        <record id="hr_employee_normal_form_view" model="ir.ui.view">
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+	    <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="address_id" position="before">
+                    <field name="x_extension"/>
+                </field>
+                <field name="parent_id" position="after">
+                    <field name="x_start_date"/>
+                </field>
+                <field name="mobile_phone" position="after">
+                    <field name="x_fax"/>
+                </field>
+		<field name="coach_id" position="replace">
+                    <field name="coach_id" invisible="1"/>
+                </field>
+		<field name="passport_id" position="replace">
+                    <field name="passport_id" invisible="1"/>
+                </field>
+
+                <field name="birthday" position="after">
+                    <field name="x_birth_month"/>
+                    <field name="x_birth_day"/>
+                </field>
+ 	       
+           </field>
+        </record>
+
+	<record id="hr_employee_normal_tree_view" model="ir.ui.view">
+            <field name="model">hr.employee</field>
+	    <field name="inherit_id" ref="hr.view_employee_tree"/>
+            <field name="type">tree</field>
+	    <field name="priority" eval="30"/>
+            <field name="arch" type="xml">
+                <field name="work_phone" position="replace"/>
+                <field name="name" position="after">
+                    <field name="x_extension" attrs="{'editable': 'top'}"/>
+	            <field name="state" string="In/Out"/>
+	            <field name="last_sign" string='Time'/>
+                </field>
+		<field name="parent_id" position="replace"/>
+		<tree position="attributes">
+    			<attribute name="colors">blue:state=='present'</attribute>
+	    	</tree>
+            </field>
+	</record>
+
+    </data>
+</openerp>
+

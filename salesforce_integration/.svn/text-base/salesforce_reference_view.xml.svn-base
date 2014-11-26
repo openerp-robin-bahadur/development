@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+<!--###########################  SalesForce Tables Form View  Start  ################################  -->
+
+        <record model="ir.ui.view" id="salesforce_tables_form">
+            <field name="name">SalesForce Tables</field>
+            <field name="model">salesforce.tables</field>
+            <field name="arch" type="xml">
+                <form string="SalesForce Tables" version='7.0'>
+                    <sheet>
+                        <group>
+                            <field name="model_id" />
+                            <field name="salesforce_model" />	
+                            <field name="sequence" />
+                        </group>
+                        <label for="salesforce_field_ids"/>	
+                        <field name="salesforce_field_ids" >			       
+                            <form string="SalesForce fields">				    
+                                <field name="field_id" domain="[('model_id','=',parent.model_id)]"/>					       
+                                <field name="salesforce_name" />		
+                                <field name="type" />
+                                <field name="evaluation_type"/>
+                                <field name="in_function"/>			       
+                                <field name="out_function"/>			       				            			
+                            </form>
+                            <tree string="SalesForce fields" >				   
+                                <field name="field_id" domain="[('model_id','=',parent.model_id)]"/>					       
+                                <field name="salesforce_name" />		
+                                <field name="type" />					       		
+                            </tree>
+                        </field>					    					   
+                    </sheet>
+                </form>
+            </field>
+        </record>
+<!--###########################  SalesForce Tables Form View  End  ################################  -->
+
+
+
+<!--###########################  SalesForce Tables Tree View  Start  ################################  -->
+
+        <record model="ir.ui.view" id="salesforce_tables_tree">
+            <field name="name">SalesForce Tables</field>
+            <field name="model">salesforce.tables</field>
+            <field name="arch" type="xml">
+                <tree string="SalesForce Tables" >				   
+                    <field name="model_id" />
+                    <field name="salesforce_model" />					       		
+                </tree>
+            </field>
+        </record>	
+<!--###########################  SalesForce Tables Tree View  End  ################################  -->
+
+
+		
+<!--###########################  SalesForce Tables Search View  Start  ################################  -->
+        <record model="ir.ui.view" id="salesforce_tables_search">
+            <field name="name">SalesForce Tables</field>
+            <field name="model">salesforce.tables</field>
+            <field name="arch" type="xml">
+                <search string="SalesForce Tables" >				   
+                    <field name="model_id" />
+                    <field name="salesforce_model" />					       		
+                </search>
+            </field>
+        </record>
+<!--###########################  SalesForce Tables Search View  End  ################################  -->	
+
+
+
+<!--###########################  SalesForce Tables Action  Start  ################################  -->
+        <record model="ir.actions.act_window" id="salesforce_tables_action">
+            <field name="name">SalesForce Tables</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">salesforce.tables</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                  <p>
+                     Here You can find the salesforce tables that are connected to BusinessUtility247 Records.
+                  </p>
+            </field>
+        </record>
+<!--###########################  SalesForce Tables Action End  ################################  -->  
+      
+
+       
+<!--###########################  SalesForce Field Form View  Start  ################################  -->     
+        <record model="ir.ui.view" id="salesforce_fields_form">
+            <field name="name">SalesForce Fields</field>
+            <field name="model">salesforce.fields</field>
+            <field name="arch" type="xml">
+                <form string="SalesForce fields" version='7.0'>
+                    <sheet>
+                        <group>
+                            <field name="table_id" required='1'/>
+                            <field name="field_id" />					       
+                            <field name="salesforce_name" />		
+                            <field name="type" required='1' />
+                            <field name="evaluation_type" attrs="{'required':[('type','!=',False)]}"/>
+                            <group attrs="{'invisible':[('evaluation_type','=','direct')]}" colspan='4' > 
+                                <field name="in_function" colspan='4'
+                                attrs="{'invisible':[('evaluation_type','!=','function')],'required':[('evaluation_type','=','function'),'|',('type','=','in'),('type','=','in_out')]}"/>
+                                <field name="out_function" attrs="{'invisible':[('evaluation_type','!=','function')],'required':[('evaluation_type','=','function'),'|',('type','=','out'),('type','=','in_out')]}" colspan='4'/>
+                            </group>				       				            
+                        </group>					   
+                    </sheet>
+                </form>
+            </field>
+        </record>
+<!--###########################  SalesForce Field Form View  End  ################################  -->  
+
+
+  
+<!--###########################  SalesForce Field Tree View  Start  ################################  -->     
+        <record model="ir.ui.view" id="salesforce_fields_tree">
+            <field name="name">SalesForce fields</field>
+            <field name="model">salesforce.fields</field>
+            <field name="arch" type="xml">
+                <tree string="SalesForce fields" >				   
+                    <field name="table_id" />
+                    <field name="field_id" />					       
+                    <field name="salesforce_name" />		
+                    <field name="type" />
+                    <field name="evaluation_type"/>							       		
+                </tree>
+            </field>
+        </record>	
+<!--###########################  SalesForce Field Tree View  End  ################################  -->                 
+        
+   
+        
+<!--###########################  SalesForce Search Form View  Start  ################################  --> 
+        <record model="ir.ui.view" id="salesforce_fields_search">
+            <field name="name">SalesForce fields</field>
+            <field name="model">salesforce.fields</field>
+            <field name="arch" type="xml">
+                <search string="SalesForce fields" >				   
+                    <field name="table_id" />
+                    <field name="field_id" />					       
+                    <field name="salesforce_name" />		
+                    <field name="type" />
+                    <field name="evaluation_type"/>							       		
+                </search>
+            </field>
+        </record>	
+<!--###########################  SalesForce Field Search View  End  ################################  --> 		
+
+
+
+<!--###########################  SalesForce Field Action Start  ################################  --> 
+        <record model="ir.actions.act_window" id="salesforce_fields_action">
+            <field name="name">SalesForce fields</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">salesforce.fields</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                  <p>
+                     Here You can find the salesforce fields that are connected to BusinessUtility247 fields.
+                  </p>
+            </field>
+        </record>
+<!--###########################  SalesForce Field ACtion  End  ################################  --> 
+
+       
+       
+<!--###########################  SalesForce Reference Tree View  Start  ################################  -->         
+        <record model="ir.ui.view" id="salesforce_reference_tree">
+            <field name="name">SalesForce Reference</field>
+            <field name="model">salesforce.reference</field>
+            <field name="arch" type="xml">
+                <tree string="SalesForce reference" create='0'>				   
+                    <field name="model" />
+                    <field name="internal_id" />		
+                    <field name="salesforce_id" />		
+                    <field name="account_id" />	
+                    <field name="updated_on" />						       		
+                </tree>
+            </field>
+        </record>	
+<!--###########################  SalesForce Reference Tree View  End  ################################  --> 
+
+		
+       
+<!--###########################  SalesForce Reference Search View  Start  ################################  -->    
+        <record model="ir.ui.view" id="salesforce_reference_search">
+            <field name="name">SalesForce reference</field>
+            <field name="model">salesforce.reference</field>
+            <field name="arch" type="xml">
+                <search string="SalesForce reference">				   
+                    <field name="model" />
+                    <field name="salesforce_id" />		
+                    <field name="account_id" />	
+                    <field name="updated_on" />						       		
+                </search>
+            </field>
+        </record>
+<!--###########################  SalesForce Reference Search View  End  ################################  --> 
+
+
+
+<!--###########################  SalesForce Reference Action  Start  ################################  --> 
+        <record model="ir.actions.act_window" id="salesforce_reference_action">
+            <field name="name">SalesForce reference</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">salesforce.reference</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                  <p>
+                     Here You can find the salesforce refence for BusinessUtility247 records.
+                  </p>
+            </field>
+        </record>
+<!--###########################  SalesForce Reference Action  End  ################################  -->         
+
+        <record id="salesforce_log_details" model="ir.actions.act_window">
+            <field name="name">SalesForce Logs</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">log.details</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('module','=','Saleforce')]</field>
+        </record>
+        
+
+<!--###########################  SalesForce Menues  ################################  --> 
+
+
+        <menuitem id="menu_salesforce_config" name="Configuration" groups="salesforce_integration.group_salesforce_manager" parent="menu_salesforce_menu"	sequence="50"/>
+        
+        <menuitem id="menu_salesforce_table" name="Synced Objects" parent="menu_salesforce_config"  action="salesforce_tables_action" 	sequence="30"  groups="salesforce_integration.group_salesforce_manager" />
+
+<!--        SalesForce Fields Menu-->
+
+        <menuitem id="menu_salesforce_fields" name="Synced Fields" parent="menu_salesforce_config"  action="salesforce_fields_action" 	sequence="40" groups="salesforce_integration.group_salesforce_manager" />
+
+
+<!--        SalesForce Reference Menu-->
+            
+
+        <menuitem id="menu_salesforce_reference" name="SalesForce Mapping" parent="menu_salesforce_config"  action="salesforce_reference_action" sequence="50" groups="salesforce_integration.group_salesforce_manager" />
+        
+        
+        <menuitem id="menu_salesforce_log" name="SalesForce Log" parent="menu_salesforce_menu" sequence="60" groups="salesforce_integration.group_salesforce_user" />
+        
+        <menuitem id="menu_salesforce_log_errorlog" name="Error Log" parent="menu_salesforce_log"  action="salesforce_log_details" sequence="10"  />
+        
+        
+        
+        
+	</data>
+</openerp>        
+        

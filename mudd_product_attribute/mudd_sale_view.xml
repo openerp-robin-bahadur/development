@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="mudd_sale_product_form_view_set_button">
+            <field name="name">mudd.sale.product.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+
+                <xpath expr="/form/sheet/group/group[2]/field[@name='client_order_ref']" position="after">
+                    
+
+                        <field name="product_temp_id"/>
+                        <field name="mudd_product_id"/>
+
+                    
+                </xpath>
+            </field>
+        </record>
+
+
+
+
+
+
+
+
+    </data>
+</openerp>

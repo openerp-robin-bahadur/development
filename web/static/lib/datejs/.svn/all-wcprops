@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/Projects/!svn/ver/794/MUDD/web/static/lib/datejs
+END
+extras.js
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/Projects/!svn/ver/794/MUDD/web/static/lib/datejs/extras.js
+END
+core.js
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/Projects/!svn/ver/794/MUDD/web/static/lib/datejs/core.js
+END
+parser.js
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/Projects/!svn/ver/794/MUDD/web/static/lib/datejs/parser.js
+END
+date.js
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/Projects/!svn/ver/794/MUDD/web/static/lib/datejs/date.js
+END
+sugarpak.js
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/Projects/!svn/ver/794/MUDD/web/static/lib/datejs/sugarpak.js
+END
+time.js
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/Projects/!svn/ver/794/MUDD/web/static/lib/datejs/time.js
+END

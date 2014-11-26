@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+    
+	    <record id="partner_simple_form_inherited" model="ir.ui.view">
+		    <field name="name">partner.simple.form.inherited</field>
+		    <field name="model">res.partner</field>
+		    <field name="type">form</field>
+		    <field name="inherit_id" ref="base.view_partner_simple_form"/>
+		    <field name="arch" type="xml">
+                <field name='name' position="after"> 
+                    <field name='middle_name' placeholder="Middle Name"/>                       
+                    <field name='last_name' placeholder="Last Name"/>              
+                </field>
+	        </field>
+	    </record>
+        <record id="partner_view_partner_form_inherited" model="ir.ui.view">
+		    <field name="name">partner.view.partner.form.inherited</field>
+		    <field name="model">res.partner</field>
+		    <field name="type">form</field>
+		    <field name="inherit_id" ref="base.view_partner_form"/>
+		    <field name="arch" type="xml">
+                <field name='name' position="after"> 
+                    <field name='middle_name' placeholder="Middle Name"/>                       
+                    <field name='last_name' placeholder="Last Name"/>              
+                </field>
+                <field name='website' position="after"> 
+                    <field name='birthdate'/>
+                </field>
+	        </field>
+	    </record>
+    </data>
+</openerp>
+
+

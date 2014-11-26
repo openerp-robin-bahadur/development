@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="mudd_res_partner_inherit" model="ir.ui.view">
+            <field name="name">mudd.res.partner.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group/group[1]/field[@name='website']" position = "after">
+                        
+                    <field name= "x_vendor_id"/>
+                    <field name= "x_ein"/>
+                </xpath>
+
+                <xpath expr="//form/sheet/group/group[1]/div/field[@name='street2']" position = "after">
+                    <field name ="x_street_3"/>
+                </xpath>
+
+                <xpath expr="//form/sheet/notebook/page[@string='Internal Notes']" position="after">
+                    <page string="Sales Force Options">
+                        <group>
+                            <group colspan="1" col="2">
+                                <field name="mudd_id"/>
+                                <field name="x_agency_ae"/>
+                                <field name="annual_revenue"/>
+                                <field name="x_bmw_dealer_code"/>
+                                <field name="billing_city"/>
+                                <field name="billing_cntry"/>
+                                <field name="billing_post"/>
+                                <field name="billing_state"/>
+                                <field name="x_buick_bac_code"/>
+                                <field name="x_buick_site_code"/>
+                                <field name="x_buick"/>
+                                <field name="x_cadillac_bac_code"/>
+                                <field name="x_cadillac_site_code"/>
+                                <field name="x_cars_sold_new"/>
+                                <field name="x_cars_sold_used"/>
+                                <field name="x_chevrolet_bac_code"/>
+                                <field name="x_chevrolet_site_code"/>
+                                <field name="x_chrysler_dealer_code"/>
+                                <field name="x_client_id"/>
+                                </group>
+                                <group>                           
+                                <field name="created_by_id"/>
+                                <field name="created_date"/>
+                                <field name="dms"/>
+                                <field name="x_daimler_dealer_code"/>
+                                <field name="x_distance"/>
+                                <field name="x_fiat_dealer_code"/>
+                                <field name="x_ford_dealer_code"/>
+                                <field name="x_franchises_allowed"/>
+                                <field name="x_franchises_assigned"/>
+                                <field name="x_fuji_dealer_code"/>
+                                <field name="x_gmc_bac_code"/>
+                                <field name="x_gmc_site_code"/>
+                                <field name="x_gm_bac_code"/>
+                                <field name="x_gc_site_code"/>
+                                <field name="x_geeley_dealer_code"/>
+                                <field name="geolocation_latitude"/>
+                                <field name="geolocation_longitude"/>
+                                <field name="x_honda_dealer_code"/>
+                                <field name="x_hyundai_dealer_code"/>                           
+                            </group>
+                            <group colspan="1" col="2">
+                                <field name="industry"/>
+                                <field name="jigsaw_cmpny_id"/>
+                                <field name="last_modi_by_id"/>
+                                <field name="last_modi_date"/>
+                                <field name="x_last_activity_date"/>
+                                <field name="x_last_contact_by"/>
+                                <field name="x_last_sold_date"/>
+                                <field name="x_mazda_dealer_code"/>
+                                <field name="x_media_agi_amount"/>
+                                <field name="x_mitsubishi_dealer_code"/>
+                                <field name="x_nissan_dealer_code"/>
+                                <field name="no_of_employees"/>
+                                <field name="owner_id"/>
+                                <field name="ownership"/>
+                                <field name="parnt_id"/>
+                                <field name="x_primary_contact"/>
+                                <field name="x_sales_ppl"/>
+                                <field name="x_service_technicians"/>
+                                <field name="cust_type"/>
+                                </group>
+                                <group>
+                                <field name="x_sales_hrs_fri"/>
+                                <field name="x_sales_hrs_mon"/>
+                                <field name="x_sales_hrs_sat"/>
+                                <field name="x_sales_hrs_sun"/>
+                                <field name="x_sales_hrs_thr"/>
+                                <field name="x_sales_hrs_tue"/>
+                                <field name="x_sales_hrs_wed"/>                            
+                                <field name="ship_city"/>
+                                <field name="ship_cntry"/>
+                                <field name="ship_post"/>
+                                <field name="ship_state"/>
+                                <field name="ship_street"/>
+                                <field name="x_finance_sold"/>
+                                <field name="x_suzuki_dealer_code"/>
+                                <field name="systm_stamp"/>
+                                <field name="x_tata_dealer_code"/>
+                                <field name="x_total_cars_sold"/>
+                                <field name="x_toyota_dealer_code"/>                             
+                                <field name="x_volkswagen_dealer_code"/>
+                            </group>
+<!--                        <group>
+                            
+                            </group>54
+                            <group>
+                            
+
+                        </group>76-->
+                            <group >
+                            
+                                <field name="x_current_user_is_tm"/>
+                                <field name="x_do_not_mail"/>
+                                <field name="x_done_business_with"/>
+                                </group>
+                                <group>
+                                <field name="is_deleted"/>
+                                <field name="x_use_as_ref"/>
+                                <field name="x_used_only"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

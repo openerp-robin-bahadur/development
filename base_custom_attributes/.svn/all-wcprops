@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/Projects/!svn/ver/666/MUDD/base_custom_attributes
+END
+ir_model.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/Projects/!svn/ver/666/MUDD/base_custom_attributes/ir_model.py
+END
+ir_model.pyc
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/Projects/!svn/ver/666/MUDD/base_custom_attributes/ir_model.pyc
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/Projects/!svn/ver/666/MUDD/base_custom_attributes/__init__.py
+END
+custom_attributes.py
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/Projects/!svn/ver/988/MUDD/base_custom_attributes/custom_attributes.py
+END
+__init__.pyc
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/Projects/!svn/ver/666/MUDD/base_custom_attributes/__init__.pyc
+END
+custom_attributes_view.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/Projects/!svn/ver/666/MUDD/base_custom_attributes/custom_attributes_view.xml
+END
+custom_attributes.pyc
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/Projects/!svn/ver/666/MUDD/base_custom_attributes/custom_attributes.pyc
+END
+__openerp__.py
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/Projects/!svn/ver/666/MUDD/base_custom_attributes/__openerp__.py
+END

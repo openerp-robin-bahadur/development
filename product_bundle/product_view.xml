@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="product_bundle_product_form_view" model="ir.ui.view">
+            <field name="name">product_bundle.product_form_view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field eval="16" name="priority"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Sales']" position="after">
+                    <page string="Bundle" attrs="{'invisible':[('supply_method','!=','bundle')]}">
+                        <group>
+                        <field name="self_m2m" nolabel ="1"/>
+                        </group>
+<!--                        <field name="item_ids" nolabel="1">
+                            <tree string="Items" editable="bottom">
+                                <field name="sequence" widget="handle"/>
+                                <field name="item_id" on_change="onchange_item_id(item_id, context)"/>
+                                <field name="qty_uom"/>
+                                <field name="uom_id"/>
+                                <field name="revenue"/>
+                                <field name="editable"/>
+                            </tree>
+                        </field>-->
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+<!--        <menuitem name="Product Bundle" id="base.product_item"  parent="base.menu_product" sequence="71"/>-->
+<!--        <record id="mudd_product_bundle_form" model="ir.ui.view">
+            <field name="name">mudd.product.bundle.form</field>
+            <field name="model">product.item</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Product Bundle" version="7.0">
+                    <sheet>
+                    <h1>
+                        <label string="Bundle"/>
+                    </h1>
+                        <group>
+                            <field name="sequence" widget="handle"/>
+                            <field name="item_id" on_change="onchange_item_id(item_id, context)"/>
+                            <field name="qty_uom"/>
+                            <field name="uom_id"/>
+                            <field name="revenue"/>
+                            <field name="editable"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+        <record id="action_mudd_product_bundle" model="ir.actions.act_window">
+            <field name="name">Product Bundles</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.item</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+
+            <field name="help" type="html"/>
+        </record>-->
+<!--        <menuitem name="Product Bundle" id="mudd_product_bundle_parent"  parent="product.prod_config_main" sequence="71"/>-->
+<!--        <menuitem name="Product Bundle" id="base.product_item" parent="base.menu_product" action="action_mudd_product_bundle"/>-->
+       <!-- <menuitem name="Product Template" id="base.product_temp" parent="base.menu_product" action="product.product_template_action_tree"/>-->
+    </data>
+</openerp>

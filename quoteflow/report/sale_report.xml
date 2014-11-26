@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+       
+        <report id="report_sale_order_id" model="sale.order" name="quotation.sale.order"
+                rml="quoteflow/report/sale_order.rml" string="Quotation" menu="False"/>
+
+        <report auto="False" id="sale.report_sale_order" model="sale.order" name="sale.order"
+                rml="sale/report/sale_order.rml" string="Quotation / Order"
+                usage="default" menu="False"/>
+
+        <report id="report_sale_order2_id" model="sale.order" name="quotation.sale.order2"
+                rml="quoteflow/report/sale_order2.rml" string="Quotation" menu="False"/>
+
+    </data>
+
+</openerp>

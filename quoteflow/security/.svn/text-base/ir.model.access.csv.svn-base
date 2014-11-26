@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_order,sale.order,model_sale_order,group_salesman,1,1,1,1
+access_base_sale_template,base.product.template,bista_product_attribute.model_base_product_template,group_salesman,1,1,1,1
+access_base_sale_bundle,base.product.bundle,bista_product_attribute.model_base_product_bundle,group_salesman,1,1,1,1
+access_base_campaign_theme,campaign.theme,bista_product_attribute.model_campaign_theme,group_salesman,1,1,1,0
+access_base_manufacture,manufacture.info,bista_product_attribute.model_manufacture_info,group_salesman,1,1,1,1
+access_base_franchise,franchise.info,bista_product_attribute.model_franchise_info,group_salesman,1,1,1,1
+
+access_sale_order_manager,sale.order,model_sale_order,group_manager,1,1,1,1
+access_base_sale_template_manager,base.product.template,bista_product_attribute.model_base_product_template,group_manager,1,1,1,1
+access_base_sale_bundle_manager,base.product.bundle,bista_product_attribute.model_base_product_bundle,group_manager,1,1,1,1
+access_base_campaign_theme_manager,campaign.theme,bista_product_attribute.model_campaign_theme,group_manager,1,1,1,0
+access_base_manufacture_manager,manufacture.info,bista_product_attribute.model_manufacture_info,group_manager,1,1,1,1
+access_base_franchise_manager,franchise.info,bista_product_attribute.model_franchise_info,group_manager,1,1,1,1

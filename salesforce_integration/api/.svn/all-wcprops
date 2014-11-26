@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/Projects/!svn/ver/750/MUDD/salesforce_integration/api
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/Projects/!svn/ver/750/MUDD/salesforce_integration/api/__init__.py
+END
+salesforce.py
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/Projects/!svn/ver/750/MUDD/salesforce_integration/api/salesforce.py
+END
+xmltodict.py
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/Projects/!svn/ver/750/MUDD/salesforce_integration/api/xmltodict.py
+END

@@ -1,0 +1,429 @@
+<!--<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        Miscellaneous wizard view for SOL
+
+
+        <record model="ir.ui.view" id="miscellaneous_wizard_form_view">
+            <field name="name">miscellaneous.wizard</field>
+            <field name="model">miscellaneous.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Miscellaneous Item" version="7.0">
+                    <group colspan="4" col="4">
+                    	<field name='line_id'/>
+                    	<field name='product_id'/>
+                        <field name="miscellaneous_item_line" nolabel="1" colspan="4" col="4">
+                            <tree editable="top">
+                                <field name="miscellaneous_id" on_change="onchange_miscellaneous_id(miscellaneous_id,context)"/>
+                                <field name="misc_cost_price"/>
+                                <field name="misc_sales_price"/>
+
+                            </tree>
+                            <form>
+                                <field name="miscellaneous_id" on_change="onchange_miscellaneous_id(miscellaneous_id,context)"/>
+                                <field name="misc_cost_price"/>
+                                <field name="misc_sales_price"/>
+
+                            </form>
+                        </field>
+					</group>
+
+                    <footer>
+                        <button name="save_miscellaneous_item" string="Save and Close" type="object" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="miscellaneous_wizard_action" model="ir.actions.act_window">
+            <field name="name">Miscellaneous Item</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">miscellaneous.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_type">form</field>
+            <field name="target">new</field>
+            <field name="nodestory">True</field>
+            <field name="view_id" ref="miscellaneous_wizard_form_view"/>
+        </record>
+
+
+
+
+        <record id="sale_commission_tree_view" model="ir.ui.view">
+            <field name="name">sale.commission.tree</field>
+            <field name="model">sale.commission</field>
+            <field name="arch" type="xml">
+                <tree string="Miscellaneous Items">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="billing_vendor_id"/>
+                    <field name="order_id" invisible="1"/>
+                    <field name="order_date"/>
+                    <field name="billing_month"/>
+                    <field name="billing_year"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sale_commission_search_view" model="ir.ui.view">
+            <field name="name">sale.commission.search</field>
+            <field name="model">sale.commission</field>
+            <field name="arch" type="xml">
+                <search string="Miscellaneous Items">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="billing_vendor_id"/>
+                    <field name="order_date"/>
+                    <field name="billing_month"/>
+                    <field name="billing_year"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="sale_commission_form_view" model="ir.ui.view">
+            <field name="name">sale.commission.form</field>
+            <field name="model">sale.commission</field>
+            <field name="arch" type="xml">
+                <form string="Sale Commission" version="7.0">
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <group col="2" colspan="2">
+                                <field name="name"/>
+                                <field name="partner_id"/>
+                                <field name="billing_vendor_id"/>
+                                <field name="order_id" invisible="1"/>
+                            </group>
+                            <group col="2" colspan="2">
+                                <field name="order_date"/>
+                                <field name="billing_month"/>
+                                <field name="billing_year"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Product Details">
+                                <field name="commission_line" colspan="4" nolabel="1">
+                                    <tree string="Commission Line">
+                                        <field name="product_id"/>
+                                        <field name="product_id"/>
+                                        <field name="sold_for"/>
+                                        <field name="initial_purchase_cost"/>
+                                        <field name="postal_cost"/>
+                                        <field name="purl_cost"/>
+                                        <field name="miscellaneous_total"/>
+                                    </tree>
+                                    <form string="Commission Line">
+                                        <group colspan="4" col="2">
+                                            <group col="2">
+                                                <field name="product_id"/>
+                                                <field name="postal_cost"/>
+                                                <field name="purl_cost"/>
+                                            </group>
+                                            <group col="2">
+                                                <field name="product_qty"/>
+                                                <field name="sold_for"/>
+                                                <field name="initial_purchase_cost"/>
+
+                                            </group>
+                                        </group>
+                                        <group colspan="4" col="4">
+                                            <field name="miscellaneous_line" colspan="4" nolabel="1">
+                                                <tree string="Miscellaneous Charges" editable="top">
+                                                    <field name="miscellaneous_id" on_change="onchange_miscellaneous_id(miscellaneous_id,context)"/>
+                                                    <field name="misc_cost_price"/>
+                                                    <field name="misc_sales_price"/>
+                                                </tree>
+                                            </field>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Shared Cost">
+                                <field name="shared_line" nolabel="1" colspan="4">
+                                    <tree string="Shared Cost" editable="top">
+                                        <field name="shared_id" on_change="onchange_shared_id(shared_id,context)"/>
+                                        <field name="shared_old_cost"/>
+                                        <field name="shared_new_cost"/>
+                                    </tree>
+                                </field>
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_sale_commission_view" model="ir.actions.act_window">
+            <field name="name">Sale Commission</field>
+            <field name="res_model">sale.commission</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="sale_commission_tree_view"/>
+            <field name="search_view_id" ref="sale_commission_search_view"/>
+        </record>
+
+        <menuitem name="Sale Commission" id="sale_commission_main_menu" parent="account.menu_finance" sequence="4"/>
+        <menuitem name="Sale Commission" id="sale_commission_menu" parent="sale_commission_main_menu" sequence="0" action="action_sale_commission_view"/>
+
+        <record id="miscellaneous_items_tree_view" model="ir.ui.view">
+            <field name="name">miscellaneous.items.tree</field>
+            <field name="model">miscellaneous.items</field>
+            <field name="arch" type="xml">
+                <tree string="Miscellaneous Items" editable="top">
+                    <field name="name"/>
+                    <field name="cost_price"/>
+                    <field name="sales_price"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="miscellaneous_items_form_view" model="ir.ui.view">
+            <field name="name">miscellaneous.items.form</field>
+            <field name="model">miscellaneous.items</field>
+            <field name="arch" type="xml">
+                <form string="Commission Rules">
+                    <field name="name"/>
+                    <field name="sales_price"/>
+                    <field name="cost_price"/>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="miscellaneous_items_search_view" model="ir.ui.view">
+            <field name="name">miscellaneous.items.search</field>
+            <field name="model">miscellaneous.items</field>
+            <field name="arch" type="xml">
+                <search string="Miscellaneous Items">
+                    <field name="name"/>
+                    <field name="sales_price"/>
+                    <field name="cost_price"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_miscellaneous_items_view" model="ir.actions.act_window">
+            <field name="name">Miscellaneous Items</field>
+            <field name="res_model">miscellaneous.items</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="miscellaneous_items_tree_view"/>
+            <field name="search_view_id" ref="miscellaneous_items_search_view"/>
+        </record>
+
+        <menuitem name="Miscellaneous Items" id="miscellaneous_items_menu" parent="product.prod_config_main" sequence="10" action="action_miscellaneous_items_view"/>
+
+        Miscellaneous shared item view menu label as Shared Item
+
+
+
+       <record id="miscellaneous_shared_tree_view" model="ir.ui.view">
+            <field name="name">miscellaneous.shared.tree</field>
+            <field name="model">miscellaneous.shared</field>
+            <field name="arch" type="xml">
+                <tree string="Shared Items" editable="top">
+                    <field name="name"/>
+                     <field name="cost"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="miscellaneous_shared_form_view" model="ir.ui.view">
+            <field name="name">miscellaneous.shared.form</field>
+            <field name="model">miscellaneous.shared</field>
+            <field name="arch" type="xml">
+                <form string="Commission Rules">
+                    <field name="name"/>
+                     <field name="cost"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="miscellaneous_shared_search_view" model="ir.ui.view">
+            <field name="name">miscellaneous.shared.search</field>
+            <field name="model">miscellaneous.shared</field>
+            <field name="arch" type="xml">
+                <search string="Shared Items">
+                    <field name="name"/>
+                     <field name="cost"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_miscellaneous_shared_view" model="ir.actions.act_window">
+            <field name="name">Shared Items</field>
+            <field name="res_model">miscellaneous.shared</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="miscellaneous_shared_tree_view"/>
+            <field name="search_view_id" ref="miscellaneous_shared_search_view"/>
+        </record>
+
+        <menuitem name="Shared Items" id="miscellaneous_shared_menu" parent="product.prod_config_main" sequence="11" action="action_miscellaneous_shared_view"/>
+
+
+
+        <record model="ir.ui.view" id="sale_commission_view_id">
+            <field name="name">sale.commission.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//notebook/page[@string='Other Information']" position="after">
+
+                    <page string="Commission cost">
+                        <button name="run_commission" string="Run Commission" type="object" icon="gtk-apply" />
+
+                        <separator string="Territory Manager" colspan="6"/>
+                        <group col="6" colspan="4">
+                            <group col="2" colspan="2">
+
+                                <field name="territory_manager1_id"  placeholder="Manager1" on_change="onchange_manager1_id(territory_manager1_id,context)"/>
+                                <field name="territory_manager2_id"  placeholder="Manager2" on_change="onchange_manager2_id(territory_manager2_id,context)"/>
+                                <field name="territory_manager3_id"  placeholder="Manager3" on_change="onchange_manager3_id(territory_manager3_id,context)"/>
+                            </group>
+                            <group col="2" colspan="2">
+                                <field name="territory_manager1_commission"  placeholder="Commission" attrs="{'required':[('territory_manager1_id','!=',False)]}"/>
+                                <field name="territory_manager2_commission"  placeholder="Commission" attrs="{'required':[('territory_manager2_id','!=',False)]}"/>
+                                <field name="territory_manager3_commission"  placeholder="Commission" attrs="{'required':[('territory_manager3_id','!=',False)]}"/>
+                            </group>
+                            <group col="2" colspan="2">
+
+                                <field name="territory_manager1_commission_val"  placeholder="Commission "/>
+                                <field name="territory_manager2_commission_val"  placeholder="Commission "/>
+                                <field name="territory_manager3_commission_val" placeholder="Commission "/>
+                            </group>
+                        </group>
+
+                        <separator string="Regional Manager" colspan="8"/>
+                        <group col="6" colspan="4">
+                            <group col="2" colspan="2">
+                                <field name="regional_manager1_id" placeholder="Manager1"/>
+                                <field name="regional_manager2_id"  placeholder="Manager2"/>
+                                <field name="regional_manager3_id"  placeholder="Manager3"/>
+                            </group>
+                            <group col="2" colspan="2">
+                                <field name="regional_manager1_commission"  placeholder="Commission" attrs="{'required':[('regional_manager1_id','!=',False)]}"/>
+                                <field name="regional_manager2_commission"  placeholder="Commission" attrs="{'required':[('regional_manager2_id','!=',False)]}"/>
+                                <field name="regional_manager3_commission"  placeholder="Commission" attrs="{'required':[('regional_manager3_id','!=',False)]}"/>
+                            </group>
+                            <group col="2" colspan="2">
+                                <field name="regional_manager1_commission_val"  placeholder="Commission "/>
+                                <field name="regional_manager2_commission_val"  placeholder="Commission "/>
+                                <field name="regional_manager3_commission_val"  placeholder="Commission "/>
+                            </group>
+                        </group>
+                        <separator string="Brand Manager"  colspan="8"/>
+                        <group col="6" colspan="4">
+                            <group col="2" colspan="2">
+                                <field name="brand_manager1_id"  placeholder="Manager1"/>
+                                <field name="brand_manager2_id"  placeholder="Manager2"/>
+                                <field name="brand_manager3_id"  placeholder="Manager3"/>
+                            </group>
+                            <group col="2" colspan="2">
+                                <field name="brand_manager1_commission"  placeholder="Commission" attrs="{'required':[('brand_manager1_id','!=',False)]}"/>
+                                <field name="brand_manager2_commission"  placeholder="Commission" attrs="{'required':[('brand_manager2_id','!=',False)]}"/>
+                                <field name="brand_manager3_commission"  placeholder="Commission" attrs="{'required':[('brand_manager3_id','!=',False)]}"/>
+                            </group>
+                            <group col="2" colspan="2">
+                                <field name="brand_manager1_commission_val"  placeholder="Commission "/>
+                                <field name="brand_manager2_commission_val"  placeholder="Commission "/>
+                                <field name="brand_manager3_commission_val"  placeholder="Commission "/>
+                            </group>
+                        </group>
+
+
+
+
+                    </page>
+                </xpath>
+
+                <xpath expr="/form/sheet/notebook/page/field[@name= 'order_line']/tree/field[@name='sequence']" position="before">
+                    <button name="%(miscellaneous_wizard_action)d" type="action" string="Miscellaneous Item" icon="gtk-edit"/>
+                    <button name="open_misc" string="Miscellaneous Item" type="object" icon="gtk-edit"/> 
+                </xpath>
+
+                <xpath expr="/form/sheet/notebook/page/field[@name= 'order_line']/form/header" position="inside">
+                    <button name="%(miscellaneous_wizard_action)d" type="action" string="Miscellaneous Item" icon="gtk-edit"/>
+                    <button name="open_misc" string="Miscellaneous Item" type="object" icon="gtk-edit"/>
+
+                </xpath>
+                <xpath expr="/form/sheet/notebook/page/field[@name= 'order_line']/tree/field[@name='tax_id']" position="before">
+                    <field name="misc_cost"/>
+                </xpath>
+
+
+                <xpath expr="//notebook/page[@string='Other Information']" position="after">
+                     <page string="Shared Cost">
+                         <group col="4" colspan="4">
+
+                             <field name="shared_line" nolabel="1">
+                                 <tree editable="top">
+
+                                        <field name="shared_id" on_change="onchange_shared_id(shared_id,context)"/>
+                                        <field name="shared_old_cost"/>
+                                        <field name="shared_new_cost"/>
+                                 </tree>
+                              </field>
+
+                         </group>
+
+                     </page>
+
+                 </xpath>
+
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="sale_order_line_misc_id">
+            <field name="name">sale.misc.view</field>
+            <field name="model">sale.order.line</field>
+
+            <field name="arch" type="xml">
+                <form string="Sale Order Line">
+                    
+                   <button name="save_and_close_miscellaneous_form" string="Save and Close" type="object" />
+                    <group colspan="4">
+                    <field name="miscellaneous_line" nolabel="1">
+                        <tree editable="top">
+                            <field name="miscellaneous_id" on_change="onchange_miscellaneous_id(miscellaneous_id,context)"/>
+                            <field name="misc_cost_price"/>
+                            <field name="misc_sales_price"/>
+
+                        </tree>
+                        <form>
+                            <field name="miscellaneous_id" on_change="onchange_miscellaneous_id(miscellaneous_id,context)"/>
+                            <field name="misc_cost_price"/>
+                            <field name="misc_sales_price"/>
+                        </form>
+
+
+
+                    </field>
+                    </group>
+
+
+                   
+                        
+                        
+                    
+
+                </form>
+            </field>
+        </record>
+
+
+
+
+
+
+
+    </data>
+</openerp>-->

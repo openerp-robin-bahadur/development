@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+    
+	    
+<!--	    res.partner form inherited-->
+
+
+		 <record model="ir.ui.view" id="sf_partner_view_partner_form_inherited2">
+                <field name="name">sf.partner.view.partner.form.inherited1</field>
+                <field name="model">res.partner</field>
+                <field name="type">form</field>
+                <field name="inherit_id" ref="base.view_partner_form"/>
+                <field name="arch" type="xml">
+                <xpath expr="/form/sheet/group/group/label[@string='Address']" position="before">
+                
+                     <field class="oe_inline" name="x_client_id"/>
+                          
+                </xpath>
+                </field>
+            </record>
+
+		<record model="ir.ui.view" id="sf_partner_view_tree_view_inherit1">
+                <field name="name">sf.partner.view.tree.view.inherit1</field>
+                <field name="model">res.partner</field>
+                <field name="type">tree</field>
+                <field name="inherit_id" ref="base.view_partner_tree"/>
+                <field name="arch" type="xml">
+                	<xpath expr="/tree/field[@name='name']" position="before">
+                    	<field name="x_client_id"/>
+                    </xpath>
+                </field>
+            </record>
+
+ <record id="res_partner_inherit1_search_view" model="ir.ui.view">
+            <field name="name">res.partner.inherit1.search</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+            <xpath expr="/search/field[@name='name']" position="before">
+                <field name="x_client_id" string="Client ID" filter_domain="['|',('name','ilike',self),('ref','=',self)]"/>
+                </xpath>
+  				</field>
+        </record>
+        
+        
+
+        <record id="sf_partner_view_partner_form_inherited" model="ir.ui.view">
+		    <field name="name">sf.partner.view.partner.form.inherited</field>
+		    <field name="model">res.partner</field>
+		    <field name="type">form</field>
+		    <field name="inherit_id" ref="base.view_partner_form"/>
+		    <field name="arch" type="xml">
+                 <page string="Accounting" position="after">
+			        <page string="Salesforce" >
+			        <group>
+				        <button name="delete_account_from_salesforce" string="Delete From SalesForce" type="object" attrs="{'invisible': [('is_company','=',False)]}"/> 
+	                    <button name="delete_contact_from_salesforce" string="Delete From SalesForce" type="object" attrs="{'invisible': [('is_company','=',True)]}"/> 
+                    </group>
+	                <group>
+                          </group>
+<!-- Default fields of Salesforce module -->                          
+			            <group> 
+			                <group>                                         
+                                <field name='Type'/>   
+                                <field name='AccountNumber'/>             
+                                <field name='Ownership'/>
+                                <field name='TickerSymbol'/>
+                                <field name='Rating'/>
+                                <field name='AnnualRevenue'/> 
+                                <field name='ReportsToId' domain="[('is_company','=',True)]"/> 
+                                <field name='sf_country' readonly='1'/>
+				                <field name='sf_state' readonly='1'/>
+<!--                             <field name='CustomerPriority__c'/> 
+                                <field name='SLA__c'/> 
+                                <field name='SLAExpirationDate__c'/>                                 
+                                <field name='Languages__c' attrs="{'invisible':[('is_company','=',True)]}"/>
+-->
+                            </group>  
+                            <group>  
+                                 <field name='Title'/>  
+                                <field name='Department'/>
+                                <field name='NumberOfEmployees'/>
+                                <field name='Site'/>
+                                <field name="Sic"/>              
+                                <field name='AccountSource'/>
+                                <field name='Industry'/>
+<!--                                 <field name='SLASerialNumber__c'/> 
+                                <field name='NumberofLocations__c'/> 
+                                <field name='UpsellOpportunity__c'/>                                                                                   
+                                <field name='LastActivityDate'/>
+                                <field name='Level__c' attrs="{'invisible':[('is_company','=',True)]}"/>
+ -->
+                            </group>  
+                                          
+                        </group>
+                          
+<!-- Custom fields added Salesforce module -->                          
+			        
+			        <group>
+                            <group colspan="1" col="2">
+                                <field name="mudd_id"/>
+                                <field name="x_agency_ae"/>
+                                <field name="annual_revenue"/>
+                                <field name="x_bmw_dealer_code"/>
+                                <field name="billing_city"/>
+                                <field name="billing_cntry"/>
+                                <field name="billing_post"/>
+                                <field name="billing_state"/>
+                                <field name="x_buick_bac_code"/>
+                                <field name="x_buick_site_code"/>
+                                <field name="x_buick"/>
+                                <field name="x_cadillac_bac_code"/>
+                                <field name="x_cadillac_site_code"/>
+                                <field name="x_cars_sold_new"/>
+                                <field name="x_cars_sold_used"/>
+                                <field name="x_chevrolet_bac_code"/>
+                                <field name="x_chevrolet_site_code"/>
+                                <field name="x_chrysler_dealer_code"/>
+                               
+                                </group>
+                                <group>                           
+                                <field name="created_by_id"/>
+                                <field name="created_date"/>
+                                <field name="dms"/>
+                                <field name="x_daimler_dealer_code"/>
+                                <field name="x_distance"/>
+                                <field name="x_fiat_dealer_code"/>
+                                <field name="x_ford_dealer_code"/>
+                                <field name="x_franchises_allowed"/>
+                                <field name="x_franchises_assigned"/>
+                                <field name="x_fuji_dealer_code"/>
+                                <field name="x_gmc_bac_code"/>
+                                <field name="x_gmc_site_code"/>
+                                <field name="x_gm_bac_code"/>
+                                <field name="x_gc_site_code"/>
+                                <field name="x_geeley_dealer_code"/>
+                                <field name="geolocation_latitude"/>
+                                <field name="geolocation_longitude"/>
+                                <field name="x_honda_dealer_code"/>
+                                <field name="x_hyundai_dealer_code"/>                           
+                            </group>
+                            <group colspan="1" col="2">
+                               <!--   <field name="industry"/> -->
+                                <field name="jigsaw_cmpny_id"/>
+                                <field name="last_modi_by_id"/>
+                                <field name="last_modi_date"/>
+                                <field name="x_last_activity_date"/>
+                                <field name="x_last_contact_by"/>
+                                <field name="x_last_sold_date"/>
+                                <field name="x_mazda_dealer_code"/>
+                                <field name="x_media_agi_amount"/>
+                                <field name="x_mitsubishi_dealer_code"/>
+                                <field name="x_nissan_dealer_code"/>
+                                <field name="no_of_employees"/>
+                                <field name="owner_id"/>
+                                <field name="ownership"/>
+                                <field name="parnt_id"/>
+                                <field name="x_primary_contact"/>
+                                <field name="x_sales_ppl"/>
+                                <field name="x_service_technicians"/>
+                                <field name="cust_type"/>
+                                </group>
+                                <group>
+                                <field name="x_sales_hrs_fri"/>
+                                <field name="x_sales_hrs_mon"/>
+                                <field name="x_sales_hrs_sat"/>
+                                <field name="x_sales_hrs_sun"/>
+                                <field name="x_sales_hrs_thr"/>
+                                <field name="x_sales_hrs_tue"/>
+                                <field name="x_sales_hrs_wed"/>                            
+                                <field name="ship_city"/>
+                                <field name="ship_cntry"/>
+                                <field name="ship_post"/>
+                                <field name="ship_state"/>
+                                <field name="ship_street"/>
+                                <field name="x_finance_sold"/>
+                                <field name="x_suzuki_dealer_code"/>
+                                <field name="systm_stamp"/>
+                                <field name="x_tata_dealer_code"/>
+                                <field name="x_total_cars_sold"/>
+                                <field name="x_toyota_dealer_code"/>                             
+                                <field name="x_volkswagen_dealer_code"/>
+                            </group>
+                            
+                            </group>
+                            <group>
+                        
+                            <group >
+                            
+                                <field name="x_current_user_is_tm"/>
+                                <field name="x_do_not_mail"/>
+                                <field name="x_done_business_with"/>
+                                </group>
+                                <group>
+                                <field name="is_deleted"/>
+                                <field name="x_use_as_ref"/>
+                                <field name="x_used_only"/>
+                            </group>
+                        </group>
+			        
+			        
+			        
+			        
+                        <label for='SicDesc'/>
+                        <field name='SicDesc'/>     
+                    </page>
+                </page>
+	        </field>
+	    </record>
+	    
+<!--	    Contracts form inherited-->
+
+
+        <record id="sf_account_analytic_account_form_inherited" model="ir.ui.view">
+		    <field name="name">Contracts</field>
+		    <field name="model">account.analytic.account</field>
+		    <field name="type">form</field>
+		    <field name="inherit_id" ref="account_analytic_analysis.account_analytic_account_form_form"/>
+		    <field name="arch" type="xml">
+                 <page string="Contract Information" position="after">
+			        <page string="Salesforce" >
+			            <group>
+			                <group>
+                                <button name="delete_contract_from_salesforce" string="Delete From SalesForce" type="object"/> 
+<!--       Must added attrs="{'invisible': [('ContractNumber','=',False)]}" once Contract Number is imported-->
+                            </group>
+			                <group>
+                            </group>
+			                <group>                     
+                                <field name='sf_customer_id'/>   
+                                <field name='CustomerSignedTitle'/>             
+                                <field name='CustomerSignedDate'/>
+                                <field name='OwnerExpirationNotice'/>
+                                <field name='CompanySignedDate'/>                                
+                                <field name='BillingStreet' /> 
+                                <field name='ContractNumber'/> 
+                            </group>  
+                            <group>                                 
+                                <field name='BillingCity'/>                                                                  
+                                <field name='BillingPostalCode'/> 
+                                <field name='state_id'/> 
+                                <field name='country_id'/>
+                                <field name='sf_status'/>
+                                <field name='active'/>
+                                <field name='LastActivityDate'/>
+                            </group>
+                        </group>
+                        <label for='SpecialTerms'/>
+                        <field name='SpecialTerms'/>     
+                    </page>
+                </page>
+	        </field>
+	    </record>
+	    
+    </data>
+</openerp>
+
+

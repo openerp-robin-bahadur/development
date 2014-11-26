@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_salesforce_data_user,access_salesforce_data,model_salesforce_connection,salesforce_integration.group_salesforce_user,1,0,0,0
+access_salesforce_data_manager,access_salesforce_data,model_salesforce_connection,salesforce_integration.group_salesforce_manager,1,1,1,1
+access_salesforce_tables_user,salesforce.tables.user,model_salesforce_tables,salesforce_integration.group_salesforce_user,1,0,0,0
+access_salesforce_tables_manger,salesforce.tables.manger,model_salesforce_tables,salesforce_integration.group_salesforce_manager,1,1,1,1
+access_salesforce_fields_user,salesforce.fields.user,model_salesforce_fields,salesforce_integration.group_salesforce_user,1,0,0,0
+access_salesforce_fields_manger,salesforce.fields.manger,model_salesforce_fields,salesforce_integration.group_salesforce_manager,1,1,1,1
+access_salesforce_reference_user,salesforce.reference.user,model_salesforce_reference,salesforce_integration.group_salesforce_user,1,0,0,0
+access_salesforce_reference_manger,salesforce.reference.manger,model_salesforce_reference,salesforce_integration.group_salesforce_manager,1,1,1,1
+,,,,,,,
+,,,,,,,
+,,,,,,,
+access_ir_property_salesforce_user,ir_property salesforce_user,base.model_ir_property,salesforce_integration.group_salesforce_user,1,1,1,0
+access_salesforce_attachment_user,ir.attachment.salesforce user,base.model_ir_attachment,salesforce_integration.group_salesforce_user,1,1,1,0
+access_salesforce_attachment_manager,ir.attachment.salesforce.manager,base.model_ir_attachment,salesforce_integration.group_salesforce_manager,1,1,1,1

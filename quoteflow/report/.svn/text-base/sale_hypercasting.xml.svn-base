@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- in name specify name mentioned in .py file for report-->
+        <report id="report_sale_order_hypercasting" model="sale.order" name="mudd.sale.order"
+                rml="quoteflow/report/sale_hypercasting.rml" string="Hypercasting Report"/>
+    </data>
+
+</openerp>

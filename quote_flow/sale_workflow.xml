@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!-- Activity -->
+        <record id="act_review" model="workflow.activity">
+             <field name="wkf_id" ref="sale.wkf_sale"/>
+            <field name="name">review</field>
+            <field name="kind">function</field>
+            <field name="action">action_review()</field>
+        </record>
+
+        <record id="act_approve" model="workflow.activity">
+                <field name="wkf_id" ref="sale.wkf_sale"/>
+            <field name="name">approve</field>
+            <field name="kind">function</field>
+            <field name="action">write({'state':'approved'})</field>
+        </record>
+
+         <record id="act_req_for_sign" model="workflow.activity">
+             <field name="wkf_id" ref="sale.wkf_sale"/>
+            <field name="name">Request for sign</field>
+            <field name="kind">function</field>
+            <field name="action">write({'state':'request_for_signature'})</field>
+        </record>
+
+<!--         <record id="act_waiting_for_sign" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_mudd_sale"/>
+            <field name="name">Waiting for sign</field>
+            <field name="kind">function</field>
+            <field name="action">write({'state_new':'waiting_approved_signature'})</field>
+        </record>-->
+
+
+
+        <!-- Transistion -->
+
+        <record id="trans_mudd_sale_review1" model="workflow.transition">
+            <field name="act_from" ref="sale.act_draft"/>
+            <field name="act_to" ref="act_review"/>
+            <field name="signal">action_submit_for_approval</field>
+        </record>
+        <record id="trans_mudd_sale_Approve1" model="workflow.transition">
+            <field name="act_from" ref="act_review"/>
+            <field name="act_to" ref="act_approve"/>
+            <field name="signal">action_approved</field>
+        </record>
+
+        <record id="trans_mudd_approve_req1" model="workflow.transition">
+            <field name="act_from" ref="act_approve"/>
+            <field name="act_to" ref="act_req_for_sign"/>
+            <field name="signal">action_request_sign</field>
+        </record>
+        <record id="trans_mudd_waiting_approve1" model="workflow.transition">
+            <field name="act_from" ref="act_req_for_sign"/>
+            <field name="act_to" ref="act_approve"/>
+            <field name="signal">action_waiting_approved</field>
+        </record>
+
+        <record id="trans_mudd_approve_cancel1" model="workflow.transition">
+            <field name="act_from" ref="act_approve"/>
+            <field name="act_to" ref="sale.act_cancel"/>
+            <field name="signal">sale.action_cancel</field>
+        </record>
+
+         <record id="trans_mudd_req_cancel1" model="workflow.transition">
+            <field name="act_from" ref="act_req_for_sign"/>
+            <field name="act_to" ref="sale.act_cancel"/>
+            <field name="signal">sale.cancel</field>
+        </record>
+
+        <record id="trans_mudd_review_cancel1" model="workflow.transition">
+            <field name="act_from" ref="act_review"/>
+            <field name="act_to" ref="sale.act_cancel"/>
+            <field name="signal">sale.cancel</field>
+        </record>
+
+    </data>
+</openerp>

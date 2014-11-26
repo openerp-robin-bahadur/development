@@ -1,0 +1,1760 @@
+10
+
+dir
+799
+https://192.168.1.49/svn/Projects/MUDD
+https://192.168.1.49/svn/Projects
+
+
+
+2014-09-25T11:33:10.125000Z
+799
+robin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+072833ac-e4da-6a45-8b5e-19844c29fac1
+
+survey
+dir
+
+
+
+add
+
+l10n_fr_rib
+dir
+
+
+
+add
+
+hr_attendance
+dir
+
+
+
+add
+
+web_tests
+dir
+
+
+
+add
+
+portal_project_issue
+dir
+
+
+
+add
+
+l10n_es
+dir
+
+
+
+add
+
+portal
+dir
+
+
+
+add
+
+auth_ldap
+dir
+
+
+
+add
+
+l10n_et
+dir
+
+
+
+add
+
+portal_stock
+dir
+
+
+
+add
+
+project_issue_sheet
+dir
+
+
+
+add
+
+l10n_syscohada
+dir
+
+
+
+add
+
+l10n_uk
+dir
+
+
+
+add
+
+purchase
+dir
+
+
+
+add
+
+mudd_product_attribute
+dir
+
+
+
+add
+
+account_chart
+dir
+
+
+
+add
+
+base_status
+dir
+
+
+
+add
+
+l10n_mx
+dir
+
+
+
+add
+
+project_issue
+dir
+
+
+
+add
+
+hr_timesheet
+dir
+
+
+
+add
+
+event_moodle
+dir
+
+
+
+add
+
+l10n_us
+dir
+
+
+
+add
+
+stock
+dir
+
+
+
+add
+
+.project
+file
+
+
+
+
+2014-09-15T06:28:55.867369Z
+45d5f06dee98d07848889abd2afae2ba
+2014-08-22T09:48:41.421875Z
+439
+prashant
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+358
+
+sale
+dir
+
+
+
+add
+
+web_analytics
+dir
+
+
+
+add
+
+marketing_campaign_crm_demo
+dir
+
+
+
+add
+
+l10n_uy
+dir
+
+
+
+add
+
+bista_project
+dir
+
+
+
+add
+
+plugin_thunderbird
+dir
+
+
+
+add
+
+note_pad
+dir
+
+
+
+add
+
+web_linkedin
+dir
+
+
+
+add
+
+account_test
+dir
+
+
+
+add
+
+account_asset
+dir
+
+
+
+add
+
+membership
+dir
+
+
+
+add
+
+account_check_writing
+dir
+
+
+
+add
+
+base_action_rule
+dir
+
+
+
+add
+
+mrp
+dir
+
+
+
+add
+
+anonymization
+dir
+
+
+
+add
+
+crm_helpdesk
+dir
+
+
+
+add
+
+web_hello
+dir
+
+
+
+add
+
+l10n_be_invoice_bba
+dir
+
+
+
+add
+
+l10n_fr
+dir
+
+
+
+add
+
+account_cancel
+dir
+
+
+
+add
+
+mrp_operations
+dir
+
+
+
+add
+
+idea
+dir
+
+
+
+add
+
+l10n_nl
+dir
+
+
+
+add
+
+web_tests_demo
+dir
+
+
+
+add
+
+base_iban
+dir
+
+
+
+add
+
+l10n_ve
+dir
+
+
+
+add
+
+portal_claim
+dir
+
+
+
+add
+
+hr_contract
+dir
+
+
+
+add
+
+portal_anonymous
+dir
+
+
+
+add
+
+document_page
+dir
+
+
+
+add
+
+project_long_term
+dir
+
+
+
+add
+
+l10n_vn
+dir
+
+
+
+add
+
+product_margin
+dir
+
+
+
+add
+
+product_variant_multi
+dir
+
+
+
+add
+
+contacts
+dir
+
+
+
+add
+
+knowledge
+dir
+
+
+
+add
+
+product
+dir
+
+
+
+add
+
+email_template
+dir
+
+
+
+add
+
+auth_signup
+dir
+
+
+
+add
+
+web_kanban
+dir
+
+
+
+add
+
+mrp_byproduct
+dir
+
+
+
+add
+
+pad_project
+dir
+
+
+
+add
+
+base_setup
+dir
+
+
+
+add
+
+l10n_in_hr_payroll
+dir
+
+
+
+add
+
+.pydevproject
+file
+
+
+
+
+2014-09-15T06:28:55.867369Z
+a612188e29a89bcb72e119d50c0e27e4
+2014-08-22T09:48:41.421875Z
+439
+prashant
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+304
+
+hr_timesheet_invoice
+dir
+
+
+
+add
+
+l10n_fr_hr_payroll
+dir
+
+
+
+add
+
+web_graph
+dir
+
+
+
+add
+
+fleet
+dir
+
+
+
+add
+
+mrp_repair
+dir
+
+
+
+add
+
+edi
+dir
+
+
+
+add
+
+l10n_gr
+dir
+
+
+
+add
+
+audittrail
+dir
+
+
+
+add
+
+portal_crm
+dir
+
+
+
+add
+
+procurement
+dir
+
+
+
+add
+
+base_import
+dir
+
+
+
+add
+
+l10n_gt
+dir
+
+
+
+add
+
+report_intrastat
+dir
+
+
+
+add
+
+hr_holidays
+dir
+
+
+
+add
+
+web_calendar
+dir
+
+
+
+add
+
+l10n_be_coda
+dir
+
+
+
+add
+
+stock_location
+dir
+
+
+
+add
+
+l10n_be_hr_payroll
+dir
+
+
+
+add
+
+sale_journal
+dir
+
+
+
+add
+
+report_webkit
+dir
+
+
+
+add
+
+point_of_sale
+dir
+
+
+
+add
+
+mudd_hr
+dir
+
+
+
+add
+
+quote_flow
+dir
+
+
+
+add
+
+__init__.py
+file
+0
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+sale_stock
+dir
+
+
+
+add
+
+salesforce_integration
+dir
+
+crm_profiling
+dir
+
+
+
+add
+
+l10n_pa
+dir
+
+
+
+add
+
+DOCX
+dir
+
+plugin
+dir
+
+
+
+add
+
+l10n_pe
+dir
+
+
+
+add
+
+l10n_hn
+dir
+
+
+
+add
+
+sale_order_dates
+dir
+
+
+
+add
+
+sale_mrp
+dir
+
+
+
+add
+
+l10n_hr
+dir
+
+
+
+add
+
+project_gtd
+dir
+
+
+
+add
+
+analytic
+dir
+
+
+
+add
+
+l10n_pl
+dir
+
+
+
+add
+
+warning
+dir
+
+
+
+add
+
+web_api
+dir
+
+
+
+add
+
+project
+dir
+
+
+
+add
+
+crm_todo
+dir
+
+
+
+add
+
+product_bundle
+dir
+
+
+
+add
+
+plugin_outlook
+dir
+
+
+
+add
+
+portal_hr_employees
+dir
+
+
+
+add
+
+l10n_pt
+dir
+
+
+
+add
+
+.bzrignore
+file
+0
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+multi_company
+dir
+
+
+
+add
+
+analytic_contract_hr_expense
+dir
+
+
+
+add
+
+mail
+dir
+
+
+
+add
+
+account_analytic_analysis
+dir
+
+
+
+add
+
+quoteflow
+dir
+
+nbproject
+dir
+
+
+
+add
+
+l10n_be_hr_payroll_account
+dir
+
+
+
+add
+
+account_payment
+dir
+
+
+
+add
+
+mudd_sale_quotation.rml
+file
+0
+
+
+add
+
+web_shortcuts
+dir
+
+
+
+add
+
+l10n_ar
+dir
+
+
+
+add
+
+project_task_dependencies
+dir
+
+
+
+add
+
+l10n_at
+dir
+
+
+
+add
+
+hr_evaluation
+dir
+
+
+
+add
+
+l10n_in
+dir
+
+
+
+add
+
+base_calendar
+dir
+
+
+
+add
+
+mrp_jit
+dir
+
+
+
+add
+
+purchase_requisition
+dir
+
+
+
+add
+
+l10n_it
+dir
+
+
+
+add
+
+partner_extension
+dir
+
+
+
+add
+
+hr_timesheet_sheet
+dir
+
+
+
+add
+
+base
+dir
+
+
+
+add
+
+mudd_sale_quotation1.rml
+file
+0
+
+
+add
+
+claim_from_delivery
+dir
+
+
+
+add
+
+account_accountant
+dir
+
+
+
+add
+
+hr_payroll
+dir
+
+
+
+add
+
+base_quality_interrogation.py
+file
+0
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+logger
+dir
+
+l10n_be
+dir
+
+
+
+add
+
+crm
+dir
+
+
+
+add
+
+sale_margin
+dir
+
+
+
+add
+
+event_sale
+dir
+
+
+
+add
+
+resource
+dir
+
+
+
+add
+
+portal_project
+dir
+
+
+
+add
+
+account_voucher
+dir
+
+
+
+add
+
+warning_popup
+dir
+
+l10n_bo
+dir
+
+
+
+add
+
+portal_project_long_term
+dir
+
+
+
+add
+
+l10n_br
+dir
+
+
+
+add
+
+web_diagram
+dir
+
+
+
+add
+
+portal_event
+dir
+
+
+
+add
+
+product_variant_multi_advanced
+dir
+
+
+
+add
+
+pad
+dir
+
+
+
+add
+
+product_visible_discount
+dir
+
+
+
+add
+
+document_webdav
+dir
+
+
+
+add
+
+lunch
+dir
+
+
+
+add
+
+web_gantt
+dir
+
+
+
+add
+
+l10n_ro
+dir
+
+
+
+add
+
+association
+dir
+
+
+
+add
+
+account_report_company
+dir
+
+
+
+add
+
+account_analytic_plans
+dir
+
+
+
+add
+
+l10n_ca
+dir
+
+
+
+add
+
+product_expiry
+dir
+
+
+
+add
+
+event
+dir
+
+
+
+add
+
+google_base_account
+dir
+
+
+
+add
+
+account_followup
+dir
+
+
+
+add
+
+project_mrp
+dir
+
+
+
+add
+
+l10n_ch
+dir
+
+
+
+add
+
+account_analytic_default
+dir
+
+
+
+add
+
+subscription
+dir
+
+
+
+add
+
+auth_oauth_signup
+dir
+
+
+
+add
+
+crm_claim
+dir
+
+
+
+add
+
+l10n_multilang
+dir
+
+
+
+add
+
+hr_payroll_account
+dir
+
+
+
+add
+
+document_ftp
+dir
+
+
+
+add
+
+l10n_cl
+dir
+
+
+
+add
+
+l10n_cn
+dir
+
+
+
+add
+
+hr_recruitment
+dir
+
+
+
+add
+
+l10n_co
+dir
+
+
+
+add
+
+product_manufacturer
+dir
+
+
+
+add
+
+l10n_cr
+dir
+
+
+
+add
+
+l10n_si
+dir
+
+
+
+add
+
+sale_analytic_plans
+dir
+
+
+
+add
+
+note
+dir
+
+
+
+add
+
+test.py
+file
+
+
+
+
+2014-09-15T06:28:55.867369Z
+d076ca804e14c4ea730b9bd0f21a3ecb
+2014-08-22T11:41:22.812500Z
+445
+prashant
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+41
+
+base_custom_attributes
+dir
+
+bista_commission_rules
+dir
+
+
+
+add
+
+project_timesheet
+dir
+
+
+
+add
+
+process
+dir
+
+
+
+add
+
+marketing
+dir
+
+
+
+add
+
+auth_crypt
+dir
+
+
+
+add
+
+l10n_de
+dir
+
+
+
+add
+
+account_sequence
+dir
+
+
+
+add
+
+google_docs
+dir
+
+
+
+add
+
+sale_crm
+dir
+
+
+
+add
+
+account_budget
+dir
+
+
+
+add
+
+base_gengo
+dir
+
+
+
+add
+
+__init__.pyc
+file
+0
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+stock_invoice_directly
+dir
+
+
+
+add
+
+auth_openid
+dir
+
+
+
+add
+
+hr_expense
+dir
+
+
+
+add
+
+auth_oauth
+dir
+
+
+
+add
+
+share
+dir
+
+
+
+add
+
+l10n_th
+dir
+
+
+
+add
+
+portal_sale
+dir
+
+
+
+add
+
+analytic_user_function
+dir
+
+
+
+add
+
+one2many_sorted
+dir
+
+
+
+add
+
+decimal_precision
+dir
+
+
+
+add
+
+hr
+dir
+
+
+
+add
+
+l10n_lu
+dir
+
+
+
+add
+
+stock_no_autopicking
+dir
+
+
+
+add
+
+web_view_editor
+dir
+
+
+
+add
+
+web
+dir
+
+document
+dir
+
+
+
+add
+
+purchase_double_validation
+dir
+
+
+
+add
+
+l10n_tr
+dir
+
+
+
+add
+
+product_custom_attributes
+dir
+
+marketing_campaign
+dir
+
+
+
+add
+
+crm_partner_assign
+dir
+
+
+
+add
+
+l10n_ec
+dir
+
+
+
+add
+
+delivery
+dir
+
+
+
+add
+
+base_vat
+dir
+
+
+
+add
+
+account_anglo_saxon
+dir
+
+
+
+add
+
+bista_product_attribute
+dir
+
+base_report_designer
+dir
+
+
+
+add
+
+l10n_ma
+dir
+
+
+
+add
+
+board
+dir
+
+
+
+add
+
+account_bank_statement_extensions
+dir
+
+
+
+add
+
+purchase_analytic_plans
+dir
+
+
+
+add
+
+account
+dir
+
+
+
+add
+
+fetchmail
+dir
+
+
+
+add
+

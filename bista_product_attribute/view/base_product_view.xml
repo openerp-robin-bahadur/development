@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<openerp>
+    <data>
+    
+    	<record id="product_custom_attributes.product_attributes_form_view" model="ir.ui.view">
+            <field name="name">product.attributes.normal.wizard</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <form string="Product" version="7.0">
+                    <group name="name_set" invisible="1">
+                        <field name="name"/>
+                        <field name="attribute_set_id" />
+                        
+                    </group>
+                    <separator string="attributes_placeholder" colspan="4"/>
+                    <footer>
+                        <button name="save_and_close_product_attributes" string="Save and Close" type="object" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    
+<!--        view for template-->
+        <record id="view_template_form" model="ir.ui.view">
+            <field name="name">template.form</field>
+            <field name="model">base.product.template</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Product Template" version="7.0">
+                    <sheet>
+                        <h1>
+                            <label string="Product Template"/>
+                        </h1>
+                        <group col="4" colspan="4">
+                            <group col="2" colspan="2">
+                                <field name="name"></field>
+                                <field name="product_id"></field>
+                            </group>
+                            <group col="2" colspan="2">
+                                <field name="attribute_id"> </field>
+                                <field name="active"> </field>
+                            </group>
+                        </group>
+                        <button name="open_attributes" string="Open Attributes" type="object" icon="gtk-ok" attrs="{'invisible':[('attribute_id', '=', False)]}"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="template_attributes_form_view">
+            <field name="name">template.product.attributes.normal.wizard</field>
+            <field name="model">base.product.template</field>
+            <field name="arch" type="xml">
+                <form string="Product Template" version="7.0">
+                    <group name="name_set" invisible="1">
+                        <field name="name"/>
+                        <field name="attribute_id"/>
+
+                    </group>
+                    <separator string="attributes_placeholder" colspan="4"/>
+                    <footer>
+                        <button name="save_and_close_product_attributes" string="Save and Close" type="object" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_template_tree" model="ir.ui.view">
+            <field name="name">template.tree</field>
+            <field name="model">base.product.template</field>
+            <field name="arch" type="xml">
+                <tree string="Product Template">
+                    <field name= "name"> </field>
+                    <field name= "product_id"> </field>
+                    <field name= "attribute_id"> </field>
+                    <field name= "active"> </field>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="action_template_form" model="ir.actions.act_window">
+            <field name="name">Template</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">base.product.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Product Template" id="base.produc_template"  parent="base.menu_product" action="action_template_form"  />
+
+<!--        view for bundle-->
+        <record id="view_bundle_form" model="ir.ui.view">
+            <field name="name">bundle.form</field>
+            <field name="model">base.product.bundle</field>
+            <field name="arch" type="xml">
+                <form string="Product Bundle" version="7.0">
+                    <sheet>
+                        <h1>
+                            <label string="Product Bundle"/>
+                        </h1>
+
+                        <group col="4" colspan="4">
+                            <group col="2" colspan="2">
+                                <field name= "name"> </field>
+
+                            </group>
+                            <group col="2" colspan="2">
+                                <field name= "active"> </field>
+                            </group>
+                        </group>
+                        <group col="4" colspan="4">
+                            <separator string="Product Template" colspan="4"/>
+                            <field name= "template_id" nolabel="1"> </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_bundle_tree" model="ir.ui.view">
+            <field name="name">bundle.tree</field>
+            <field name="model">base.product.bundle</field>
+            <field name="arch" type="xml">
+                <tree string="Product Bundle">
+                    <field name= "name"> </field>
+<!--                    <field name= "template_id"> </field>-->
+                    <field name= "active"> </field>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_bundle_form" model="ir.actions.act_window">
+            <field name="name">bundle.action</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">base.product.bundle</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem name="Product Bundle" id="base.produc_bundle"  parent="base.menu_product" action="action_bundle_form"  />
+
+    </data>
+</openerp>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_order,sale.order,model_sale_order,group_salesman,1,1,1,1
+access_base_sale_template,base.product.template,bista_product_attribute.model_base_product_template,group_salesman,1,1,1,1
+access_base_sale_bundle,base.product.bundle,bista_product_attribute.model_base_product_bundle,group_salesman,1,1,1,1

@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/Projects/!svn/ver/791/MUDD/quoteflow/report
+END
+sale_hypercasting.xml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/Projects/!svn/ver/596/MUDD/quoteflow/report/sale_hypercasting.xml
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/Projects/!svn/ver/596/MUDD/quoteflow/report/__init__.py
+END
+sale_report.py
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/Projects/!svn/ver/872/MUDD/quoteflow/report/sale_report.py
+END
+sale_report_hypercasting.py
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/Projects/!svn/ver/596/MUDD/quoteflow/report/sale_report_hypercasting.py
+END
+report_market.rml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/Projects/!svn/ver/596/MUDD/quoteflow/report/report_market.rml
+END
+sale_order.rml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/Projects/!svn/ver/872/MUDD/quoteflow/report/sale_order.rml
+END
+mudd_sale_quotation.rml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/Projects/!svn/ver/596/MUDD/quoteflow/report/mudd_sale_quotation.rml
+END
+sale_order2.rml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/Projects/!svn/ver/872/MUDD/quoteflow/report/sale_order2.rml
+END
+sale_hypercasting.rml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/Projects/!svn/ver/596/MUDD/quoteflow/report/sale_hypercasting.rml
+END
+sale_report.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/Projects/!svn/ver/596/MUDD/quoteflow/report/sale_report.xml
+END

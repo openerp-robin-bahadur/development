@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+
+
+        <record model="ir.ui.view" id="quote_work_flow">
+            <field name="name">sale.flow.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="/form/header/field[@name='state']" position="replace">
+                    
+                    <field name="state" widget="statusbar" statusbar_visible="review,approved,request_for_signature"/>
+<!--                        <field name="state" invisible="1"/>-->
+                         
+
+                </xpath>
+
+                <xpath expr="/form/header/button[@string= 'Send by Email']" position="after">
+
+                    <button name="action_submit_for_approval" string="Submit for Approval" states="draft,cancel"/>
+                    <button name="action_approved" string="Approved" states="review"/>
+                    <button name="action_request_sign" string="Request For Sign" states="approved"/>
+                    <button name="action_waiting_approved" string="Approve Signature" states="request_for_signature"/>
+<!--                         <button name="action_cancel" string="Cancel Quote"/>-->
+                         
+                </xpath>
+
+                <xpath expr="/form/header/button[@string= 'Print']" position="replace">
+<!--                    <button name="cancel" states="draft,sent,review,approved,request_for_signature" string="Cancel Quotation1" groups="base.group_user"/>-->
+                    <button name="print_quotation" string="Print" type="object" states="draft,review,approved,request_for_signature,sent,progress,manual" groups="base.group_user"/>
+                </xpath>
+                
+                <xpath expr="/form/header/button[@string= 'Cancel Quotation']" position="replace">
+                    <button name="action_cancel" states="draft,review,approved,manual,progress,request_for_signature" string="Cancel Order" type="object" groups="base.group_user"/>
+<!--                <button name="cancel" states="draft,review,approved,sent" string="Cancel Quotation" groups="base.group_user"/>-->
+                </xpath>
+
+                <xpath expr="/form/header/button[@string= 'Send by Email']" position="replace">
+                    <button name="action_quotation_send" string="Send by Email" type="object" states="approved" class="oe_highlight" groups="base.group_user"/>
+                </xpath>
+
+                <xpath expr="/form/header/button[@string= 'Confirm Sale']" position="replace">
+                <button name="action_button_confirm" states="sent" string="Confirm Sale" type="object" groups="base.group_user"/>
+            </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</openerp>
