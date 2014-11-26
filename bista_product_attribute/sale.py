@@ -38,9 +38,12 @@ class sale_order(osv.osv):
                 else:
                     val1 += line.sold_for
                 val += self._amount_line_tax(cr, uid, line, context=context)
+               
             res[order.id]['amount_tax'] = cur_obj.round(cr, uid, cur, val)
             res[order.id]['amount_untaxed'] = cur_obj.round(cr, uid, cur, val1)
+          
             res[order.id]['amount_total'] = res[order.id]['amount_untaxed'] + res[order.id]['amount_tax']
+           
         return res
 
     def add_product_order_line(self,cr,uid,ids,context=None):
@@ -81,8 +84,7 @@ class sale_order(osv.osv):
                         i = attr_name_in_product.index(each)
 
                         if attr_type_in_product[i] == 'select':
-                            print "select type attribute"
-                            print read_data[each]
+                           
                             if read_data[each]:
                                 read_data[each] = read_data[each][0]
                                 sales_price_select=self.pool.get('attribute.option').browse(cr,uid,read_data[each]).sales_price
@@ -97,7 +99,7 @@ class sale_order(osv.osv):
                                         pass
 
                         elif attr_type_in_product[i] == 'multiselect':
-                            print read_data[each]
+                            
                             if read_data[each]:
                                 for each_attr_id in read_data[each]:
                                     sales_price_multi= self.pool.get('attribute.option').browse(cr,uid,each_attr_id).sales_price
@@ -111,7 +113,7 @@ class sale_order(osv.osv):
 
                                 read_data[each] = [(6,0,read_data[each])]
 
-                                print [(6,0,read_data[each])]
+                                
                             else:
                                 read_data[each] = [(6,0,[])]
 
@@ -146,7 +148,7 @@ class sale_order(osv.osv):
 
     def add_template_order_line(self,cr,uid,ids,context=None):
         try:
-            print" check context for template",context
+           
             sales_price=0
             sales_price_per_unit = 0
             sales_price_per_order_line = 0
@@ -181,8 +183,7 @@ class sale_order(osv.osv):
                     if each in attr_name_in_product:
                         i = attr_name_in_product.index(each)
                         if attr_type_in_product[i] == 'select':
-                            print "select type attribute"
-                            print read_data[each]
+                          
                             if read_data[each]:
                                 read_data[each] = read_data[each][0]
                                 sales_price_select=self.pool.get('attribute.option').browse(cr,uid,read_data[each]).sales_price
@@ -196,7 +197,7 @@ class sale_order(osv.osv):
                                     else:
                                         pass
 
-                                print read_data[each]
+                               
                             else:
                                 pass
 
@@ -215,7 +216,7 @@ class sale_order(osv.osv):
                                         pass
 
                                 read_data[each] = [(6,0,read_data[each])]
-                                print [(6,0,read_data[each])]
+                               
                             else:
                                 read_data[each] = [(6,0,[])]
 
@@ -299,7 +300,7 @@ class sale_order(osv.osv):
                         if attr_type_in_product[i] == 'select':
                             
 
-                            print read_data[each1]
+                          
                             if read_data[each1]:
                                 read_data[each1] = read_data[each1][0]
                                 sales_price_select=self.pool.get('attribute.option').browse(cr,uid,read_data[each1]).sales_price
@@ -318,7 +319,7 @@ class sale_order(osv.osv):
                         elif attr_type_in_product[i] == 'multiselect':
 
                             
-                            print attr_type_in_product[i]
+                            
                             if read_data[each1]:
                                 for each_attr_id in read_data[each1]:
                                     sales_price_multi= self.pool.get('attribute.option').browse(cr,uid,each_attr_id).sales_price
@@ -331,13 +332,13 @@ class sale_order(osv.osv):
                                         pass
 
                                 read_data[each1] = [(6,0,read_data[each1])]
-                                print [(6,0,read_data[each1])]
+                               
                             else:
                                 read_data[each1] = [(6,0,[])]
                         else:
-                            print attr_type_in_product[i]
+                           
                             search_id = self.pool.get('attribute.attribute').search(cr,uid,[('model','=','product.product'),('name','=',each1)])
-                            print "search id ",search_id
+                          
 #                             try:
                             sales_price_other= self.pool.get('attribute.attribute').browse(cr,uid,search_id[0]).option_ids[0].sales_price
                             calculation_method = self.pool.get('attribute.attribute').browse(cr,uid,search_id[0]).option_ids[0].price
@@ -485,7 +486,7 @@ class sale_order(osv.osv):
         'amount_untaxed': fields.function(_amount_all, digits_compute=dp.get_precision('Account'), string='Untaxed Amount',
             store={
                 'sale.order': (lambda self, cr, uid, ids, c={}: ids, ['order_line'], 10),
-                'sale.order.line': (_get_order, ['price_unit', 'tax_id', 'discount', 'product_uom_qty','sold_for'], 10),
+                'sale.order.line': (_get_order, ['price_unit', 'tax_id', 'discount', 'product_uom_qty','misc_sale_total','misc_cost_total','price_per_line','price_per_unit'], 10),
             },
             multi='sums', help="The amount without tax.", track_visibility='always'),
         'amount_tax': fields.function(_amount_all, digits_compute=dp.get_precision('Account'), string='Taxes',
@@ -497,7 +498,7 @@ class sale_order(osv.osv):
         'amount_total': fields.function(_amount_all, digits_compute=dp.get_precision('Account'), string='Total',
             store={
                 'sale.order': (lambda self, cr, uid, ids, c={}: ids, ['order_line'], 10),
-                'sale.order.line': (_get_order, ['price_unit', 'tax_id', 'discount', 'product_uom_qty'], 10),
+                'sale.order.line': (_get_order, ['price_unit', 'tax_id', 'discount', 'product_uom_qty','misc_sale_total','misc_cost_total','price_per_line','price_per_unit'], 10),
             },
             multi='sums', help="The total amount."),
         
@@ -614,19 +615,17 @@ class sale_order_line(osv.osv):
             taxes['total_included'] = taxes['total_included'] + price_misc_cost+price_per_line
             cur = line.order_id.pricelist_id.currency_id
             res[line.id] = cur_obj.round(cr, uid, cur, taxes['total'])
+#            self.pool.get('sale.order')._amount_all(cr, uid, [line.order_id.id], field_name, arg, context)
         return res
     def _set_sold_amount(self, cr, uid, ids, name, value, arg, context=None):
         print" reverse function"
-        print"ids me kitne hai",ids
+       
         if ids and (value==0 or value>0):
-            
             pos="""update sale_order_line set
                         sold_for=%d
                     where
                         id=%d"""%(value,ids)
             cr.execute(pos)
-
-
         return True
 
     def _get_order(self, cr, uid, ids, context=None):
@@ -650,9 +649,7 @@ class sale_order_line(osv.osv):
                     for each_attr_id in each_grp_id.attribute_ids:
                         attr_names.append(each_attr_id.attribute_id.name)
             if len(attr_names)>0:
-
                 so_line_data = self.read(cr, uid, val.id, attr_names)
-
                 for each in attr_names:
                     if isinstance(so_line_data[each],tuple):
                         if len(so_line_data[each]):
@@ -680,7 +677,7 @@ class sale_order_line(osv.osv):
                             elif attr_option_data['price'] == "based_order_lines":
                                 price_per_order_line += attr_option_data['sales_price']
 
-            print "===sale==price_per_unit + price_per_order_line/val.product_uom_qty==",price_per_unit, price_per_order_line,val.product_uom_qty
+           
 
             res[val.id] = price_per_unit + price_per_order_line/val.product_uom_qty
  
@@ -698,7 +695,7 @@ class sale_order_line(osv.osv):
             so_line_attrs = {}
 
             if val.attribute_set_id:
-                print"val.attribute_set_id.attribute_group_ids:",val.product_id.attribute_set_id
+                
                 
                 for each_grp_id in val.attribute_set_id.attribute_group_ids:
                     for each_attr_id in each_grp_id.attribute_ids:
@@ -736,7 +733,6 @@ class sale_order_line(osv.osv):
                                 elif attr_option_data['price'] == "based_order_lines":
                                     price_per_order_line += attr_option_data['cost_price']
 
-                print "===cost==price_per_unit + price_per_order_line/val.product_uom_qty==",price_per_unit, price_per_order_line,val.product_uom_qty
 
             res[val.id] = price_per_unit + price_per_order_line/val.product_uom_qty
  
@@ -752,7 +748,7 @@ class sale_order_line(osv.osv):
         'price_subtotal': fields.function(_amount_line, string='Subtotal', digits_compute= dp.get_precision('Account')),
         'sold_for':fields.function(_sold_amount, fnct_inv=_set_sold_amount, string='Sold For', type='float',store={
                 'sale.order.line': (lambda self, cr, uid, ids, c={}: ids, [], 10),
-                'sale.order.line': (_get_order, ['price_unit', 'tax_id', 'discount', 'product_uom_qty','misc_sale_total','misc_cost_total'], 10),
+                'sale.order.line': (_get_order, ['price_unit', 'tax_id', 'discount', 'product_uom_qty','misc_sale_total','misc_cost_total','price_per_line','price_per_unit'], 10),
             },),
          
 
@@ -787,22 +783,40 @@ class sale_order_line(osv.osv):
         }
 
     def save_and_close_product_attributes(self, cr, uid, ids, context=None):
-        sal_id_val=self.browse(cr,uid,ids[0]).order_id.id
-        mod_obj = self.pool.get('ir.model.data')
-        res = mod_obj.get_object_reference(cr, uid, 'sale', 'view_order_form')
-        res_id = res and res[1] or False
+        cur_obj = self.pool.get('res.currency')
+        for line in self.browse(cr,uid,ids):
+            order_id = line.order_id.id
+            cur = line.order_id.pricelist_id.currency_id
+            untaxed = 0.0
+            total = 0.0
+            tax = 0.0
+            for all in line.order_id.order_line:
+                val = 0.0
+                val += self.pool.get('sale.order')._amount_line_tax(cr, uid, all, context=context)
+                tax += cur_obj.round(cr, uid, cur, val)
+                untaxed += all.sold_for
+            total = tax + untaxed
+            arg=line.order_id.amount_untaxed
+            
+            mod_obj = self.pool.get('ir.model.data')
+            res = mod_obj.get_object_reference(cr, uid, 'sale', 'view_order_form')
+            res_id = res and res[1] or False
+            if arg!=line.sold_for:
+               
+                cr.execute('''update sale_order set amount_untaxed=%s,amount_tax=%s,amount_total = %s where id in %s''',(untaxed,tax,total, tuple([line.order_id.id])))
 
-        return{
-                'view_type': 'form',
-                'view_mode': 'form',
-                'res_model': 'sale.order',
-                'view_id': [res_id],
-                'type': 'ir.actions.act_window',
-                'nodestroy': True,
-                'target': 'current',
+            
+            return{
+                    'view_type': 'form',
+                    'view_mode': 'form',
+                    'res_model': 'sale.order',
+                    'view_id': [res_id],
+                    'type': 'ir.actions.act_window',
+                    'nodestroy': True,
+                    'target': 'current',
 
-                'res_id':sal_id_val
-                }
+                    'res_id':order_id
+                    }
 
 #        return {'type': 'ir.actions.act_window_close'}
 
@@ -897,19 +911,14 @@ class sale_order_line(osv.osv):
 #          
     def write(self,cr,uid,ids,vals,context=None):
 
-         print"context valkue check for the erite",context
-
-         print"vals of sol ",vals
 
          if 'x_custom_json_attrs' not in vals.keys():
-             print "write vals", vals
              attr_obj = self.pool.get('attribute.attribute')
              option_obj = self.pool.get('attribute.option')
              price_per_unit = 0
              price_per_order_line = 0
              so_line_obj = self.browse(cr, uid, ids[0])
              so_line_data = self.read(cr, uid, ids[0])
-
              attr_names = []
              so_line_attrs = {}
              if so_line_obj.attribute_set_id:
@@ -931,7 +940,6 @@ class sale_order_line(osv.osv):
                                  so_line_data[each] = so_line_data[each][0]
      #                     elif isinstance(so_line_data[each],list) and len(so_line_data[each]):
                          elif isinstance(so_line_data[each],list):
-                             print "Multiselect ", so_line_data[each]
                              so_line_data[each] = [[6,False,so_line_data[each]]]
                          vals.update({each:so_line_data[each]})
                      else:
@@ -946,7 +954,6 @@ class sale_order_line(osv.osv):
                              attr_data = attr_obj.read(cr, uid, attr_id[0],[])
                              if attr_data['ttype'] == 'many2one':
                                  if vals[each]:
-         #                                                             print vals[each]
                                      attr_option_data = option_obj.read(cr, uid, vals[each], [])
 
                                      if attr_option_data['price'] == 'per_unit':
@@ -957,7 +964,6 @@ class sale_order_line(osv.osv):
                                          pass
                              elif attr_data['ttype'] == 'many2many':
                                  if vals[each]:
-     #
                                      if len(vals[each][0][2]):
                                          for each in vals[each][0][2]:
                                              attr_option_data = option_obj.read(cr, uid, each, [])
@@ -970,11 +976,9 @@ class sale_order_line(osv.osv):
                                              else:
                                                  pass
                              else:
-     #
                                  if vals[each]:
                                      attr_option_obj = option_obj.search(cr, uid, [('attribute_id','=',attr_data['id'])])
                                      if len(attr_option_obj):
-             #                             If Attribute type is not relational than search in the attribute options with attr ID and taken the first Attribute option id.
                                          attr_option_data = option_obj.read(cr, uid, attr_option_obj[0], [])
 
                                          if attr_option_data['price'] == 'per_unit':
@@ -986,11 +990,9 @@ class sale_order_line(osv.osv):
 
                          else:
                              _logger.warning("Attribute not created for sale order line.")
-         #
 
                  price_subtotal = so_line_data['product_uom_qty'] * price_per_unit + price_per_order_line + so_line_data['price_unit']
 
-                 print "price_subtotal", price_subtotal
                  if price_per_order_line>0 and not vals.get('sold_for'):
 
                      vals.update({'price_per_line':price_per_order_line})
@@ -999,7 +1001,6 @@ class sale_order_line(osv.osv):
                      vals.update({'price_unit':price_per_unit+list_price})
                      vals.update({'price_per_unit':price_per_unit})
 
-                 print" vals value check kar o for order lines ",vals
 
 
              for id in self.browse(cr,uid,ids):
