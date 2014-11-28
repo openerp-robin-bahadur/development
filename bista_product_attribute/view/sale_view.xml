@@ -117,9 +117,9 @@
                 <xpath expr="/form/sheet/group/group[2]/field[@name='client_order_ref']" position="after">
                     <field name="x_cs_rep_id" />
 
-                    <field name="x_billing_month" required="1" />
-                    <field name="x_billing_year"  required="1" />
-                    <field name="x_coop" />
+                    <field name="x_billing_month" required="1" on_change="onchange_billing_month(x_billing_month,context)"/>
+                    <field name="x_billing_year"  required="1"/>
+                    <field name="x_coop"/>
                     <field name="x_dealer_code" />
                     <field name="x_additional_code" />
 
@@ -132,7 +132,7 @@
                     <field name="x_performance_based" />
                     <field name="x_performance_tracking" />
                     <field name="x_signed_flag" readonly="1"/>
-                    <field name="x_suppress_dms" />
+                    <field name="x_suppress_dms"/>
                     <field name="x_manufacturer" on_change="onchange_manufacture_id(x_manufacturer,context)" />
                     <field name="x_franchise" domain="[('manufacture_id','=',x_manufacturer)]" options="{'create': False, 'create_edit': False ,'always_reload': True}" />
                     <field name="x_campaign_theme_id" required="1"/>

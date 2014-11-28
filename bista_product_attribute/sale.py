@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+import time
 from openerp.osv import fields, osv
 import openerp.addons.decimal_precision as dp
 from openerp.tools.translate import _
@@ -384,17 +385,141 @@ class sale_order(osv.osv):
        return {'value': v}
    
     def onchange_partner_id(self, cr, uid, ids, part, context=None):
-
         res =super(sale_order,self).onchange_partner_id(cr,uid,ids,part,context)
         if part:
-
             if self.pool.get('res.partner').browse(cr,uid,part).is_company:
                 res['value'].update({'x_signing_company_id':part})
-#            
             else:
-
                 res['value'].update({'x_signing_company_id':False})
         return res
+
+
+
+
+    def onchange_billing_month(self, cr, uid, ids, month, context=None):
+        v={}
+        if month:
+            pr_year=datetime.now().year-1
+            curr_year=datetime.now().year
+            next_year=datetime.now().year+1
+            pr_dt = str(pr_year)+'-'+str(month) + '-1'
+            cr_dt = str(curr_year)+'-'+str(month) + '-1'
+            nx_dt = str(next_year)+'-'+str(month) + '-1'
+            pr_date=datetime.strptime(pr_dt,"%Y-%B-%d")
+            cr_date=datetime.strptime(cr_dt,"%Y-%B-%d")
+            nx_date=datetime.strptime(nx_dt,"%Y-%B-%d")
+            curr_date=datetime.strptime(time.strftime("%Y-%B-%d"),"%Y-%B-%d")
+            if cr_date > curr_date:
+                a=(cr_date - curr_date).days
+            else:
+                a=(curr_date - cr_date).days
+            b=(curr_date - pr_date).days
+            c=(nx_date - curr_date).days
+            days=min(a,b,c)
+            if days==a:
+                v.update({'x_billing_year':curr_year})
+            elif days==b:
+                v.update({'x_billing_year':pr_year})
+            else:
+                v.update({'x_billing_year':next_year})
+
+        return {'value': v}
+
+
+
+
+#            print" check month of current",datetime.now().month,month
+#            if month == 'January':
+#
+#
+##                if datetime.now().month<6:
+##                    if datetime.now().month-1 >= 6:
+##                        v.update({'x_billing_year':datetime.now().year+1})
+##                    else:
+##                        v.update({'x_billing_year':datetime.now().year})
+##                else:
+##                     if datetime.now().month-1 >= 6:
+##                        v.update({'x_billing_year':datetime.now().year-1})
+##                    else:
+##                        v.update({'x_billing_year':datetime.now().year})
+#
+#            elif month == 'February':
+#                if datetime.now().month<6:
+#                    if datetime.now().month-2 >= 6:
+#                        v.update({'x_billing_year':datetime.now().year+1})
+#                    else:
+#                        v.update({'x_billing_year':datetime.now().year})
+#                else:
+#                    if datetime.now().month-2 >= 6:
+#                        v.update({'x_billing_year':datetime.now().year-1})
+#                    else:
+#                        v.update({'x_billing_year':datetime.now().year})
+#
+#            elif month == 'March':
+#                if datetime.now().month-3 >= 6:
+#                    v.update({'x_billing_year':datetime.now().year+1})
+#                else:
+#                    v.update({'x_billing_year':datetime.now().year})
+#            elif month == 'April':
+#                 if datetime.now().month-4 >= 6:
+#                    v.update({'x_billing_year':datetime.now().year+1})
+#                 else:
+#                    v.update({'x_billing_year':datetime.now().year})
+#            elif month == 'May':
+#                if datetime.now().month-5 >= 6:
+#                    v.update({'x_billing_year':datetime.now().year+1})
+#                else:
+#                    v.update({'x_billing_year':datetime.now().year})
+#            elif month == 'June':
+#                if datetime.now().month-6 >= 6:
+#                    v.update({'x_billing_year':datetime.now().year+1})
+#                else:
+#                    v.update({'x_billing_year':datetime.now().year})
+#            elif month == 'Junly':
+#                if datetime.now().month-7 >= 6:
+#                    v.update({'x_billing_year':datetime.now().year+1})
+#                else:
+#                    v.update({'x_billing_year':datetime.now().year})
+#            elif month == 'August':
+#                if datetime.now().month-8 >= 6:
+#                    v.update({'x_billing_year':datetime.now().year+1})
+#                else:
+#                    v.update({'x_billing_year':datetime.now().year})
+#
+#            elif month == 'September':
+#                if datetime.now().month-9>= 6:
+#                    v.update({'x_billing_year':datetime.now().year+1})
+#                else:
+#                    v.update({'x_billing_year':datetime.now().year})
+#            elif month == 'October':
+#                if datetime.now().month-10>= 6:
+#                    v.update({'x_billing_year':datetime.now().year+1})
+#                else:
+#                    v.update({'x_billing_year':datetime.now().year})
+#            elif month == 'Nevomber':
+#                if datetime.now().month-11 >= 6:
+#                    v.update({'x_billing_year':datetime.now().year+1})
+#                else:
+#                    v.update({'x_billing_year':datetime.now().year})
+#            elif month == 'December':
+#                if datetime.now().month-12 >= 6:
+#                    v.update({'x_billing_year':datetime.now().year+1})
+#                else:
+#                    v.update({'x_billing_year':datetime.now().year})
+#        return {'value': v}
+#
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #    def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
@@ -454,7 +579,6 @@ class sale_order(osv.osv):
 
     _columns = {
 
-
 #        
         'add_product_id':fields.many2one('product.product','Product',states={'review': [('readonly', True)], 'waiting_approved_signature': [('readonly', True)]}),
         'add_product_temp_id':fields.many2one('base.product.template','Product Template',states={'review': [('readonly', True)], 'waiting_approved_signature': [('readonly', True)]},),
@@ -481,7 +605,7 @@ class sale_order(osv.osv):
         'x_franchise':fields.many2one('franchise.info','Franchise',required=True,states={'review': [('readonly', True)], 'waiting_approved_signature': [('readonly', True)]}),
         'x_campaign_theme_id':fields.many2one('campaign.theme',"Campaign Theme",states={'review': [('readonly', True)], 'waiting_approved_signature': [('readonly', True)]}),
         'x_signed_flag':fields.boolean('Signed'),
-        'x_payment_due_date':fields.date('Payment Date',required=True,states={'review': [('readonly', True)], 'waiting_approved_signature': [('readonly', True)]}),
+        'x_payment_due_date':fields.date('Due Date',required=True,states={'review': [('readonly', True)], 'waiting_approved_signature': [('readonly', True)]}),
         'old_price_total':fields.float("old price"),
         'amount_untaxed': fields.function(_amount_all, digits_compute=dp.get_precision('Account'), string='Untaxed Amount',
             store={
@@ -504,13 +628,7 @@ class sale_order(osv.osv):
         
     }
 
-    def create(self, cr, uid, vals, context=None):
-        res=super(sale_order, self).create(cr, uid, vals, context)
-        current_year=datetime.now().year
-        if vals.get('x_billing_year')!=current_year:
-            raise osv.except_osv(_('Error!'),
-                _('Year in not valid. Please enter current year'))
-        return res
+#    
 
 
     def copy(self, cr, uid, id, default=None, context=None):
@@ -1335,6 +1453,5 @@ class purchase_order_line(osv.osv):
 
     'x_version_no':fields.char('V',size=10),
     'x_drop_no':fields.char('D',size=10),
-
 
     }

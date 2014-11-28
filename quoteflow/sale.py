@@ -305,7 +305,6 @@ class sale_order(osv.osv):
          res = mod_obj.get_object_reference(cr, uid, 'account', 'invoice_form')
          res_id = res and res[1] or False
          invoice_id=self.pool.get('account.invoice').search(cr,uid,[('origin','=',self.browse(cr,uid,ids[0]).name)])
-        
 
          return{
                 'view_type': 'form',
@@ -318,7 +317,6 @@ class sale_order(osv.osv):
 
                 'context': "{'type':'out_invoice'}",
                 'res_id':invoice_id[0]
-
 
                 }
 
@@ -342,7 +340,6 @@ class sale_order(osv.osv):
 
             if each.x_signed_flag and each.old_price_total != each.amount_total:
                 new_group_ids=self.pool.get('res.groups').search(cr,uid,[('notify_email','in',['notify_account','notify_manager','notify_both'])])
-
 
                 for follower_id in self.pool.get('res.groups').browse(cr,uid,new_group_ids):
                     for users in follower_id.users:
@@ -432,30 +429,29 @@ class sale_order(osv.osv):
 
         
         if vals.get('state')!="waiting_approved_signature" and vals.get('state')!="quote_cancel":
-
             res = self.read(cr,uid,ids,['state'])
-
             state_status=res[0].get('state')
             if state_status=="approved":
                  vals.update({'state':'draft'})
                  new_group_ids=self.pool.get('res.groups').search(cr,uid,[('notify_email','=','notify_manager')])
+                 for each in self.browse(cr,uid,ids):
+                     if each.x_signed_flag:
+                         invoice_id=self.pool.get('account.invoice').search(cr,uid,[('origin','=',each.name)])
+                         if invoice_id and self.pool.get('account.invoice').browse(cr,uid,invoice_id[0]).state=='open':
+                             for follower_id in self.pool.get('res.groups').browse(cr,uid,new_group_ids):
+                                for users in follower_id.users:
+                                    if users.email and users.partner_id.email:
 
-                 if self.browse(cr,uid,ids[0]).x_signed_flag:
-                     
-                     for follower_id in self.pool.get('res.groups').browse(cr,uid,new_group_ids):
-                        for users in follower_id.users:
-                            if users.email and users.partner_id.email:
-
-                                mail_mail = self.pool.get('mail.mail')
-                                # the invite wizard should create a private message not related to any object -> no model, no res_id
-                                mail_id = mail_mail.create(cr, uid, {
-                                    'model': 'sale.order',
-                                    'res_id': ids[0],
-                                    'subject': _('Modification in Quotation # %s') % (self.browse(cr,uid,ids[0]).name),
-                                    'body_html': 'This is to notify that Total Amount for %s Quotation is changed' % (self.browse(cr,uid,ids[0]).name,),
-                                    'auto_delete': True,
-                                    }, context=context)
-                                mail_mail.send(cr, uid, [mail_id], recipient_ids=[users.partner_id.id], context=context)
+                                        mail_mail = self.pool.get('mail.mail')
+                                        # the invite wizard should create a private message not related to any object -> no model, no res_id
+                                        mail_id = mail_mail.create(cr, uid, {
+                                            'model': 'sale.order',
+                                            'res_id': ids[0],
+                                            'subject': _('Modification in Quotation # %s') % (each.name),
+                                            'body_html': 'This is to notify that Total Amount for %s Quotation is changed' % (each.name,),
+                                            'auto_delete': True,
+                                            }, context=context)
+                                        mail_mail.send(cr, uid, [mail_id], recipient_ids=[users.partner_id.id], context=context)
         return super(sale_order,self).write(cr,uid,ids,vals,context)
 
 
