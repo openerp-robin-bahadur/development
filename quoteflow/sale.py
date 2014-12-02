@@ -322,6 +322,19 @@ class sale_order(osv.osv):
                                 'auto_delete': True,
                                 }, context=context)
                             mail_mail.send(cr, uid, [mail_id], recipient_ids=[users.partner_id.id], context=context)
+            if not each.x_signed_flag:
+                for line in each.order_line:
+                    attr_name=[]
+                    if line.attribute_set_id:
+                        for attrs_group in line.attribute_set_id.attribute_group_ids:
+                            for attrs in attrs_group.attribute_ids:
+                                if attrs.attribute_id.required_on_views:
+                                    attr_name.append(attrs.name)
+                        if len(attr_name)>0:
+                            read_line=self.pool.get('sale.order.line').read(cr,uid,[line.id],attr_name)[0]
+                            for record in read_line:
+                                if not read_line[record]:
+                                    raise osv.except_osv(_('Error!'), _('Mandatory Attribute %s cannot be False for the Product \n %s')%(record,line.product_id.name))
         return True
 
     def act_waiting_for_approve(self,cr,uid,ids,context=None):

@@ -1,70 +1,0 @@
-10
-
-dir
-0
-https://192.168.1.49/svn/Projects/MUDD/quote_flow
-https://192.168.1.49/svn/Projects
-add
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-072833ac-e4da-6a45-8b5e-19844c29fac1
-
-__init__.py
-file
-
-
-
-add
-
-security
-dir
-
-
-
-add
-
-sale.py
-file
-
-
-
-add
-
-__openerp__.py
-file
-
-
-
-add
-
-sale_workflow.xml
-file
-
-
-
-add
-
-sale_view.xml
-file
-
-
-
-add
-
