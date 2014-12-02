@@ -9,8 +9,6 @@ from datetime import datetime, timedelta
 class special_commission(osv.osv):
     _name='special.commission'
 
-
-
     def onchange_field(self, cr, uid, ids, field, context=None):
         res = {}
         if not field:
@@ -37,11 +35,6 @@ class special_commission(osv.osv):
             res['value']={'sale_final_result':False}
         res['value']={'sale_final_result':manager_field}
         return res
-
-
-
-
-
 
     _columns = {
     'product_category_ids':fields.many2many('product.category','commission_categ_rel','commission_id','categ_id','Product Category'),

@@ -2,7 +2,6 @@ from openerp.osv import fields, osv
 from openerp.tools.translate import _
 from lxml import etree
 
-
 class product_product(osv.Model):
     _inherit = "product.product"
 
@@ -16,9 +15,7 @@ class product_product(osv.Model):
             for node in doc.xpath("//notebook[@name='attributes_notebook']/page/group"):
                 for new in node.xpath('//field'):
                     new.set('required','False')
-                    
                     new.set('modifiers','{}')
-
             result['arch'] = etree.tostring(doc)
         return result
     
@@ -56,7 +53,6 @@ class base_product_template(osv.osv):
         'attribute_id':fields.many2one('attribute.set', 'Attribute Set', required=True),
         'product_id':fields.many2one('product.product', 'Product', required=True),
         'active':fields.boolean('Active'),
-
     }
 
     def open_attributes(self, cr, uid, ids, context=None):
@@ -118,7 +114,6 @@ class base_product_template(osv.osv):
                 info_page.addnext(main_page)
             result['arch'] = etree.tostring(eview, pretty_print=True)
             doc = etree.XML(result['arch'])
-            
             for node in doc.xpath("//notebook[@name='attributes_notebook']/page/group"):
                 for new in node.xpath('//field'):
                     new.set('required','False')
@@ -137,8 +132,6 @@ class base_product_template(osv.osv):
                 for val in self.pool.get('attribute.attribute').read(cr, uid, filter_ids, ['name']):
                     res['value'].update({str(val['name']):False})
         return res
-    
-
     _defaults={
             'active': True
             }
@@ -153,7 +146,6 @@ class base_product_bundle(osv.osv):
         'template_id':fields.many2many('base.product.template', 'bundle_template_rel','temp_id','bundle_id','Product Template'),
         'active':fields.boolean('Active'),
     }
-
      _defaults={
             'active': True
             }

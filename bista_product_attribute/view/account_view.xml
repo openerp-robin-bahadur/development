@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-       <!-- <record id="sales_team_id" model="ir.ui.view">
-            <field name="name">mudd.crm.sales.team.inherit</field>
-            <field name="model">crm.case.section</field>
-            <field name="inherit_id" ref="crm.crm_case_section_view_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='active']" position = "after">
-                    <field name="account_journal_id"/>
-                </xpath>
-            </field>
-        </record>-->
-        
         <record id="product_categ_account_id" model="ir.ui.view">
             <field name="name">mudd.product.categ.inherit</field>
             <field name="model">product.category</field>
@@ -37,7 +26,7 @@
                 </sheet>
             </field>
         </record>
-         <record id="inherit_stock_id" model="ir.ui.view">
+        <record id="inherit_stock_id" model="ir.ui.view">
             <field name="name">mudd.product.cat.stock.inherit</field>
             <field name="model">product.category</field>
             <field name="inherit_id" ref="stock.view_category_property_form"/>
@@ -59,24 +48,21 @@
                 </xpath>
             </field>
         </record>
-
-         <record id="inherit_account_id" model="ir.ui.view">
+        <record id="inherit_account_id" model="ir.ui.view">
             <field name="name">mudd.product.cat.stock.inherit</field>
             <field name="model">product.category</field>
             <field name="inherit_id" ref="account.view_category_property_form"/>
             <field name="arch" type="xml">
-                 <xpath expr="//field[@name='property_account_income_categ']" position = "attributes">
+                <xpath expr="//field[@name='property_account_income_categ']" position = "attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath expr="//field[@name='property_account_expense_categ']" position = "attributes">
-                   <attribute name="invisible">1</attribute>
+                    <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath expr="//group[@string='Account Properties']" position = "attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
-
             </field>
         </record>
-
     </data>
 </openerp>

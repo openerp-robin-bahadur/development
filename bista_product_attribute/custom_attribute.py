@@ -101,8 +101,6 @@ class attribute_attribute(orm.Model):
     def _field_value(self, cr, uid, context=None):
         return [('none', 'None')]
     _columns={
-
-#                'domain':fields.char('Domain', size=256, help="The optional domain to restrict possible values for relationship fields, "),
                 'active':fields.boolean('Active'),
                 'is_create':fields.boolean("create",readonly=True,invisble=True),
                 'domain_field_id':fields.many2one('attribute.attribute','Domain Field'),
@@ -134,8 +132,8 @@ class attribute_attribute(orm.Model):
         vals['state'] = 'manual'
 
         update_model_ids=self.pool.get('ir.model').search(cr,uid,[('model', 'in',['base.product.template','sale.order.line'])])
-#        if vals['model_id'] not in update_model_ids and len(vals['option_ids']) == 0:
-#            raise osv.except_osv(_('Error!'), _('Attribute must have atleast one active option line.'))
+        if vals['model_id'] not in update_model_ids and len(vals['option_ids']) == 0:
+            raise osv.except_osv(_('Error!'), _('Attribute must have atleast one active option line.'))
 
         vals['is_create']=True
         res = super(attribute_attribute, self).create(cr, uid, vals, context)
@@ -200,8 +198,8 @@ class attribute_attribute(orm.Model):
         attr_records = self.browse(cr, uid, ids)
         for each_attr_record in attr_records:
             each_attr_record_name = each_attr_record.name
-#            if each_attr_record_name in ['x_version','x_sale_start_date','x_sale_end_date','x_drop_number','x_list_type']:
-#                continue
+            if each_attr_record_name in ['x_version','x_sale_start_date','x_sale_end_date','x_drop_number','x_list_type']:
+                continue
             attr_field_ids = self.search(cr, uid, [('name','=',each_attr_record_name)])
 
             ir_field_records = self.browse(cr,uid,attr_field_ids)
@@ -241,24 +239,6 @@ class attribute_attribute(orm.Model):
 
 attribute_attribute()
 
-#
-#class vendor_info(osv.osv):
-#    _name='vendor.info'
-#
-#    _columns={
-#    'name' : fields.many2one('res.partner', 'Supplier', required=True,domain = [('supplier','=',True)], ondelete='cascade', help="Supplier of this product"),
-#    'attribute_option_id':fields.many2one('attribute.option','Attribute Option',ondelete='cascade', select=True),
-#    'sales_price': fields.float('Sale Price',digits=(4,4)),
-#    'cost_price': fields.float('Cost Price',digits=(4,4)),
-#    'product_code': fields.char('Supplier Product Code', size=64, help="This supplier's product code will be used when printing a request for quotation. Keep empty to use the internal one."),
-#    'sequence' : fields.integer('Sequence', help="Assigns the priority to the list of product supplier."),
-#    'min_qty': fields.float('Minimal Quantity', required=True, help="The minimal quantity to purchase to this supplier, expressed in the supplier Product Unit of Measure if not empty, in the default unit of measure of the product otherwise."),
-#    'delay' : fields.integer('Delivery Lead Time', required=True, help="Lead time in days between the confirmation of the purchase order and the reception of the products in your warehouse. Used by the scheduler for automatic computation of the purchase order planning."),
-#    }
-#vendor_info()
-
-
-
 class attribute_option(orm.Model):
     _inherit = "attribute.option"
     _columns={
@@ -270,8 +250,6 @@ class attribute_option(orm.Model):
                 'attribute_id': fields.many2one('attribute.attribute','Product Attribute',required=True,ondelete='cascade'),
                 'field_desc':fields.related('attribute_id','field_description',type='char',string="Field Label", store=True),
                 'filter_field_id':fields.many2many('attribute.option','attribute_filter_rel','attr_id','filter_id','Filter Value'),
-#                'vendor_ids':fields.one2many('vendor.info','attribute_option_id','Vendors')
-
              }
 
     _defaults = {
@@ -321,9 +299,7 @@ class attribute_option(orm.Model):
             write_id = self.search(cr, uid, [('attribute_id','=',each),('sales_price','=',val[0].sales_price),('sequence','=',val[0].sequence),('cost_price','=',val[0].cost_price),('name','=',val[0].name),('active','=',val[0].active)])
             if write_id:
                 self.write(cr, uid, [write_id[0]],vals)
-#
         return res
-
 
     def unlink(self, cr, uid,ids,context=None):
         unlink_ids = []
@@ -338,16 +314,12 @@ class attribute_option(orm.Model):
 
     def name_change(self, cr, uid, ids, name, field_id, context=None):
         res = {}
-
         if not field_id:
             res['domain'] = {'filter_field_id':[('id','in',[])]}
             return res
         filter_ids = self.search(cr, uid, [('attribute_id','=',field_id)])
         res['domain'] = {'filter_field_id':[('id','in',filter_ids)]}
-
         return res
-
-
 
 attribute_option()
 
@@ -355,20 +327,15 @@ attribute_option()
 class attribute_set(osv.osv):
     _inherit='attribute.set'
 
-
     _columns={
     'vendor_id':fields.many2one('res.partner','Vendor',domain=[('supplier','=',True)])
-
     }
-
     def create(self,cr,uid,vals,context=None):
         if vals['name'] and vals['vendor_id']:
             v_name=self.pool.get('res.partner').browse(cr,uid,vals['vendor_id']).name
             vals.update({'name':vals['name']+" - "+v_name})
         return super(attribute_set,self).create(cr,uid,vals,context)
-
     def copy(self, cr, uid, id, default=None, context=None):
-
         if not default:
             default = {}
         data = self.browse(cr, uid, id)
@@ -376,24 +343,6 @@ class attribute_set(osv.osv):
                         'name': data.name + ' Copy',
                         })
         return super(attribute_set, self).copy(cr, uid, id, default, context=context)
-
-
-#    def write(self,cr,uid,ids,vals,context=None):
-#        v_name=''
-#        for each in self.browse(cr,uid,ids):
-#            if each.vendor_id:
-#                v_name=self.pool.get('res.partner').browse(cr,uid,each.vendor_id.id).name
-#        return super(attribute_set,self).write(cr,uid,ids,{'name':each.name+" - "+v_name})
-
-
-                 
-        
-       
-
-
-
-
-
 
 attribute_set()
 
@@ -409,26 +358,19 @@ class attribute_location(orm.Model):
                 readonly=True,
                 store=True),
                 'vendor_id':fields.many2one('res.partner','Vendor',domain=[('supplier','=',True)]),
-#                'vendor_set_id':fields.many2one('res.partner','Vendor Set',domain=[('supplier','=',True)]),
                 'vendor_group':fields.selection([('group_one','Group 1'),('group_two','Group 2'),('group_three','Group 3'),('group_four','Group 4'),('group_five','Group 5'),('group_six','Group 6'),('group_seven','Group 7'),('group_eight','Group 8'),('group_nine','Group 9'),('group_ten','Group 10'),('group_eleven','Group 11'),('group_twelve','Group 12'),('group_thirteen','Group 13'),('group_fouteen','Group 14'),('group_fifteen','Group 15'),('group_sixteen','Group 16'),('group_seventeen','Group 17'),('group_eighteen','Group 18'),('group_nineteen','Group 19'),('group_twenty','Group 20'),],'Vendor Group')
                 }
-
 
     _sql_constraints = [
                         ('group_field_uniq', 'unique (attribute_id, attribute_group_id)',
                                 'The name of the field is already exist for a given group !'),
                         ]
 
-
-
-
 attribute_location()
 
 
 class attribute_group(osv.osv):
     _inherit='attribute.group'
-
-
     _columns={
     'vendor_id_group':fields.many2one('res.partner','Group Vendor',domain=[('supplier','=',True)]),
     }
@@ -447,15 +389,12 @@ class attribute_group(osv.osv):
                                         raise osv.except_osv(_('Error!'), _('Please select same vendor for the group: %s.')%(value['vendor_group']))
                                 else:
                                     dict_vendor_group[value['vendor_group']]=value['vendor_id']
-                                
-        
         return res
 
     def write(self,cr,uid,ids,vals,context=None):
         attr_name=[]
         attr_domain_field=[]
         dict_vendor_group={}
-        
         res= super(attribute_group,self).write(cr,uid,ids,vals,context)
         for each in self.browse(cr,uid,ids):
             for attribute_ids in each.attribute_ids:
@@ -465,7 +404,6 @@ class attribute_group(osv.osv):
             for name in attr_domain_field:
                 if name not in attr_name:
                     raise osv.except_osv(_('Error!'), _('Domain field %s.')%(name +" is not mentioned"))
-                    
                 else:
                     pass
             for attrs_ids in each.attribute_ids:
@@ -475,13 +413,6 @@ class attribute_group(osv.osv):
                             raise osv.except_osv(_('Error!'), _('Please select same vendor for the group: %s.')%(attrs_ids.vendor_group))
                     else:
                         dict_vendor_group[attrs_ids.vendor_group]=attrs_ids.vendor_id.id
-
-
-
-                    
-
         return res
-
-
 
 attribute_group()

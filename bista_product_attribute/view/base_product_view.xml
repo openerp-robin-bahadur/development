@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
-
 <openerp>
     <data>
-    
-    	<record id="product_custom_attributes.product_attributes_form_view" model="ir.ui.view">
+        <record id="product_custom_attributes.product_attributes_form_view" model="ir.ui.view">
             <field name="name">product.attributes.normal.wizard</field>
             <field name="model">product.product</field>
             <field name="arch" type="xml">
@@ -13,7 +9,6 @@
                     <group name="name_set" invisible="1">
                         <field name="name"/>
                         <field name="attribute_set_id" />
-                        
                     </group>
                     <separator string="attributes_placeholder" colspan="4"/>
                     <footer>
@@ -24,8 +19,8 @@
                 </form>
             </field>
         </record>
-    
-<!--        view for template-->
+
+        <!--        view for template-->
         <record id="view_template_form" model="ir.ui.view">
             <field name="name">template.form</field>
             <field name="model">base.product.template</field>
@@ -52,7 +47,6 @@
             </field>
         </record>
 
-
         <record model="ir.ui.view" id="template_attributes_form_view">
             <field name="name">template.product.attributes.normal.wizard</field>
             <field name="model">base.product.template</field>
@@ -61,7 +55,6 @@
                     <group name="name_set" invisible="1">
                         <field name="name"/>
                         <field name="attribute_id"/>
-
                     </group>
                     <separator string="attributes_placeholder" colspan="4"/>
                     <footer>
@@ -86,7 +79,6 @@
             </field>
         </record>
 
-
         <record id="action_template_form" model="ir.actions.act_window">
             <field name="name">Template</field>
             <field name="type">ir.actions.act_window</field>
@@ -94,10 +86,9 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
-
         <menuitem name="Product Template" id="base.produc_template"  parent="base.menu_product" action="action_template_form"  />
 
-<!--        view for bundle-->
+        <!--        view for bundle-->
         <record id="view_bundle_form" model="ir.ui.view">
             <field name="name">bundle.form</field>
             <field name="model">base.product.bundle</field>
@@ -107,11 +98,9 @@
                         <h1>
                             <label string="Product Bundle"/>
                         </h1>
-
                         <group col="4" colspan="4">
                             <group col="2" colspan="2">
                                 <field name= "name"> </field>
-
                             </group>
                             <group col="2" colspan="2">
                                 <field name= "active"> </field>
@@ -132,7 +121,6 @@
             <field name="arch" type="xml">
                 <tree string="Product Bundle">
                     <field name= "name"> </field>
-<!--                    <field name= "template_id"> </field>-->
                     <field name= "active"> </field>
                 </tree>
             </field>
@@ -146,8 +134,6 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-
         <menuitem name="Product Bundle" id="base.produc_bundle"  parent="base.menu_product" action="action_bundle_form"  />
-
     </data>
 </openerp>

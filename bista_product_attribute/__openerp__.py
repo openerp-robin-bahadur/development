@@ -30,9 +30,9 @@
     'images' : [],
     'depends' : ['base','sale', 'product','product_custom_attributes','stock','crm','purchase'],
     'data': [
-#                'wizard/attribute_data_view.xml',
 #                'wizard/brand_manager_commission_view.xml',
                 'wizard/miscellaneous_view.xml',
+                'wizard/sale_price_history_wizard_view.xml',
                 'view/account_view.xml',
                 'view/custom_attribute_view.xml',
                 'view/res_partner_view.xml',

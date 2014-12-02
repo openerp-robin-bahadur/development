@@ -2,7 +2,6 @@
 
 <openerp>
     <data>
-
         <record model="ir.ui.view" id="attributes_switch_form_view">
             <field name="name">attribute.switch.wizard</field>
             <field name="model">attribute.switch</field>
@@ -26,6 +25,44 @@
                 </form>
             </field>
         </record>
+        
+        <record id="sale_price_history_tree_view" model="ir.ui.view">
+            <field name="name">sale.price.history.tree.view</field>
+            <field name="model">sale.price.history</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Sale Price History" editable="top">
+                    <field name="order_line_id"/>
+                    <field name="attribute_id"/>
+                    <field name="sale_price"/>
+                    <field name="cost_price"/>
+                    <field name="calculation_method"/>
+                </tree>
+            </field>
+        </record>
+        <record id="sale_price_history_form_view" model="ir.ui.view">
+            <field name="name">sale.price.history.form.view</field>
+            <field name="model">sale.price.history</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Sale Price History">
+                    <field name="order_line_id"/>
+                    <field name="attribute_id"/>
+                    <field name="sale_price"/>
+                    <field name="cost_price"/>
+                    <field name="calculation_method"/>
+                </form>
+            </field>
+        </record>
+        <record id="sale_price_history_action" model="ir.actions.act_window">
+            <field name="name">Sale Price History</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.price.history</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+        </record>
+        <menuitem id="menu_sale_price_history" name="Sale Price History" parent="base.menu_base_config" action="sale_price_history_action" sequence="26"/>
+
 
         <record id="attribute_switch_action" model="ir.actions.act_window">
             <field name="name">Attribute Switch</field>
@@ -46,83 +83,56 @@
             <field name="arch" type="xml">
                 <!--<xpath expr="//form" position="attributes"> <attribute name="edit" eval="[false]"/> </xpath>-->
                 <xpath expr="//h1" position="replace">
-
                     <h1>
-
                         <label string=" Quotation"/>
                         <field name="name" class="oe_inline" readonly="1"/>
                     </h1>
                 </xpath>
-
                 <xpath expr="/form/sheet/group/group[2]/field[@name='client_order_ref']" position="after">
                     <field name="x_billing_vendor_id" domain="[('x_is_billing_vendor','=',True)]" required="1" options="{'create': False, 'create_edit': False ,'always_reload': True}" />
-
-
                 </xpath>
                 <xpath expr="//field[@name='partner_id']"  position="after">
                     <field name="user_id" required="1" />
                     <field name="x_manager_id" required="1" />
-
-
                 </xpath>
-
                 <xpath expr="//field[@name='user_id']" position="attributes">
-
                     <attribute name="attrs">{'readonly':['|',('state','=','review'),('state','=','waiting_approved_signature')]}</attribute>
                 </xpath>
-
-
                 <xpath expr="//field[@name='client_order_ref']" position="attributes">
-
                     <attribute name="attrs">{'readonly':['|',('state','=','review'),('state','=','waiting_approved_signature')]}</attribute>
                 </xpath>
-
                 <xpath expr="//field[@name='note']" position="attributes">
-
                     <attribute name="attrs">{'readonly':['|',('state','=','review'),('state','=','waiting_approved_signature')]}</attribute>
                 </xpath>
-
-
                 <xpath expr="//field[@name='payment_term']" position="attributes">
-
                     <attribute name="attrs">{'readonly':['|',('state','=','review'),('state','=','waiting_approved_signature')]}</attribute>
                 </xpath>
                 <xpath expr="//field[@name='origin']" position="attributes">
-
                     <attribute name="attrs">{'readonly':['|',('state','=','review'),('state','=','waiting_approved_signature')]}</attribute>
                 </xpath>
                 <xpath expr="//field[@name='fiscal_position']" position="attributes">
 
                     <attribute name="attrs">{'readonly':['|',('state','=','review'),('state','=','waiting_approved_signature')]}</attribute>
                 </xpath>
-
                 <xpath expr="/form/sheet/notebook/page[@string='Other Information']/group/group/field[@name='user_id']" position="replace">
-
                 </xpath>
                 <xpath expr="//field[@name='user_id']" position="attributes">
                     <attribute name="required">0</attribute>
-
                 </xpath>
                 <xpath expr="/form/sheet/group/group[2]/field[@name='date_order']" position="after">
                     <field name="x_payment_due_date" />
                 </xpath>
-
                 <xpath expr="//field[@name='order_line']" position="attributes">
 
                     <attribute name="attrs">{'readonly':['|',('state','=','review'),('state','=','waiting_approved_signature')]}</attribute>
                 </xpath>
-
-
-
                 <xpath expr="/form/sheet/group/group[2]/field[@name='client_order_ref']" position="after">
                     <field name="x_cs_rep_id" />
-
                     <field name="x_billing_month" required="1" on_change="onchange_billing_month(x_billing_month,context)"/>
                     <field name="x_billing_year"  required="1"/>
                     <field name="x_coop"/>
                     <field name="x_dealer_code" />
                     <field name="x_additional_code" />
-
                 </xpath>
                 <xpath expr="//field[@name='partner_shipping_id']" position="after">
                     <field name="x_call_source" />
@@ -136,7 +146,6 @@
                     <field name="x_manufacturer" on_change="onchange_manufacture_id(x_manufacturer,context)" />
                     <field name="x_franchise" domain="[('manufacture_id','=',x_manufacturer)]" options="{'create': False, 'create_edit': False ,'always_reload': True}" />
                     <field name="x_campaign_theme_id" required="1"/>
-
                 </xpath>
 
                 <xpath expr="//notebook/page[@string='Other Information']" position="after">
@@ -146,19 +155,15 @@
                         </group>
                         <group>
                             <field name="x_guarantee_verbiage" colspan="4" nolabel="1" placeholder="Guarantee Verbiage" />
-
                         </group>
                     </page>
                 </xpath>
                 <xpath expr="//notebook/page[@string='Other Information']" position="after">
                     <page string="Notes">
-
                         <group>
                             <field name="x_special_notes" colspan="4" nolabel="1" placeholder="Notes"/>
                         </group>
-
                     </page>
-
                 </xpath>
                 <xpath expr="//notebook" position="before">
                     <group col="4" colspan="4">
@@ -181,7 +186,7 @@
                     <field name="attribute_set_id" invisible="1" />
                 </xpath>
                 <xpath expr="/form/sheet/notebook/page/field[@name= 'order_line']/form/header" position="inside">
-                    <button name="%(miscellaneous_wizard_action)d" type="action" string="Miscellaneous Item" icon="gtk-edit"/>
+                    <button name="%(sale_price_history_wizard_action)d" type="action" string="Price History" icon="gtk-edit"/>
                     <button name="open_attributes" string="Open Attributes" type="object" icon="gtk-ok" attrs="{'invisible':[('attribute_set_id', '=', False)]}" />
                     <button name="copy_lines" string="Copy Lines" type="object" icon="gtk-copy"/>
                     <button name="%(attribute_switch_action)d" type="action" string="Switch Attributes Set" icon="gtk-jump-to" attrs="{'invisible':[('attribute_set_id', '=', False)]}"/>
@@ -189,7 +194,7 @@
                 </xpath>
 
                 <xpath expr="/form/sheet/notebook/page/field[@name= 'order_line']/tree/field[@name='sequence']" position="before">
-                    <button name="%(miscellaneous_wizard_action)d" type="action" string="Miscellaneous Item" icon="gtk-edit"/>
+                    <button name="%(sale_price_history_wizard_action)d" type="action" string="Price History" icon="gtk-edit"/>
                     <button name="open_attributes" string="Open Attributes" type="object" icon="gtk-ok" attrs="{'invisible':[('attribute_set_id', '=', False)]}"/>
                     <button name="copy_lines" string="Copy Lines" type="object" icon="gtk-copy"/>
                     <button name="%(attribute_switch_action)d" type="action" string="Switch Attributes Set" icon="gtk-jump-to" attrs="{'invisible':[('attribute_set_id', '=', False)]}"/>
@@ -207,12 +212,15 @@
                 <xpath expr="/form/sheet/notebook/page/field[@name= 'order_line']/tree/field[@name='price_unit']" position="attributes">
                     <attribute name="readonly">1</attribute>
                 </xpath>
-                 <xpath expr="/form/sheet/notebook/page/field[@name= 'order_line']/tree/field[@name='product_id']" position="attributes">
+                <xpath expr="/form/sheet/notebook/page/field[@name= 'order_line']/tree/field[@name='product_id']" position="attributes">
                     <attribute name="readonly">1</attribute>
                 </xpath>
                 <xpath expr="/form/sheet/notebook/page/field[@name= 'order_line']/tree/field[@name='price_subtotal']" position="after">
                     <field name="sold_for"/>
                 </xpath>
+                <!--<xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                    <field name="price_history_id"/>
+                </xpath>-->
 
 
                 <xpath expr="/form/sheet/notebook/page/field[@name= 'order_line']/tree/field[@name='tax_id']" position="before">
@@ -227,8 +235,6 @@
                     <field name="misc_sale_total" invisible="1"/>
                     <field name="product_cost" invisible="1"/>
                 </xpath>
-
-
             </field>
         </record>
 
@@ -252,60 +258,8 @@
             </field>
         </record>
 
-
-
-
-        <!--<record id="vendor_form_view" model="ir.ui.view">
-            <field name="name">vendor.switch.form</field>
-            <field name="model">vendor.switch</field>
-            <field name="type">form</field>
-            <field name="arch" type="xml">
-
-                <form string="Vendor Information">
-                    <field name="old_vendor_id"/>
-                    <field name="attribute_id"/>
-                    <field name="old_cost_price"/>
-                    <field name="old_sale_price"/>
-                    <field name="new_vendor_id"/>
-                    <field name="new_cost_price"/>
-                    <field name="new_sale_price"/>
-
-
-                </form>
-            </field>
-        </record>
-
-        <record id="vendor_tree_view" model="ir.ui.view">
-            <field name="name">vendor.switch.tree</field>
-            <field name="model">vendor.switch</field>
-            <field name="type">tree</field>
-            <field name="arch" type="xml">
-
-                <tree string="Vendor Information" editable="top">
-                    <field name="attribute_id" on_change="onchange_attribute(attribute_id)"/>
-                    <field name="option_id" domain="[('attribute_id','=',attribute_id),('attribute_id.model','=','sale.order.line')]" on_change="onchange_option(option_id)"/>
-                    <field name="old_vendor_id"/>
-                    <field name="old_cost_price"/>
-                    <field name="old_sale_price"/>
-                    <field name="new_vendor_id"/>
-                    <field name="new_cost_price"/>
-                    <field name="new_sale_price"/>
-
-                </tree>
-            </field>
-        </record>
-
-        <record id="vendor_action" model="ir.actions.act_window">
-            <field name="name">Vendor Information</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">vendor.switch</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-            <field name="view_id" ref="vendor_tree_view"/>
-        </record>-->
-
-<!--        manufacture tree view
--->        <record id="manufacture_tree_id" model="ir.ui.view">
+        <!--        manufacture tree view
+        -->        <record id="manufacture_tree_id" model="ir.ui.view">
             <field name="name">manufacture.info.tree</field>
             <field name="model">manufacture.info</field>
             <field name="type">tree</field>
@@ -315,33 +269,29 @@
                 </tree>
             </field>
         </record>
-<!--        manufacture form view
--->        <record id="manufacture_form_id" model="ir.ui.view">
+        <!--        manufacture form view
+        -->        <record id="manufacture_form_id" model="ir.ui.view">
             <field name="name">manufacture.form</field>
             <field name="model">manufacture.info</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-
                 <form string="Manufacturing information">
                     <field name="name"/>
                 </form>
             </field>
         </record>
-<!--        franchise info search view
--->        <record id="manufacture_search_id" model="ir.ui.view">
+        <!--        franchise info search view
+        -->        <record id="manufacture_search_id" model="ir.ui.view">
             <field name="name">manufacture.search</field>
             <field name="model">manufacture.info</field>
             <field name="type">search</field>
             <field name="arch" type="xml">
-
                 <search string="Manufacture Info">
-
                     <field name="name"/>
-
                 </search>
             </field>
         </record>
-<!--        manufacture action view
+        <!--        manufacture action view
 -->
         <record id="manufacture_action" model="ir.actions.act_window">
             <field name="name">Manufacture</field>
@@ -352,55 +302,43 @@
             <field name="search_view_id" ref="manufacture_search_id"/>
         </record>
 
-
-<!--        franchise tree view
--->        <record id="mudd_franchise_id" model="ir.ui.view">
+        <!--        franchise tree view
+        -->        <record id="mudd_franchise_id" model="ir.ui.view">
             <field name="name">franchise.info.tree</field>
             <field name="model">franchise.info</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
-
                 <tree string="Franchise information" editable="top">
-
                     <field name="name"/>
-
                     <field name="manufacture_id"/>
-
                 </tree>
             </field>
         </record>
-<!--        franchise form view
--->        <record id="franchise_form_id" model="ir.ui.view">
+        <!--        franchise form view
+        -->        <record id="franchise_form_id" model="ir.ui.view">
             <field name="name">franchise.form</field>
             <field name="model">franchise.info</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-
                 <form string="Franchise information">
-
                     <field name="name"/>
                     <field name="manufacture_id"/>
-
                 </form>
             </field>
         </record>
-<!--        franchise info search view
--->        <record id="franchise_search_id" model="ir.ui.view">
+        <!--        franchise info search view
+        -->        <record id="franchise_search_id" model="ir.ui.view">
             <field name="name">franchise.search</field>
             <field name="model">franchise.info</field>
             <field name="type">search</field>
             <field name="arch" type="xml">
-
                 <search string="Franchise Info">
-
                     <field name="name"/>
-
                     <field name="manufacture_id"/>
-
                 </search>
             </field>
         </record>
-<!--        franchise action view
+        <!--        franchise action view
 -->
         <record id="franchise_action" model="ir.actions.act_window">
             <field name="name">Franchise</field>
@@ -411,51 +349,43 @@
             <field name="search_view_id" ref="franchise_search_id"/>
         </record>
 
-<!--        menu  franchise
--->        <menuitem id="franchise_info_id" name="Franchise" parent="base.menu_base_config" action="franchise_action"/>
+        <!--        menu  franchise
+        -->        <menuitem id="franchise_info_id" name="Franchise" parent="base.menu_base_config" action="franchise_action"/>
 
-<!--        manufacture tree view
--->        <record id="manufacture_tree_id" model="ir.ui.view">
+        <!--        manufacture tree view
+        -->        <record id="manufacture_tree_id" model="ir.ui.view">
             <field name="name">manufacture.info.tree</field>
             <field name="model">manufacture.info</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
-
                 <tree string="manufacture information" editable="top">
-
                     <field name="name"/>
-
                 </tree>
             </field>
         </record>
-<!--        manufacture form view
--->        <record id="manufacture_form_id" model="ir.ui.view">
+        <!--        manufacture form view
+        -->        <record id="manufacture_form_id" model="ir.ui.view">
             <field name="name">manufacture.form</field>
             <field name="model">manufacture.info</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-
                 <form string="Manufacturing information">
-
                     <field name="name"/>
-
                 </form>
             </field>
         </record>
-<!--        franchise info search view
--->        <record id="manufacture_search_id" model="ir.ui.view">
+        <!--        franchise info search view
+        -->        <record id="manufacture_search_id" model="ir.ui.view">
             <field name="name">manufacture.search</field>
             <field name="model">manufacture.info</field>
             <field name="type">search</field>
             <field name="arch" type="xml">
-
                 <search string="Manufacture Info">
-
                     <field name="name"/>
                 </search>
             </field>
         </record>
-<!--        manufacture action view
+        <!--        manufacture action view
 -->
         <record id="manufacture_action" model="ir.actions.act_window">
             <field name="name">Manufacture</field>
@@ -466,21 +396,18 @@
             <field name="search_view_id" ref="manufacture_search_id"/>
         </record>
 
-<!--        menu  franchise
--->        <menuitem id="manufacture_info_id" name="Manufacturer" parent="base.menu_base_config" action="manufacture_action"/>
+        <!--        menu  franchise
+        -->        <menuitem id="manufacture_info_id" name="Manufacturer" parent="base.menu_base_config" action="manufacture_action"/>
 
-<!--        campaign tree view
--->        <record id="campaign_tree_id" model="ir.ui.view">
+        <!--        campaign tree view
+        -->        <record id="campaign_tree_id" model="ir.ui.view">
             <field name="name">campaign.info.tree</field>
             <field name="model">campaign.theme</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
-
                 <tree string="campaign information" editable="top">
-
                     <field name="name"/>
                     <field name="active"/>
-
                 </tree>
             </field>
         </record>
@@ -490,12 +417,9 @@
             <field name="model">campaign.theme</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-
                 <form string="Campaign Theme">
-
                     <field name="name"/>
                     <field name="active"/>
-
                 </form>
             </field>
         </record>
@@ -505,12 +429,9 @@
             <field name="model">campaign.theme</field>
             <field name="type">search</field>
             <field name="arch" type="xml">
-
                 <search string="Campaign Theme">
-
                     <field name="name"/>
                     <field name="active"/>
-
                 </search>
             </field>
         </record>
@@ -533,12 +454,9 @@
             <field name="model">guarantee.type</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
-
                 <tree string="Guarantee Type" editable="top">
-
                     <field name="name"/>
                     <field name="verbiage"/>
-
                 </tree>
             </field>
         </record>
@@ -548,12 +466,9 @@
             <field name="model">guarantee.type</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-
                 <form string="Guarantee Type">
-
                     <field name="name"/>
                     <field name="verbiage"/>
-
                 </form>
             </field>
         </record>
@@ -563,9 +478,7 @@
             <field name="model">guarantee.type</field>
             <field name="type">search</field>
             <field name="arch" type="xml">
-
                 <search string="Guaratee Type">
-
                     <field name="name"/>
                     <field name="verbiage"/>
                 </search>
@@ -588,11 +501,8 @@
             <field name="model">coop.info</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
-
                 <tree string="coop information" editable="top">
-
                     <field name="name"/>
-
                 </tree>
             </field>
         </record>
@@ -602,9 +512,7 @@
             <field name="model">coop.info</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-
                 <form string="Coop Information">
-
                     <field name="name"/>
                 </form>
             </field>
@@ -615,15 +523,11 @@
             <field name="model">coop.info</field>
             <field name="type">search</field>
             <field name="arch" type="xml">
-
                 <search string="Coop info">
-
                     <field name="name"/>
-
                 </search>
             </field>
         </record>
-
 
         <record id="coop_action" model="ir.actions.act_window">
             <field name="name">coop info</field>
@@ -634,24 +538,19 @@
             <field name="search_view_id" ref="coop_search_id"/>
         </record>
 
-
         <menuitem id="coop_info_id" name="Coop" parent="base.menu_base_config" action="coop_action"/>
+
+
+
 
         <record model="ir.ui.view" id="account_invoice_sale_order_line">
             <field name="name">account.invoice.line.order.line</field>
             <field name="model">account.invoice</field>
             <field name="inherit_id" ref="account.invoice_form"/>
-
             <field name="arch" type="xml">
-
-
                 <xpath expr="/form/sheet/notebook/page[@string='Invoice Lines']/field[@name='invoice_line']/tree/field[@name='product_id']" position="before">
-
                     <field name="sale_order_line_id" invisible="1"/>
-
-
                 </xpath>
-
             </field>
         </record>
 
@@ -675,7 +574,6 @@
                     <field name="name"/>
                     <field name="sales_price"/>
                     <field name="cost_price"/>
-
                 </form>
             </field>
         </record>
@@ -715,10 +613,8 @@
                 <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='product_id']" position="after">
                     <field name="x_version_no"/>
                     <field name="x_drop_no"/>
-
                 </xpath>
             </field>
         </record>
-
     </data>
 </openerp>

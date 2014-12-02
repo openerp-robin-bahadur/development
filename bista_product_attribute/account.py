@@ -7,11 +7,7 @@ from datetime import datetime, timedelta
 
 class crm_case_section(osv.osv):
     _inherit="crm.case.section"
-#    _columns={
-##    'account_journal_id':fields.many2one('account.journal','Account Journal'),
-#    }
-
-
+#    
     def create(self,cr,uid,vals,context=None):
         res=super(crm_case_section,self).create(cr,uid,vals,context)
         if vals['member_ids']:
@@ -39,9 +35,7 @@ class crm_case_section(osv.osv):
                             sale_obj=self.browse(cr,uid,id)
                             if id != each.id:
                                 raise osv.except_osv(_('Error!'), _('User %s is Already assign to Sales Team %s')%(user_obj.name,sale_obj.name))
-
         return res
-
 
 crm_case_section()
 

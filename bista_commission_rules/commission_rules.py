@@ -149,7 +149,6 @@ class commission_rules(osv.osv):
                          raise osv.except_osv(_('Error!'),
                 _('invalid expression %s for defining rule')%(exp))
 
-
         return res
 
     def write(self,cr,uid,ids,vals,context=None):
@@ -173,10 +172,7 @@ class commission_rules(osv.osv):
                     if exp in rule_vals:
                         raise osv.except_osv(_('Error!'),
                         _('invalid expression %s for defining rule')%(exp))
-
         return res
-
-    
 
 class miscellaneous_rules(osv.osv):
     _name='miscellaneous.rules'

@@ -33,20 +33,8 @@
                     <field name="vendor_group"/>
 
                 </xpath>
-                
-                <!--
-                    <xpath expr="//field[@name='attribute_set_id']" position ="after">
-                        <field name="vendor_id_group"/>
-                        </xpath>-->
-
-                    
-                    
-                
-
-
             </field>
         </record>
-
 
         <!-- ATTRIBUTE VIEW -->
 
@@ -82,7 +70,6 @@
 
                     <separator string="Attribute Options" colspan="4"/>
                     <field name="option_ids" colspan="4" nolabel="1" context="{'parent.attribute_type':attribute_type,'parent.domain_field_id':domain_field_id}">
-                        <!--<field name="option_ids" colspan="4" nolabel="1">-->
                         <tree string="Attribute Options">
                             <field name="name" />
                             <field name="cost_price" />
@@ -105,85 +92,6 @@
             </field>
         </record>
 
-
-
-        <!-- <record id="inherit_product_supplier_info" model="ir.ui.view">
-            <field name="name">product.supplier.info</field>
-            <field name="model">product.supplierinfo</field>
-            <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='sequence']" position="after">
-                    <field name="sales_price"/>
-                    <field name="cost_price"/>
-
-                </xpath>
-
-            </field>
-        </record>-->
-
-
-        <!--<record id="vendor_info_id" model="ir.ui.view">
-            <field name="name">vendor.info</field>
-            <field name="model">vendor.info</field>
-
-            <field name="arch" type="xml">
-
-                 <form string="Vendor" version="7.0">
-                    <sheet>
-                        <h1>
-                            <label string="Product Options"/>
-                        </h1>
-                        <group col="4" colspan="4">
-                            <group col="2" colspan="2">
-                                <field name="name"></field>
-                                <field name="field_desc"/>
-
-                            </group>
-                            <group col="2" colspan="2">
-                                <field name="sales_price"> </field>
-                                <field name="cost_price"> </field>
-                                <field name="active"> </field>
-                            </group>
-                        </group>
-
-                    </sheet>
-                </form>
-
-
-            </field>
-        </record>-->
-
-
-        <!--<record id="attribute_option_form" model="ir.ui.view">
-            <field name="name">attribute.option.form</field>
-            <field name="model">attribute.option</field>
-            <field name="inherit_id" ref="base_custom_attributes.attribute_option_form_popup_view"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='sequence']" position="after">
-
-
-                    <field name="sales_price" required="1" on_change="name_change(name, parent.domain_field_id, context)"/>
-                    <field name="price" required="1" on_change="name_change(name, parent.domain_field_id, context)"/>
-                    <field name="cost_price" on_change="name_change(name, parent.domain_field_id, context)"/>
-
-                    <field name="filter_field_id" widget="many2many_tags"/>
-                    <field name="active"/>
-                    <separator string="Vendors" colspan="4"/>
-
-
-                    <field name="vendor_ids" colspan="4" nolabel="1"/>
-
-                </xpath>
-                <xpath expr="//field[@name='name']" position="replace">
-
-                    <field name="name" on_change="name_change(name, parent.domain_field_id, context)"/>
-
-                </xpath>
-
-            </field>
-        </record>
--->
-
         <record id="product_custom_attributes.attribute_attribute_form_action" model="ir.actions.act_window">
             <field name="name">Product Attribute</field>
             <field name="res_model">attribute.attribute</field>
@@ -194,10 +102,6 @@
             <field name="domain">[('model_id.model','=','product.product')]</field>
             <field name="help"></field>
         </record>
-
-
-
-
 
         <!--Attribute Option View-->
         <record id="view_product_option_form" model="ir.ui.view">
@@ -221,7 +125,6 @@
                                 <field name="active"> </field>
                             </group>
                         </group>
-
                     </sheet>
                 </form>
             </field>
@@ -237,8 +140,6 @@
                     <field name="sales_price" readonly="1"> </field>
                     <field name="cost_price" readonly="1"> </field>
                     <field name="active"> </field>
-
-
                 </tree>
             </field>
         </record>
@@ -254,7 +155,6 @@
             </field>
         </record>
 
-
         <record id="action_product_option" model="ir.actions.act_window">
             <field name="name">Inactive Product Option</field>
             <field name="type">ir.actions.act_window</field>
@@ -265,7 +165,6 @@
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="view_product_option_filter"/>
         </record>
-
 
         <record id="open_view_product_option_tree1" model="ir.actions.act_window.view">
             <field name="sequence" eval="2"/>
@@ -280,10 +179,6 @@
             <field name="view_id" ref="view_product_option_form"/>
             <field name="act_window_id" ref="action_product_option"/>
         </record>
-
         <menuitem name="Inactive Product Option" id="bista_product_options" parent="product.prod_config_main" sequence="22" action="action_product_option"/>
-
-
-
     </data>
 </openerp>

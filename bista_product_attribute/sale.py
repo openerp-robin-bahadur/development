@@ -39,38 +39,28 @@ class sale_order(osv.osv):
                 else:
                     val1 += line.sold_for
                 val += self._amount_line_tax(cr, uid, line, context=context)
-               
             res[order.id]['amount_tax'] = cur_obj.round(cr, uid, cur, val)
             res[order.id]['amount_untaxed'] = cur_obj.round(cr, uid, cur, val1)
-          
             res[order.id]['amount_total'] = res[order.id]['amount_untaxed'] + res[order.id]['amount_tax']
-           
         return res
 
     def add_product_order_line(self,cr,uid,ids,context=None):
-           
             read_data={}
             vals={}
             sales_price=0
             sales_price_per_unit = 0
             sales_price_per_order_line = 0
             sale_data=self.browse(cr,uid,ids[0])
-
             attr_name_in_product=[]
             attr_type_in_product=[]
-
             if sale_data.add_product_id.attribute_set_id:
                 attribute_set_val=sale_data.add_product_id.attribute_set_id.attribute_group_ids
                 for each in attribute_set_val:
                     for y in each.attribute_ids:
-        #                
                         attr_name_in_product.append(y.name)
                         attr_type_in_product.append(y.attribute_id.attribute_type)
-
                 read_data=self.pool.get('product.product').read(cr,uid,[sale_data.add_product_id.id],attr_name_in_product)
                 read_data = read_data[0]
-
-
             if sale_data.add_product_id:
                 vals.update({'product_id':sale_data.add_product_id.id,
                 'order_id':sale_data.id,
@@ -79,18 +69,14 @@ class sale_order(osv.osv):
                 'product_cost':sale_data.add_product_id.standard_price,
                 })
 
-
                 for each in read_data:
                     if each in attr_name_in_product:
                         i = attr_name_in_product.index(each)
-
                         if attr_type_in_product[i] == 'select':
-                           
                             if read_data[each]:
                                 read_data[each] = read_data[each][0]
                                 sales_price_select=self.pool.get('attribute.option').browse(cr,uid,read_data[each]).sales_price
                                 calculation_method = self.pool.get('attribute.option').browse(cr,uid,read_data[each]).price
-                                
                                 if calculation_method:
                                     if calculation_method == "per_unit":
                                         sales_price_per_unit += sales_price_select
@@ -98,9 +84,7 @@ class sale_order(osv.osv):
                                         sales_price_per_order_line += sales_price_select
                                     else:
                                         pass
-
                         elif attr_type_in_product[i] == 'multiselect':
-                            
                             if read_data[each]:
                                 for each_attr_id in read_data[each]:
                                     sales_price_multi= self.pool.get('attribute.option').browse(cr,uid,each_attr_id).sales_price
@@ -113,19 +97,13 @@ class sale_order(osv.osv):
                                         pass
 
                                 read_data[each] = [(6,0,read_data[each])]
-
-                                
                             else:
                                 read_data[each] = [(6,0,[])]
-
                         else:
                             search_id=self.pool.get('attribute.attribute').search(cr,uid,[('model','=','product.product'),('name','=',each)])
-                            
                             try:
-                                
                                 sales_price_other= self.pool.get('attribute.attribute').browse(cr,uid,search_id[0]).option_ids[0].sales_price
                                 calculation_method = self.pool.get('attribute.attribute').browse(cr,uid,search_id[0]).option_ids[0].price
-                                
                                 if read_data[each]:
                                     if calculation_method == "per_unit":
                                         sales_price_per_unit += sales_price_other
@@ -142,14 +120,10 @@ class sale_order(osv.osv):
 
                 self.pool.get('sale.order.line').create(cr,uid,vals)
                 self.write(cr,uid,ids,{'add_product_id':False})
-
-
             return True
-
 
     def add_template_order_line(self,cr,uid,ids,context=None):
         try:
-           
             sales_price=0
             sales_price_per_unit = 0
             sales_price_per_order_line = 0
@@ -162,16 +136,10 @@ class sale_order(osv.osv):
                 attribute_set_val=sale_data.add_product_temp_id.attribute_id.attribute_group_ids
                 for each in attribute_set_val:
                     for y in each.attribute_ids:
-        #
                         attr_name_in_product.append(y.name)
                         attr_type_in_product.append(y.attribute_id.attribute_type)
-        #
-
             read_data=self.pool.get('base.product.template').read(cr,uid,[sale_data.add_product_temp_id.id],attr_name_in_product)
             read_data = read_data[0]
-
-
-
             if sale_data.add_product_temp_id:
                 vals.update({'product_id':sale_data.add_product_temp_id.product_id.id,
                 'order_id':sale_data.id,
@@ -184,12 +152,10 @@ class sale_order(osv.osv):
                     if each in attr_name_in_product:
                         i = attr_name_in_product.index(each)
                         if attr_type_in_product[i] == 'select':
-                          
                             if read_data[each]:
                                 read_data[each] = read_data[each][0]
                                 sales_price_select=self.pool.get('attribute.option').browse(cr,uid,read_data[each]).sales_price
                                 calculation_method = self.pool.get('attribute.option').browse(cr,uid,read_data[each]).price
-                                
                                 if calculation_method:
                                     if calculation_method == "per_unit":
                                         sales_price_per_unit += sales_price_select
@@ -197,15 +163,10 @@ class sale_order(osv.osv):
                                         sales_price_per_order_line += sales_price_select
                                     else:
                                         pass
-
-                               
                             else:
                                 pass
-
                         elif attr_type_in_product[i] == 'multiselect':
                             if read_data[each]:
-
-
                                 for each_attr_id in read_data[each]:
                                     sales_price_multi= self.pool.get('attribute.option').browse(cr,uid,each_attr_id).sales_price
                                     calculation_method = self.pool.get('attribute.option').browse(cr,uid,each_attr_id).price
@@ -215,21 +176,15 @@ class sale_order(osv.osv):
                                         sales_price_per_order_line += sales_price_multi
                                     else:
                                         pass
-
                                 read_data[each] = [(6,0,read_data[each])]
-                               
                             else:
                                 read_data[each] = [(6,0,[])]
-
                         else:
                             search_id=self.pool.get('attribute.attribute').search(cr,uid,[('model','=','base.product.template'),('name','=',each)])
                             sales_price_other= self.pool.get('attribute.attribute').browse(cr,uid,search_id[0]).option_ids[0].sales_price
-
-                            
                             try:
                                 sales_price_other= self.pool.get('attribute.attribute').browse(cr,uid,search_id[0]).option_ids[0].sales_price
                                 calculation_method = self.pool.get('attribute.attribute').browse(cr,uid,search_id[0]).option_ids[0].price
-                                
                                 if read_data[each]:
                                     if calculation_method == "per_unit":
                                         sales_price_per_unit += sales_price_other
@@ -239,20 +194,12 @@ class sale_order(osv.osv):
                                         pass
                             except:
                                 pass
-                            
-#                             
-
                 sales_price = self.pool.get('product.product').browse(cr,uid,sale_data.add_product_temp_id.product_id.id).list_price
                 vals.update(read_data)
-#                 vals.update({'price_unit':sales_price})
                 vals.update({'price_unit':sales_price+sales_price_per_unit,'price_per_line':sales_price_per_order_line,'price_per_unit':sales_price_per_unit})
-
-
                 vals.pop('id')
-                sol_id = self.pool.get('sale.order.line').create(cr,uid,vals)
-
+                self.pool.get('sale.order.line').create(cr,uid,vals)
                 self.write(cr,uid,ids,{'add_product_temp_id':False})
-
             return True
         except:
             pass
@@ -261,47 +208,31 @@ class sale_order(osv.osv):
         if self.browse(cr,uid,ids[0]).add_product_bundle_id:
 
             sale_data=self.browse(cr,uid,ids[0])
-
             for each_template in sale_data.add_product_bundle_id.template_id:
-
                 vals={}
                 attr_name_in_product=[]
                 attr_type_in_product=[]
                 sales_price=0
                 sales_price_per_unit = 0
                 sales_price_per_order_line = 0
-
-               
                 attribute_set_val=each_template.attribute_id.attribute_group_ids
                 for each in attribute_set_val:
                     for y in each.attribute_ids:
-        #
                         attr_name_in_product.append(y.name)
                         attr_type_in_product.append(y.attribute_id.attribute_type)
-    #
-
-
-
                 read_data=self.pool.get('base.product.template').read(cr,uid,[each_template.id],attr_name_in_product)
                 read_data = read_data[0]
-               
-                
-                template_ids_val = each_template.id
-                
+#                template_ids_val = each_template.id
                 vals.update({'product_id':each_template.product_id.id,
                 'order_id':sale_data.id,
                 'name':each_template.name,
                 'attribute_set_id':each_template.attribute_id and each_template.attribute_id.id or False,
                 'product_cost':sale_data.add_product_id.standard_price,
                 })
-                
                 for each1 in read_data:
                     if each1 in attr_name_in_product:
                         i = attr_name_in_product.index(each1)
                         if attr_type_in_product[i] == 'select':
-                            
-
-                          
                             if read_data[each1]:
                                 read_data[each1] = read_data[each1][0]
                                 sales_price_select=self.pool.get('attribute.option').browse(cr,uid,read_data[each1]).sales_price
@@ -313,14 +244,9 @@ class sale_order(osv.osv):
                                         sales_price_per_order_line += sales_price_select
                                     else:
                                         pass
-
                             else:
                                 pass
-
                         elif attr_type_in_product[i] == 'multiselect':
-
-                            
-                            
                             if read_data[each1]:
                                 for each_attr_id in read_data[each1]:
                                     sales_price_multi= self.pool.get('attribute.option').browse(cr,uid,each_attr_id).sales_price
@@ -331,19 +257,13 @@ class sale_order(osv.osv):
                                         sales_price_per_order_line += sales_price_multi
                                     else:
                                         pass
-
                                 read_data[each1] = [(6,0,read_data[each1])]
-                               
                             else:
                                 read_data[each1] = [(6,0,[])]
                         else:
-                           
                             search_id = self.pool.get('attribute.attribute').search(cr,uid,[('model','=','product.product'),('name','=',each1)])
-                          
-#                             try:
                             sales_price_other= self.pool.get('attribute.attribute').browse(cr,uid,search_id[0]).option_ids[0].sales_price
                             calculation_method = self.pool.get('attribute.attribute').browse(cr,uid,search_id[0]).option_ids[0].price
-                            
                             if read_data[each1]:
                                 if calculation_method == "per_unit":
                                     sales_price_per_unit += sales_price_other
@@ -355,12 +275,9 @@ class sale_order(osv.osv):
                 sales_price = self.pool.get('product.product').browse(cr,uid,each_template.product_id.id).list_price
                 vals.update(read_data)
                 vals.update({'price_unit':sales_price+sales_price_per_unit,'price_per_line':sales_price_per_order_line,'price_per_unit':sales_price_per_unit})
-#                   
                 vals.pop('id')
                 self.pool.get('sale.order.line').create(cr,uid,vals)
                 self.write(cr,uid,ids,{'add_product_bundle_id':False})
-
-
             return True
 
 #         
@@ -372,7 +289,6 @@ class sale_order(osv.osv):
 
     def onchange_guarantee_type_id(self, cr, uid, ids, x_guarantee_type_id, context=None):
        v = {}
-
        if x_guarantee_type_id:
            verbiage_info= self.pool.get('guarantee.type').browse(cr,uid,x_guarantee_type_id).verbiage
            if verbiage_info:
@@ -392,9 +308,6 @@ class sale_order(osv.osv):
             else:
                 res['value'].update({'x_signing_company_id':False})
         return res
-
-
-
 
     def onchange_billing_month(self, cr, uid, ids, month, context=None):
         v={}
@@ -425,161 +338,8 @@ class sale_order(osv.osv):
 
         return {'value': v}
 
-
-
-
-#            print" check month of current",datetime.now().month,month
-#            if month == 'January':
-#
-#
-##                if datetime.now().month<6:
-##                    if datetime.now().month-1 >= 6:
-##                        v.update({'x_billing_year':datetime.now().year+1})
-##                    else:
-##                        v.update({'x_billing_year':datetime.now().year})
-##                else:
-##                     if datetime.now().month-1 >= 6:
-##                        v.update({'x_billing_year':datetime.now().year-1})
-##                    else:
-##                        v.update({'x_billing_year':datetime.now().year})
-#
-#            elif month == 'February':
-#                if datetime.now().month<6:
-#                    if datetime.now().month-2 >= 6:
-#                        v.update({'x_billing_year':datetime.now().year+1})
-#                    else:
-#                        v.update({'x_billing_year':datetime.now().year})
-#                else:
-#                    if datetime.now().month-2 >= 6:
-#                        v.update({'x_billing_year':datetime.now().year-1})
-#                    else:
-#                        v.update({'x_billing_year':datetime.now().year})
-#
-#            elif month == 'March':
-#                if datetime.now().month-3 >= 6:
-#                    v.update({'x_billing_year':datetime.now().year+1})
-#                else:
-#                    v.update({'x_billing_year':datetime.now().year})
-#            elif month == 'April':
-#                 if datetime.now().month-4 >= 6:
-#                    v.update({'x_billing_year':datetime.now().year+1})
-#                 else:
-#                    v.update({'x_billing_year':datetime.now().year})
-#            elif month == 'May':
-#                if datetime.now().month-5 >= 6:
-#                    v.update({'x_billing_year':datetime.now().year+1})
-#                else:
-#                    v.update({'x_billing_year':datetime.now().year})
-#            elif month == 'June':
-#                if datetime.now().month-6 >= 6:
-#                    v.update({'x_billing_year':datetime.now().year+1})
-#                else:
-#                    v.update({'x_billing_year':datetime.now().year})
-#            elif month == 'Junly':
-#                if datetime.now().month-7 >= 6:
-#                    v.update({'x_billing_year':datetime.now().year+1})
-#                else:
-#                    v.update({'x_billing_year':datetime.now().year})
-#            elif month == 'August':
-#                if datetime.now().month-8 >= 6:
-#                    v.update({'x_billing_year':datetime.now().year+1})
-#                else:
-#                    v.update({'x_billing_year':datetime.now().year})
-#
-#            elif month == 'September':
-#                if datetime.now().month-9>= 6:
-#                    v.update({'x_billing_year':datetime.now().year+1})
-#                else:
-#                    v.update({'x_billing_year':datetime.now().year})
-#            elif month == 'October':
-#                if datetime.now().month-10>= 6:
-#                    v.update({'x_billing_year':datetime.now().year+1})
-#                else:
-#                    v.update({'x_billing_year':datetime.now().year})
-#            elif month == 'Nevomber':
-#                if datetime.now().month-11 >= 6:
-#                    v.update({'x_billing_year':datetime.now().year+1})
-#                else:
-#                    v.update({'x_billing_year':datetime.now().year})
-#            elif month == 'December':
-#                if datetime.now().month-12 >= 6:
-#                    v.update({'x_billing_year':datetime.now().year+1})
-#                else:
-#                    v.update({'x_billing_year':datetime.now().year})
-#        return {'value': v}
-#
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#    def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
-#        if context is None:
-#            context = {}
-#        print "fields_view_get"
-#        result = super(sale_order, self).fields_view_get(cr, uid, view_id,view_type,context,toolbar=toolbar, submenu=submenu)
-#
-##
-#
-#
-#        def translate_view(source):
-#            """Return a translation of type view of source."""
-#            return translate(
-#                cr, None, 'view', context.get('lang'), source
-#            ) or source
-#
-#
-#        eview = etree.fromstring(result['arch'])
-#        if view_type == 'form':
-#
-#             doc = etree.XML(result['arch'])
-#             print" result for the result",doc
-#             nodes = doc.xpath("//field[@name='order_line']")[0]
-##             print"nodes ================>>>>>>>>>>",nodes
-#
-#             kwargs = {}
-#             kwargs['name']="x_version"
-#             kwargs['name']="x_drop_number"
-#
-#             print " print kwargs value>>>>>>>>>>",kwargs
-#
-#             field = etree.SubElement(nodes, 'field', **kwargs)
-#
-#             print"fields value is>>>>>>>>",field
-##             orm.setup_modifiers(field, self.fields_get(cr, uid, nodes,
-##                                               context))
-#
-#
-#
-#
-#
-#
-#        #hide button under the name
-#
-#
-#
-#             result['arch'] = etree.tostring(nodes)
-#             result['context']=context
-#             print"result['arch']result['arch']result['arch'],",etree.tostring(doc)
-#        return result
-
-
-
-
-
-
     _columns = {
 
-#        
         'add_product_id':fields.many2one('product.product','Product',states={'review': [('readonly', True)], 'waiting_approved_signature': [('readonly', True)]}),
         'add_product_temp_id':fields.many2one('base.product.template','Product Template',states={'review': [('readonly', True)], 'waiting_approved_signature': [('readonly', True)]},),
         'add_product_bundle_id':fields.many2one('base.product.bundle','Product Bundle',states={'review': [('readonly', True)], 'waiting_approved_signature': [('readonly', True)]},),
@@ -625,11 +385,7 @@ class sale_order(osv.osv):
                 'sale.order.line': (_get_order, ['price_unit', 'tax_id', 'discount', 'product_uom_qty','misc_sale_total','misc_cost_total','price_per_line','price_per_unit'], 10),
             },
             multi='sums', help="The total amount."),
-        
     }
-
-#    
-
 
     def copy(self, cr, uid, id, default=None, context=None):
         if not default:
@@ -641,47 +397,9 @@ class sale_order(osv.osv):
 
 sale_order()
 
-
-
 class sale_order_line(osv.osv):
     _inherit = "sale.order.line"
 
-#    def _misc_sale_total(self,cr,uid,ids,field_name,args,context=None):
-#        res = {}
-#        for val in self.browse(cr, uid, ids):
-#            total = 0.0
-#            for line in val.miscellaneous_line:
-#                total += line.misc_sales_price
-#            res[val.id]=total
-#        return res
-#
-#    def _misc_cost_total(self,cr,uid,ids,field_name,args,context=None):
-#        res = {}
-#        for val in self.browse(cr, uid, ids):
-#            total = 0.0
-#            for line in val.miscellaneous_line:
-#                total += line.misc_cost_price
-#            res[val.id]=total
-#        return res
-#
-#    def _misc_sale_total_new(self,cr,uid,ids,context=None):
-#        res = {}
-#        for val in self.browse(cr, uid, ids):
-#            total = 0.0
-#            for line in val.miscellaneous_line:
-#                total += line.misc_sales_price
-#            self.write(cr, uid, ids, {'misc_sale_total':total},context)
-#        return True
-#
-#    def _misc_cost_total_new(self,cr,uid,ids,context=None):
-#        res = {}
-#        for val in self.browse(cr, uid, ids):
-#            total = 0.0
-#            for line in val.miscellaneous_line:
-#                total += line.misc_cost_price
-#            res[val.id]=total
-#        return res
-#    
     def _attr_grp_ids(self, cr, uid, ids, field_names, arg=None, context=None):
         res = {}
         for i in ids:
@@ -733,11 +451,9 @@ class sale_order_line(osv.osv):
             taxes['total_included'] = taxes['total_included'] + price_misc_cost+price_per_line
             cur = line.order_id.pricelist_id.currency_id
             res[line.id] = cur_obj.round(cr, uid, cur, taxes['total'])
-#            self.pool.get('sale.order')._amount_all(cr, uid, [line.order_id.id], field_name, arg, context)
         return res
     def _set_sold_amount(self, cr, uid, ids, name, value, arg, context=None):
         print" reverse function"
-       
         if ids and (value==0 or value>0):
             pos="""update sale_order_line set
                         sold_for=%d
@@ -759,7 +475,6 @@ class sale_order_line(osv.osv):
         for val in self.browse(cr, uid, ids):
             price_per_unit = 0
             price_per_order_line = 0
-                        
             attr_names = []
             so_line_attrs = {}
             if val.attribute_set_id:
@@ -794,11 +509,7 @@ class sale_order_line(osv.osv):
                                 price_per_unit += attr_option_data['sales_price']
                             elif attr_option_data['price'] == "based_order_lines":
                                 price_per_order_line += attr_option_data['sales_price']
-
-           
-
             res[val.id] = price_per_unit + price_per_order_line/val.product_uom_qty
- 
         return res
     
     def _cal_attr_unit_cost_price(self, cr, uid, ids, field_name, args, context=None):
@@ -808,21 +519,13 @@ class sale_order_line(osv.osv):
         for val in self.browse(cr, uid, ids):
             price_per_unit = 0
             price_per_order_line = 0
-                        
             attr_names = []
-            so_line_attrs = {}
-
             if val.attribute_set_id:
-                
-                
                 for each_grp_id in val.attribute_set_id.attribute_group_ids:
                     for each_attr_id in each_grp_id.attribute_ids:
                         attr_names.append(each_attr_id.attribute_id.name)
-            
             if len(attr_names)>0:
-            
                 so_line_data = self.read(cr, uid, val.id, attr_names)
-
                 for each in attr_names:
                     if isinstance(so_line_data[each],tuple):
                         if len(so_line_data[each]):
@@ -850,11 +553,9 @@ class sale_order_line(osv.osv):
                                     price_per_unit += attr_option_data['cost_price']
                                 elif attr_option_data['price'] == "based_order_lines":
                                     price_per_order_line += attr_option_data['cost_price']
-
-
             res[val.id] = price_per_unit + price_per_order_line/val.product_uom_qty
- 
         return res
+
 
     _columns = {
         'attribute_group_ids': fields.function(_attr_grp_ids, type='many2many',
@@ -869,14 +570,13 @@ class sale_order_line(osv.osv):
                 'sale.order.line': (_get_order, ['price_unit', 'tax_id', 'discount', 'product_uom_qty','misc_sale_total','misc_cost_total','price_per_line','price_per_unit'], 10),
             },),
          
-
         'attr_sale_price': fields.function(_cal_attr_unit_sale_price, string='Attr Sale Price', digits_compute= dp.get_precision('Account')),
         'attr_cost_price': fields.function(_cal_attr_unit_cost_price, string='Attr Cost Price', digits_compute= dp.get_precision('Account')),
-        
         'miscellaneous_line':fields.one2many('miscellaneous.line','line_id','Miscellaneous Lines'),
         'misc_sale_total':fields.float('Misc Sale'),
         'misc_cost_total':fields.float('Misc Cost'),
-        'product_cost':fields.float('Product Cost Price')
+        'product_cost':fields.float('Product Cost Price'),
+        'price_history_id':fields.many2one('sale.price.history', 'Price History ID'),
     }
     
     def open_attributes(self, cr, uid, ids, context=None):
@@ -886,7 +586,6 @@ class sale_order_line(osv.osv):
             res_id = ir_model_data_obj.read(cr, uid, ir_model_data_id, fields=['res_id'])[0]['res_id']
         grp_ids = self._attr_grp_ids(cr, uid, [ids[0]], [], None, context)[ids[0]]
         ctx = {'open_attributes': True, 'attribute_group_ids': grp_ids}
-
         return {
             'name': 'Product Attributes',
             'view_type': 'form',
@@ -901,6 +600,53 @@ class sale_order_line(osv.osv):
         }
 
     def save_and_close_product_attributes(self, cr, uid, ids, context=None):
+        self.pool.get('attribute.attribute').search(cr,uid,[('active','=',True),('model','=','sale.order.line')])
+        sale_price_histroy_obj=self.pool.get('sale.price.history')
+        price_history_vals={}
+        attr_name=[]
+        attribute_key=[]
+        att_dict={}
+        att_search=self.pool.get('attribute.attribute').search(cr,uid,[('active','=',True),('model','=','sale.order.line')])
+#        att_search=self.pool.get('attribute.attribute').search(cr,uid,[('name','=','x_mailer_variable_data'),('model','=','sale.order.line')])
+        print" ****how much data in search view",att_search
+        name=self.pool.get('attribute.attribute').browse(cr,uid,att_search[0]).name
+        print"name",name
+        print"att_search",att_search
+        if att_search:
+            att_read=self.pool.get('attribute.attribute').read(cr,uid,att_search,['name','ttype'])
+            print"att_read",att_read
+            for each in att_read:
+                if isinstance(each,dict):
+                    att_dict[str(each['name'])]={'ttype':str(each['ttype']),'id':str(each['id'])}
+                    attribute_key.append(str(each['name']))
+        read_data=self.pool.get('sale.order.line').read(cr,uid,ids,attribute_key)
+        for data in read_data:
+            for each1 in attribute_key:
+                if each1=='x_mailer_variable_data':
+                    print" data[each1]",data[each1]
+                if att_dict.has_key(each1):
+                    if data[each1]:
+                        cr.execute("delete from sale_price_history where order_line_id = '"+str(ids[0])+"' and attribute_id = '"+str(att_dict[each1]['id'])+"'")
+                        if att_dict[each1]['ttype'] in ['many2one']:
+                            option_data = self.pool.get('attribute.option').browse(cr, uid, data[each1][0])
+                        elif att_dict[each1]['ttype'] in ['many2many']:
+                            id_va_m2m=[x for x in att_dict[each1]]
+                        else:
+                            option_search_ids = self.pool.get('attribute.option').search(cr, uid, [], limit=1)
+                            if option_search_ids:
+                                option_data = self.pool.get('attribute.option').browse(cr, uid, option_search_ids[0])
+                        if option_data:
+                            price_history_vals.update(
+                            {
+                            'order_line_id':ids and ids[0] or False,
+                            'attribute_id':str(att_dict[each1]['id']),
+                            'sale_price':option_data.sales_price,
+                            'cost_price':option_data.cost_price,
+                            'calculation_method':option_data.price
+                            }
+                        )
+                        sale_price_histroy_obj.create(cr,uid,price_history_vals)
+
         cur_obj = self.pool.get('res.currency')
         for line in self.browse(cr,uid,ids):
             order_id = line.order_id.id
@@ -920,10 +666,7 @@ class sale_order_line(osv.osv):
             res = mod_obj.get_object_reference(cr, uid, 'sale', 'view_order_form')
             res_id = res and res[1] or False
             if arg!=line.sold_for:
-               
                 cr.execute('''update sale_order set amount_untaxed=%s,amount_tax=%s,amount_total = %s where id in %s''',(untaxed,tax,total, tuple([line.order_id.id])))
-
-            
             return{
                     'view_type': 'form',
                     'view_mode': 'form',
@@ -936,7 +679,6 @@ class sale_order_line(osv.osv):
                     'res_id':order_id
                     }
 
-#        return {'type': 'ir.actions.act_window_close'}
 
     def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
         if context is None:
@@ -952,7 +694,6 @@ class sale_order_line(osv.osv):
             ) or source
 
         result = super(sale_order_line, self).fields_view_get(cr, uid, view_id,view_type,context,toolbar=toolbar, submenu=submenu)
-        
         if view_type == 'form' and context.get('attribute_group_ids'):
             eview = etree.fromstring(result['arch'])
             
@@ -980,15 +721,8 @@ class sale_order_line(osv.osv):
 
             result['arch'] = etree.tostring(eview, pretty_print=True)
             doc = etree.XML(result['arch'])
-#            for node in doc.xpath("//notebook[@name='attributes_notebook']"):
-#                new_page = etree.SubElement(node,'Page',string="Vendor Information")
-#                group = etree.SubElement(new_page,'group',col="4",colspan="4")
-#                new_tree = etree.SubElement(group,'field',name='vendor_lines',nolabel="1", colspan="4")
-#                result['fields'].update(self.fields_get(cr, uid, ['vendor_lines'], context))
-                
             for node in doc.xpath("//notebook[@name='attributes_notebook']/page/group"):
                 for new in node.xpath("//field"):
-                    
                     if state in ['review','waiting_approved_signature']:
                         new.set('readonly','True')
                         setup_modifiers(new, result['fields'])
@@ -1006,7 +740,6 @@ class sale_order_line(osv.osv):
         return res
 
     def copy_lines(self,cr,uid,ids,vals,context=None):
-
          sol_object=self.browse(cr,uid,ids)
          for each in sol_object:
             copy_line=self.copy(cr, uid,each.id,vals,context)
@@ -1014,7 +747,6 @@ class sale_order_line(osv.osv):
             mod_obj = self.pool.get('ir.model.data')
             res = mod_obj.get_object_reference(cr, uid, 'sale', 'view_order_form')
             res_id = res and res[1] or False
-
          return{
                 'view_type': 'form',
                 'view_mode': 'form',
@@ -1026,9 +758,8 @@ class sale_order_line(osv.osv):
                 'res_id':sal_id_val
 
                 }
-#          
-    def write(self,cr,uid,ids,vals,context=None):
 
+    def write(self,cr,uid,ids,vals,context=None):
 
          if 'x_custom_json_attrs' not in vals.keys():
              attr_obj = self.pool.get('attribute.attribute')
@@ -1043,28 +774,16 @@ class sale_order_line(osv.osv):
                  for each_grp_id in so_line_obj.attribute_set_id.attribute_group_ids:
                      for each_attr_id in each_grp_id.attribute_ids:
                          attr_names.append(each_attr_id.attribute_id.name)
-
-
-         #         for each in attr_names:
-         #             if each in so_line_data.keys():
-         #                 if each in vals.keys():
-         #                     so_line_attrs.update({each:vals[each]})
-         #                 so_line_attrs.update({each:so_line_data[each]})
-         #                 so_line_keys[each]
                  for each in attr_names:
                      if each not in vals.keys():
                          if isinstance(so_line_data[each],tuple):
                              if len(so_line_data[each]):
                                  so_line_data[each] = so_line_data[each][0]
-     #                     elif isinstance(so_line_data[each],list) and len(so_line_data[each]):
                          elif isinstance(so_line_data[each],list):
                              so_line_data[each] = [[6,False,so_line_data[each]]]
                          vals.update({each:so_line_data[each]})
                      else:
                          pass
-         #                 so_line_attrs.update({each:so_line_data[each]})
-
-
                  for each in vals:
                      if 'x_' in each:
                          attr_id = attr_obj.search(cr, uid, [('name','=',each),('model','=','sale.order.line')])
@@ -1105,70 +824,27 @@ class sale_order_line(osv.osv):
                                              price_per_order_line += attr_option_data['sales_price']
                                          else:
                                              pass
-
                          else:
                              _logger.warning("Attribute not created for sale order line.")
-
                  price_subtotal = so_line_data['product_uom_qty'] * price_per_unit + price_per_order_line + so_line_data['price_unit']
-
                  if price_per_order_line>0 and not vals.get('sold_for'):
-
                      vals.update({'price_per_line':price_per_order_line})
                  if price_per_unit>0 and not vals.get('sold_for'):
                      list_price=self.browse(cr,uid,ids[0]).product_id.list_price
                      vals.update({'price_unit':price_per_unit+list_price})
                      vals.update({'price_per_unit':price_per_unit})
 
-
-
              for id in self.browse(cr,uid,ids):
                 sale_id=id.order_id.id
-
                 if id.order_id.state=='approved':
-                    self.pool.get('sale.order').write(cr,uid,[sale_id],{'state':'draft'},context)
+                    print" gone to approve"
+                    if id.order_id.x_signed_flag:
+                        self.pool.get('sale.order').write(cr,uid,[sale_id],{'state':'draft'},context)
          res=super(sale_order_line,self).write(cr,uid,ids,vals,context)
          return res
 
 
 sale_order_line()
-
-#class vendor_switch(osv.osv):
-#    _name = 'vendor.switch'
-#
-#    _columns = {
-#                'order_line_id':fields.many2one('sale.order.line','Sale Order Line'),
-#                'old_vendor_id':fields.many2one('res.partner','Old Vendor',domain = [('supplier','=',True)],required=True),
-#                'new_vendor_id':fields.many2one('res.partner','New Vendor',domain = [('supplier','=',True)],required=True),
-#                'attribute_id':fields.many2one('attribute.attribute','Attribute',domain = [('model','=','sale.order.line')],required=True),
-#                'option_id':fields.many2one('attribute.option','Option',required=True),
-#                'old_cost_price':fields.float('Old Cost Price',digits=(4,4)),
-#                'old_sale_price':fields.float('Old Sales Price',digits=(4,4)),
-#                'new_cost_price':fields.float('New Cost Price',digits=(4,4)),
-#                'new_sale_price':fields.float('New Sales Price',digits=(4,4)),
-#
-#        }
-#
-#    def onchange_attribute(self, cr, uid, ids, attribute, comtext=None):
-#        res = {}
-#        print "=========onchange_attribute========111======"
-#        if not attribute:
-#            res['value'] = {'option_id':False}
-#            print "=========onchange_attribute=============="
-#        return res
-#
-#
-#    def onchange_option(self, cr, uid, ids, option, context=None):
-#        res = {}
-#        print "=======onchange_option=============",option
-#        if not option:
-#            res['value'] = {'old_cost_price':0.0,'old_sale_price':0.0,'old_vendor_id':False}
-#            return res
-#        for line in self.pool.get('vendor.info').search(cr, uid, [('attribute_option_id','=',option)], order="sequence", limit=1):
-#            vendor_data = self.pool.get('vendor.info').browse(cr, uid, line)
-#            print "============={'old_cost_price':vendor_data.cost_price,'old_sales_price':vendor_data.sales_price,'old_vendor_id':vendor_data.name.id}====",{'old_cost_price':vendor_data.cost_price,'old_sales_price':vendor_data.sales_price,'old_vendor_id':vendor_data.name.id}
-#            res['value'] = {'old_cost_price':vendor_data.cost_price,'old_sale_price':vendor_data.sales_price,'old_vendor_id':vendor_data.name.id}
-#
-#        return res
 
 class attribute_switch(osv.TransientModel):
     _name = 'attribute.switch'
@@ -1182,7 +858,6 @@ class attribute_switch(osv.TransientModel):
         for each in self.pool.get('sale.order.line').browse(cr,uid,active_ids):
             if 'old_attribute_set_id' in fields:
                 res.update({'old_attribute_set_id':each.attribute_set_id and each.attribute_set_id.id or False})
-            
             return res
 
     _columns = {
@@ -1207,7 +882,6 @@ class attribute_switch(osv.TransientModel):
         ir_model_data_id = ir_model_data_obj.search(cr, uid, [['model', '=', 'ir.ui.view'], ['name', '=', 'sale_attributes_form_view']], context=context)
         if ir_model_data_id:
             res_id = ir_model_data_obj.read(cr, uid, ir_model_data_id, fields=['res_id'])[0]['res_id']
-#        grp_ids = self.pool.get('sale.order.line')._attr_grp_ids(cr, uid, ids, [], None, context)[ids[0]]
         ctx = {'open_attributes': True, 'attribute_group_ids': grp_ids, 'active_id':active_id[0],'active_ids':active_id}
 
         return {
@@ -1374,9 +1048,7 @@ class guarantee_type(osv.osv):
 
     'name':fields.char('Name',size=128,required=True),
     'verbiage':fields.text('Guarantee Verbiage',size=1024),
-
     }
-
 
 guarantee_type()
 
@@ -1387,12 +1059,23 @@ class coop_info(osv.osv):
     _columns={
 
     'name':fields.char('Name',size=128,required=True),
-
     }
-
 
 coop_info()
 
+
+
+class sale_price_history(osv.osv):
+    _name="sale.price.history"
+    _columns={
+    'order_line_id':fields.many2one('sale.order.line','Order Line'),
+    'attribute_id':fields.many2one('attribute.attribute','Attribute'),
+    'sale_price':fields.float('Sale price'),
+    'cost_price':fields.float('Cost price'),
+    'calculation_method':fields.selection([('per_unit','Per Unit'),('based_order_lines','Per Order Line')],'Calculation Method'),
+    'sale_price_wizard_id':fields.many2one('sale.price.history.wizard','Sale Price History')
+    }
+sale_price_history()
 
 class account_invoice_line(osv.osv):
     _inherit="account.invoice.line"
@@ -1401,12 +1084,9 @@ class account_invoice_line(osv.osv):
     _columns={
 
     'sale_order_line_id':fields.many2one('sale.order.line','Order line'),
-
-
     }
 account_invoice_line()
-
-    
+   
 class miscellaneous_items(osv.osv):
     _name = 'miscellaneous.items'
     
@@ -1428,6 +1108,7 @@ class miscellaneous_line(osv.osv):
             if sale_price:
                 v['misc_sales_price'] = item.sales_price
         return {'value': v}
+
     _columns = {
                 'miscellaneous_id':fields.many2one('miscellaneous.items','Miscellaneous Items',required=True),
                 'line_id':fields.many2one('sale.order.line','Sale Order Line'),
@@ -1443,15 +1124,13 @@ miscellaneous_line()
 class purchase_order(osv.osv):
     _inherit = "purchase.order"
     _columns={
-
     'sale_order_id':fields.many2one('sale.order','Quotation'),
-    
     }
 class purchase_order_line(osv.osv):
     _inherit = "purchase.order.line"
     _columns={
-
     'x_version_no':fields.char('V',size=10),
     'x_drop_no':fields.char('D',size=10),
 
     }
+

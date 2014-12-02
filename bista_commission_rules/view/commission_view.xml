@@ -1,230 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-	<data>
-	
-			<record id="product_form_commission_view" model="ir.ui.view">
-	            <field name="name">product.commission.form</field>
-	            <field name="model">product.product</field>
-	            <field name="inherit_id" ref="product.product_normal_form_view"/>
-	            <field name="arch" type="xml">
-	            	<xpath expr="//notebook/page[@string='Sales']" position="after">
-	                		
-                            <page string="Commission Rules">
-                                    <field name="commission_line" colspan="4" nolabel="1">
-                                            <tree string="Commission Rules">
-                                                    <field name="name"/>
-                                                    <field name="designation_id"/>
-                                                    <field name="commission_date"/>
-                                            </tree>
-                                            <form string="Commission Rules">
-                                                <group colspan="4" col="4">
-                                                    <group col="2">
-                                                            <field name="name"/>
-                                                        <field name="model_id" on_change="onchange_model(model_id)" invisible="0"/>
-                                                        <field name="field_id" domain="[('model_id','=',model_id)]" on_change="onchange_field(field_id)"/>
-                                                        <field name="commission_date"/>
-
-                                                    </group>
-                                                    <group col="2">
-                                                        <field name="designation_id"/>
-                                                        <field name="field_name"/>
-                                                    </group>
-                                                </group>
-                                                <group colspan="4" col="4">
-                                                    <group col="2">
-                                                            <field name="condition_one"/>
-                                                            <field name="condition_two"/>
-                                                            <field name="condition_three"/>
-                                                            <field name="condition_four"/>
-                                                            <field name="condition_five"/>
-                                                            <field name="condition_six"/>
-                                                    </group>
-                                                    <group col="2">
-                                                            <field name="rule_one"/>
-                                                            <field name="rule_two"/>
-                                                            <field name="rule_three"/>
-                                                            <field name="rule_four"/>
-                                                            <field name="rule_five"/>
-                                                            <field name="rule_six"/>
-
-
-                                                    </group>
-                                                            <separator string="Python Code Example" colspan="4"/>
-                                                            <field name="code_example" colspan="4" nolabel="1"/>
-                                                </group>
-                                             </form>
-
-                                    </field>
-                            </page>
-	                        
-	                </xpath>
-
-                        <xpath expr="//notebook/page[@string='Sales']" position="after">
-
-                            <page string="Miscellaneous Rules">
-                                    <field name="miscellaneous_line" colspan="4" nolabel="1">
-                                            <tree string="Miscellaneous Rules">
-                                                    <field name="name"/>
-
-                                            </tree>
-                                            <form string="Miscellaneous Rules">
-                                                <group colspan="4" col="6">
-                                                    <group col="2">
-                                                            <field name="name"/>
-                                                        <field name="field_id" domain="[('model_id','=',model_id)]" on_change="onchange_field(field_id)"/>
-                                                    </group>
-                                                    <group col="2">
-                                                        <field name="partner_ids" widget="many2many_tags"/>
-                                                        <field name="field_name"/>
-                                                    </group>
-                                                    <group col="2">
-                                                        <field name="model_id" on_change="onchange_model(model_id)"/>
-
-                                                    </group>
-                                                </group>
-                                                <group colspan="4" col="4">
-                                                    <group col="2">
-                                                            <field name="condition_one"/>
-                                                            <field name="condition_three"/>
-                                                            <field name="condition_five"/>
-                                                            <field name="condition_two"/>
-                                                            <field name="condition_four"/>
-                                                            <field name="condition_six"/>
-                                                    </group>
-                                                    <group col="2">
-                                                            <field name="rule_one"/>
-                                                            <field name="rule_three"/>
-                                                            <field name="rule_five"/>
-                                                            <field name="rule_two"/>
-                                                            <field name="rule_four"/>
-                                                            <field name="rule_six"/>
-
-
-                                                    </group>
-                                                            <separator string="Python Code Example" colspan="4"/>
-                                                            <field name="code_example" colspan="4" nolabel="1"/>
-                                                </group>
-                                             </form>
-
-                                    </field>
-                            </page>
-
-	                </xpath>
-
-
-
-
-	            </field>
-	        </record>
-			
-			<!--
-			
-			<record id="commission_tree_view" model="ir.ui.view">
-	            <field name="name">commission.rules.tree</field>
-	            <field name="model">commission.rules</field>
-	            <field name="arch" type="xml">
-    				<tree string="Commission Rules">
-    					<field name="name"/>
-    					<field name="designation_id"/>
-    				</tree>
-    			</field>
-    		</record>
-    		
-    		<record id="commission_form_view" model="ir.ui.view">
-	            <field name="name">commission.rules.form</field>
-	            <field name="model">commission.rules</field>
-	            <field name="arch" type="xml">
-    			<form string="Commission Rules">
-                    <group colspan="4" col="6">
-                        <group col="2">
-                        	<field name="name"/>
-                            <field name="field_id" domain="[('model_id','=',model_id)]" on_change="onchange_field(field_id)"/>
-                        </group>
-                        <group col="2">
-                            <field name="designation_id"/>
-                            <field name="field_name"/>
-                        </group>
-                        <group col="2">
-                            <field name="model_id" on_change="onchange_model(model_id)"/>
-                            
-                        </group>
-                    </group>
-                    <group colspan="4" col="4">
-                        <group col="2">
-                        	<field name="condition_one"/>
-                        	<field name="condition_three"/>
-                        	<field name="condition_five"/>
-                        	<field name="condition_two"/>
-                        	<field name="condition_four"/>
-                        	<field name="condition_six"/>
-                        </group>
-                        <group col="2">
-                        	<field name="rule_one"/>
-                        	<field name="rule_three"/>
-                        	<field name="rule_five"/>
-                        	<field name="rule_two"/>
-                        	<field name="rule_four"/>
-                        	<field name="rule_six"/>
-                            
-                            
-                        </group>
-                        	<separator string="Python Code Example" colspan="4"/>
-                        	<field name="code_example" colspan="4" nolabel="1"/>
-                    </group>
-                 </form>
-    			</field>
-    		</record>
-    		
-    		<record id="commission_search_view" model="ir.ui.view">
-	            <field name="name">commission.rules.search</field>
-	            <field name="model">commission.rules</field>
-	            <field name="arch" type="xml">
-	                <search string="Commission Rules">
-	                    <field name="name"/>
-    					<field name="agent_id"/>
-	                </search>
-	            </field>
-	        </record>
-    		
-    		<record id="action_commission_view" model="ir.actions.act_window">
-	            <field name="name">Commission Rules</field>
-	            <field name="res_model">commission.rules</field>
-	            <field name="type">ir.actions.act_window</field>
-	            <field name="view_mode">tree,form</field>
-	            <field name="view_type">form</field>
-	            <field name="view_id" ref="commission_tree_view"/>
-	        </record>
-	        
-        <menuitem name="Commission Rules" id="commission_rules_menu" parent="product.prod_config_main" sequence="10" action="action_commission_view"/>
-        
-        
-        
-        
-        
-         <record model="ir.ui.view" id="sale_order_representative_form_view">
-            <field name="name">sale.order.representative.form</field>
-            <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.view_order_form"/>
+    <data>
+        <record id="product_form_commission_view" model="ir.ui.view">
+            <field name="name">product.commission.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@string='Sales']" position="after">
+                    <page string="Commission Rules">
+                        <field name="commission_line" colspan="4" nolabel="1">
+                            <tree string="Commission Rules">
+                                <field name="name"/>
+                                <field name="designation_id"/>
+                                <field name="commission_date"/>
+                            </tree>
+                            <form string="Commission Rules">
+                                <group colspan="4" col="4">
+                                    <group col="2">
+                                        <field name="name"/>
+                                        <field name="model_id" on_change="onchange_model(model_id)" invisible="0"/>
+                                        <field name="field_id" domain="[('model_id','=',model_id)]" on_change="onchange_field(field_id)"/>
+                                        <field name="commission_date"/>
 
-                <xpath expr="//notebook/page[@string='Other Information']" position="after">
-                	<page string="Commission Info">
-                    	<field name="commission_manager_line" colspan="4" nolabel="1" >
-                        	<tree string="Commission Line" editable="top">
-                        		<field name="manager_id_1"/>
-                        		<field name="percentage_1"/>
-                        		<field name="manager_id_2"/>
-                        		<field name="percentage_2"/>
-                        		<field name="manager_id_3"/>
-                        		<field name="percentage_3"/>
-                        	</tree>
+                                    </group>
+                                    <group col="2">
+                                        <field name="designation_id"/>
+                                        <field name="field_name"/>
+                                    </group>
+                                </group>
+                                <group colspan="4" col="4">
+                                    <group col="2">
+                                        <field name="condition_one"/>
+                                        <field name="condition_two"/>
+                                        <field name="condition_three"/>
+                                        <field name="condition_four"/>
+                                        <field name="condition_five"/>
+                                        <field name="condition_six"/>
+                                    </group>
+                                    <group col="2">
+                                        <field name="rule_one"/>
+                                        <field name="rule_two"/>
+                                        <field name="rule_three"/>
+                                        <field name="rule_four"/>
+                                        <field name="rule_five"/>
+                                        <field name="rule_six"/>
+                                    </group>
+                                    <separator string="Python Code Example" colspan="4"/>
+                                    <field name="code_example" colspan="4" nolabel="1"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+                <xpath expr="//notebook/page[@string='Sales']" position="after">
+                    <page string="Miscellaneous Rules">
+                        <field name="miscellaneous_line" colspan="4" nolabel="1">
+                            <tree string="Miscellaneous Rules">
+                                <field name="name"/>
+                            </tree>
+                            <form string="Miscellaneous Rules">
+                                <group colspan="4" col="6">
+                                    <group col="2">
+                                        <field name="name"/>
+                                        <field name="field_id" domain="[('model_id','=',model_id)]" on_change="onchange_field(field_id)"/>
+                                    </group>
+                                    <group col="2">
+                                        <field name="partner_ids" widget="many2many_tags"/>
+                                        <field name="field_name"/>
+                                    </group>
+                                    <group col="2">
+                                        <field name="model_id" on_change="onchange_model(model_id)"/>
+                                    </group>
+                                </group>
+                                <group colspan="4" col="4">
+                                    <group col="2">
+                                        <field name="condition_one"/>
+                                        <field name="condition_three"/>
+                                        <field name="condition_five"/>
+                                        <field name="condition_two"/>
+                                        <field name="condition_four"/>
+                                        <field name="condition_six"/>
+                                    </group>
+                                    <group col="2">
+                                        <field name="rule_one"/>
+                                        <field name="rule_three"/>
+                                        <field name="rule_five"/>
+                                        <field name="rule_two"/>
+                                        <field name="rule_four"/>
+                                        <field name="rule_six"/>
+                                    </group>
+                                    <separator string="Python Code Example" colspan="4"/>
+                                    <field name="code_example" colspan="4" nolabel="1"/>
+                                </group>
+                            </form>
                         </field>
                     </page>
                 </xpath>
             </field>
-          </record>
-          
-          -->
-          
-	</data>
+        </record>
+    </data>
 </openerp>

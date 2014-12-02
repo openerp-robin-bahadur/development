@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-
         <record model="ir.ui.view" id="sale_commission_view_id">
             <field name="name">sale.commission.view</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-
                 <xpath expr="//notebook/page[@string='Other Information']" position="after">
-
                     <page string="Commission">
                         <button name="run_commission" string="Run Commission" type="object" icon="gtk-apply" />
-
                         <separator string="Territory Manager" colspan="6"/>
                         <group col="6" colspan="4">
                             <group col="2" colspan="2">
-
                                 <field name="territory_manager1_id"  placeholder="Manager1" on_change="onchange_manager1_id(territory_manager1_id,context)" domain="[('job_id.name','=','Territory Manager')]"/>
                                 <field name="territory_manager2_id"  placeholder="Manager2" on_change="onchange_manager2_id(territory_manager2_id,context)" domain="[('job_id.name','=','Territory Manager')]"/>
                                 <field name="territory_manager3_id"  placeholder="Manager3" on_change="onchange_manager3_id(territory_manager3_id,context)" domain="[('job_id.name','=','Territory Manager')]"/>
@@ -27,13 +22,11 @@
                                 <field name="territory_manager3_commission"  placeholder="Commission" attrs="{'required':[('territory_manager3_id','!=',False)]}" on_change="on_change_manager3_commission(territory_manager3_commission,context)"/>
                             </group>
                             <group col="2" colspan="2">
-
                                 <field name="territory_manager1_commission_val"  placeholder="Commission "/>
                                 <field name="territory_manager2_commission_val"  placeholder="Commission "/>
                                 <field name="territory_manager3_commission_val" placeholder="Commission "/>
                             </group>
                         </group>
-
                         <separator string="Regional Manager" colspan="8"/>
                         <group col="6" colspan="4">
                             <group col="2" colspan="2">
@@ -70,16 +63,11 @@
                                 <field name="brand_manager3_commission_val"  placeholder="Commission "/>
                             </group>
                         </group>
-                        
                         <separator string="Other Manager"  colspan="8"/>
                         <field name="other_manager_id"  placeholder="Other Manager"/>
-                        
                     </page>
                 </xpath>
             </field>
         </record>
-
-
-
     </data>
 </openerp>

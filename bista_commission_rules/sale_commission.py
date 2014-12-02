@@ -172,10 +172,7 @@ class sale_order(osv.osv):
                       new_fld.append(str(fld.strip()))
 
             read_field=self.pool.get('sale.order.line').read(cr,uid,line_id.id,new_fld)
-            print"read_field value for sol",read_field
-            print "----------rule_old--------",rule_old
             for key, value in read_field.iteritems():
-                print "----key---",key,"-----value----",value
                 rule_old = rule_old.replace(str(key),str(value))
                 if condition_field_old:
                     condition_field_old=condition_field_old.replace(str(key),str(value))
@@ -195,15 +192,13 @@ class sale_order(osv.osv):
     #                            ======execution of rule3 commission===
                 if rule3_field:
                     rule3_old=rule3_old.replace(str(key),str(value))
-                    print"=========rule three value is====",rule3_old
-
+                   
     #                            ==== execution of condition4===
                 if condition4_field_old:
                     condition4_field_old=condition4_field_old.replace(str(key),str(value))
 
     #                        =========execution of rule 4 commission========                                if rule4_field:
                     rule4_old=rule4_old.replace(str(key),str(value))
-                    print"=========rule four value is====",rule4_old
 
     #                          =======execution of condition5====
                 if condition5_field_old:
@@ -212,8 +207,6 @@ class sale_order(osv.osv):
     #                        =======execution of rule 5 commission
                 if rule5_field:
                     rule5_old=rule5_old.replace(str(key),str(value))
-                    print"=========rule five value is====",rule5_old
-
     #                           ===== execution of condition6====
                 if condition6_field_old:
                     condition6_field_old=condition6_field_old.replace(str(key),str(value))
@@ -222,19 +215,15 @@ class sale_order(osv.osv):
 
                 if rule6_field:
                     rule6_old=rule6_old.replace(str(key),str(value))
-                    print"=========rule six value is====",rule6_old
-
     #                        evaluation of rule1 field
             if condition_field_old:
                 if rule_old and eval(condition_field_old):
                     rule1=eval(rule_old)
                     result = rule1
-                    print"rule1 value is",rule1
             else:
                  if rule_old:
                     rule1=eval(rule_old)
                     result = rule1
-                    print"rule1 value is",rule1
 
     #                        evaluation of rule2 field
             if condition2_field_old:
@@ -245,14 +234,12 @@ class sale_order(osv.osv):
                         rule2_old= rule2_old.replace('rule1',str(rule1))
                     rule2=eval(rule2_old)
                     result = rule2
-                    print"rule2 value is",rule2
             else:
                  if rule2_old:
                     if 'rule1' in rule2_old:
                         rule2_old= rule2_old.replace('rule1',str(rule1))
                     rule2=eval(rule2_old)
                     result = rule2
-                    print"rule2 value is",rule2
 
     #                                evaluation rule3 field
             if condition3_field_old:
@@ -267,7 +254,6 @@ class sale_order(osv.osv):
                         rule3_old= rule3_old.replace('rule2',str(rule2))
                     rule3=eval(rule3_old)
                     result = rule3
-                    print"rule3 value is",rule3
             else:
                  if rule3_old:
                     if 'rule1' in rule3_old:
@@ -276,7 +262,6 @@ class sale_order(osv.osv):
                         rule3_old= rule3_old.replace('rule2',str(rule2))
                     rule3=eval(rule3_old)
                     result = rule3
-                    print"rule3 value is",rule3
 
     #                                evaluation of rule4 field
             if condition4_field_old:
@@ -295,8 +280,6 @@ class sale_order(osv.osv):
                         rule4_old = rule4_old.replace('rule3',str(rule3))
                     rule4=eval(rule4_old)
                     result = rule4
-                    print"rule4 value is",rule4
-
             else:
                 if rule4_old:
                     if 'rule1' in rule4_old:
@@ -307,7 +290,6 @@ class sale_order(osv.osv):
                         rule4_old = rule4_old.replace('rule3',str(rule3))
                     rule4=eval(rule4_old)
                     result = rule4
-                    print"rule4 value is",rule4
 
     #                                   evalaution of rule5 field
             if condition5_field_old:
@@ -330,7 +312,6 @@ class sale_order(osv.osv):
                         rule5_old = rule5_old.replace('rule4',str(rule4))
                     rule5=eval(rule5_old)
                     result = rule5
-                    print"rule5 value is",rule5
             else:
                  if rule5_old:
                     if 'rule1' in rule5_old:
@@ -343,8 +324,6 @@ class sale_order(osv.osv):
                         rule5_old = rule5_old.replace('rule4',str(rule4))
                     rule5=eval(rule5_old)
                     result = rule5
-                    print"rule5 value is",rule5
-
     #                                evaluation of rule6 field
             if condition6_field_old:
                 if 'rule1' in condition6_field_old:
@@ -370,8 +349,6 @@ class sale_order(osv.osv):
                         rule6_old = rule6_old.replace('rule5',str(rule5))
                     rule6=eval(rule6_old)
                     result = rule6
-                    print"rule6 value is",rule6
-
             else:
                  if rule6_old:
                     if 'rule1' in rule6_old:
@@ -386,45 +363,26 @@ class sale_order(osv.osv):
                         rule6_old = rule6_old.replace('rule5',str(rule5))
                     rule6=eval(rule6_old)
                     result = rule6
-                    print"rule6 value is",rule6
-
-
             if result:
                 if type=='territory':
                     if line_id.order_id.territory_manager1_commission:
                         commission_value1 += (line_id.order_id.territory_manager1_commission / 100.00)*result
-                        print"commission one me add hua",commission_value1
-                   
-
                     if line_id.order_id.territory_manager2_commission:
                         commission_value2 += (line_id.order_id.territory_manager2_commission / 100.00)*result
-                        print"commission two me add hua",commission_value2
-                   
                     if line_id.order_id.territory_manager3_commission:
                         commission_value3 += (line_id.order_id.territory_manager3_commission / 100.00)*result
-                    
                 if type=='regional':
                     if line_id.order_id.regional_manager1_commission:
                         commission_value1 += (line_id.order_id.regional_manager1_commission / 100.00)*result
-                        print"commission one me add hua",commission_value1
-                    
                     if line_id.order_id.regional_manager2_commission:
                         commission_value2 += (line_id.order_id.regional_manager2_commission / 100.00)*result
-                        print"commission two me add hua",commission_value2
-                    
                     if line_id.order_id.regional_manager3_commission:
                         commission_value3 += (line_id.order_id.regional_manager3_commission / 100.00)*result
-                    
                 if type=='brand':
                     if line_id.order_id.brand_manager1_commission:
                         commission_value1 += (line_id.order_id.brand_manager1_commission / 100.00)*result
-                        print"commission one me add hua",commission_value1
-                    
-
                     if line_id.order_id.brand_manager2_commission:
                         commission_value2 += (line_id.order_id.brand_manager2_commission / 100.00)*result
-                        print"commission two me add hua",commission_value2
-                    
                     if line_id.order_id.brand_manager3_commission:
                         commission_value3 += (line_id.order_id.brand_manager3_commission / 100.00)*result
                    
@@ -439,8 +397,6 @@ class sale_order(osv.osv):
 
     def run_commission(self, cr, uid, ids, context=None):
         type=False
-        comm_dict = {}
-        comm_obj = self.pool.get('commission.rules')
         for each in self.browse(cr,uid,ids):
             if (each.territory_manager1_id and not each.territory_manager2_id) and each.territory_manager3_id:
                 raise osv.except_osv(_('Error!'),
@@ -455,12 +411,7 @@ class sale_order(osv.osv):
                     if (each.territory_manager2_commission and each.territory_manager3_commission) and(not each.territory_manager2_id or not each.territory_manager3_id):
                         raise osv.except_osv(_('Error!'),
                             _('Please Select Territory Manager \n before defining the commission rate '))
-#                    if each.territory_manager2_id and each.territory_manager3_id and(each.territory_manager2_commission<=0 or each.territory_manager3_commission<=0):
-#                        raise osv.except_osv(_('Error!'),
-#                            _('Commission rate for the territory manager cannot be Zero '))
                     total=each.territory_manager1_commission+each.territory_manager2_commission+each.territory_manager3_commission
-
-
                     if total != 100:
                          raise osv.except_osv(_('Error!'),
                             _('Total Commission for the Managers are invalid \n should be sum up to 100 '))
@@ -468,12 +419,7 @@ class sale_order(osv.osv):
                     if not each.territory_manager2_id:
                         raise osv.except_osv(_('Error!'),
                             _('Please Select Territory Manager \n before defining the commission rate '))
-
-#                    if each.territory_manager2_id and not each.territory_manager2_commission>0:
-#                        raise osv.except_osv(_('Error!'),
-#                            _('Commission rate for the territory manager cannot be Zero '))
                     total=each.territory_manager1_commission+each.territory_manager2_commission
-                    
                     if total != 100:
                          raise osv.except_osv(_('Error!'),
                             _('Total Commission for the two Managers are invalid \n should be sum up to 100 '))
@@ -485,14 +431,10 @@ class sale_order(osv.osv):
                     if not each.territory_manager3_id:
                         raise osv.except_osv(_('Error!'),
                             _('Please Select Territory Manager \n before defining the commission rate '))
-#                    if each.territory_manager3_id and not each.territory_manager3_commission>0:
-#                        raise osv.except_osv(_('Error!'),
-#                            _('Commission rate for the territory manager cannot be Zero '))
                     total=each.territory_manager1_commission+each.territory_manager3_commission
                     if total != 100:
                          raise osv.except_osv(_('Error!'),
                             _('Total Commission for the two Managers are invalid \n should be sum up to 100 '))
-#
 
                 elif each.territory_manager1_commission != 100:
                      raise osv.except_osv(_('Error!'),
@@ -597,7 +539,6 @@ class sale_order(osv.osv):
             for line in each.order_line:
                 if line.product_id and each.territory_manager1_id and each.territory_manager1_id.job_id:
                     rule_id=self.pool.get('commission.rules').search(cr,uid,[('designation_id.id','=',each.territory_manager1_id.job_id.id),('product_id.id','=',line.product_id.id)],limit=1,order='commission_date desc')
-                    print"rule_data for the commssion rules",rule_id
                     if not rule_id:
                         rule_id=self.pool.get('commission.rules').search(cr,uid,[('designation_id.id','=',each.territory_manager1_id.job_id.id),('product_id.id','=',line.product_id.id)],limit=1,order='commission_date')
                     if rule_id:
@@ -625,7 +566,6 @@ class sale_order(osv.osv):
                         regional_commission_value2 += comm_result['result2']
                         regional_commission_value3 += comm_result['result3']
 
-
             self.write(cr,uid,ids,{'regional_manager1_commission_val':regional_commission_value1,'regional_manager2_commission_val':regional_commission_value2,'regional_manager3_commission_val':regional_commission_value3})
 
             brand_commission_value1 = 0.0
@@ -634,7 +574,6 @@ class sale_order(osv.osv):
             for line in each.order_line:
                 if line.product_id and each.brand_manager1_id and each.brand_manager1_id.job_id:
                     rule_id=self.pool.get('commission.rules').search(cr,uid,[('designation_id.id','=',each.brand_manager1_id.job_id.id),('product_id.id','=',line.product_id.id)],limit=1,order='commission_date desc')
-                    print"rule_data for the Brandcommssion rules",rule_id
                     if not rule_id:
                         rule_id=self.pool.get('commission.rules').search(cr,uid,[('designation_id.id','=',each.brand_manager1_id.job_id.id),('product_id.id','=',line.product_id.id)],limit=1,order='commission_date')
                     if rule_id:
@@ -817,7 +756,6 @@ class sale_order(osv.osv):
             if not sales_manger_id:
                 raise osv.except_osv(_('Error!'),
                 _('Current user is not assign to any employee'))
-
             vals.update({'territory_manager1_id':sales_manger_id[0]})
 
         return res
@@ -832,9 +770,6 @@ class sale_order(osv.osv):
                     raise osv.except_osv(_('Error!'),
                     _('Current user is not assign to any employee'))
                 res=super(sale_order,self).write(cr, uid,ids,{'territory_manager1_id':sales_manger_id[0]}, context)
-
-
-
             return res
 
 

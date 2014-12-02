@@ -30,7 +30,12 @@
     'images' : [],
     'depends' : ['base','sale','product','stock','bista_product_attribute'],
     'data': [
-                'security/sale_man_security.xml','report/sale_report.xml','security/ir.model.access.csv','sale_workflow.xml','sale_view.xml',
+                'invoice_view.xml',
+                'security/sale_man_security.xml',
+                'report/sale_report.xml',
+                'security/ir.model.access.csv',
+                'sale_workflow.xml',
+                'sale_view.xml',
     ],
     'js': [],
     'qweb' : [],

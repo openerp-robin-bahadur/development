@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+        
+        <record model="ir.ui.view" id="customer_invoice_form_inherited">
+            <field name="name">customer.invoice.form.inherited</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='origin']" position="attributes">
+                    <attribute name="string">Quotation Number</attribute>
+                </xpath>
+
+                <xpath expr="/form/header/button[@name='invoice_open']" position="after">
+                    <button name="repull_quotation" states="draft" string="Repull Quotation"  type="object" groups="base.group_user"/>
+                </xpath>
+                
+            </field>
+        </record>
+        
+    </data>
+</openerp>
